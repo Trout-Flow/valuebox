@@ -56,6 +56,30 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('delete/{id}', ['as' => 'province.delete', 'uses' => 'App\Http\Controllers\ProvincesController@destroy']);
         Route::post('show/{id}', ['as' => 'province.show', 'uses' => 'App\Http\Controllers\ProvincesController@show']);
         Route::get('search', ['as' => 'province.search', 'uses' => 'App\Http\Controllers\ProvincesController@search']);
-        Route::get('user', ['as' => 'user.bank', 'uses' => 'App\Http\Controllers\CountriesController@getUserPermissions']);
+        Route::get('user', ['as' => 'user.bank', 'uses' => 'App\Http\Controllers\ProvincesController@getUserPermissions']);
+    });
+
+    Route::group(['prefix' => 'city'], function () {
+        Route::get('list', ['as' => 'city.list', 'uses' => 'App\Http\Controllers\CityController@index']);
+        Route::get('create', ['as' => 'city.create', 'uses' => 'App\Http\Controllers\CityController@create']);
+        Route::post('save', ['as' => 'city.save', 'uses' => 'App\Http\Controllers\CityController@store']);
+        Route::get('edit/{id}', ['as' => 'city.edit', 'uses' => 'App\Http\Controllers\CityController@edit']);
+        Route::post('update', ['as' => 'city.update', 'uses' => 'App\Http\Controllers\CityController@update']);
+        Route::get('delete/{id}', ['as' => 'city.delete', 'uses' => 'App\Http\Controllers\CityController@destroy']);
+        Route::post('show/{id}', ['as' => 'city.show', 'uses' => 'App\Http\Controllers\CityController@show']);
+        Route::get('search', ['as' => 'city.search', 'uses' => 'App\Http\Controllers\CityController@search']);
+        Route::get('user', ['as' => 'user.city', 'uses' => 'App\Http\Controllers\CityController@getUserPermissions']);
+    });
+
+    Route::group(['prefix' => 'area'], function () {
+        Route::get('list', ['as' => 'area.list', 'uses' => 'App\Http\Controllers\AreaController@index']);
+        Route::get('create', ['as' => 'area.create', 'uses' => 'App\Http\Controllers\AreaController@create']);
+        Route::post('save', ['as' => 'area.save', 'uses' => 'App\Http\Controllers\AreaController@store']);
+        Route::get('edit/{id}', ['as' => 'area.edit', 'uses' => 'App\Http\Controllers\AreaController@edit']);
+        Route::post('update', ['as' => 'area.update', 'uses' => 'App\Http\Controllers\AreaController@update']);
+        Route::get('delete/{id}', ['as' => 'area.delete', 'uses' => 'App\Http\Controllers\AreaController@destroy']);
+        Route::post('show/{id}', ['as' => 'area.show', 'uses' => 'App\Http\Controllers\AreaController@show']);
+        Route::get('search', ['as' => 'area.search', 'uses' => 'App\Http\Controllers\AreaController@search']);
+        Route::get('user', ['as' => 'user.area', 'uses' => 'App\Http\Controllers\AreaController@getUserPermissions']);
     });
 });

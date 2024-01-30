@@ -27,6 +27,18 @@ use Illuminate\Support\Facades\Input;
         $object->save();
         return $object;
     }
+
+    public function DropDownData()
+    {
+        $result = [
+            'country' => Countries::pluck('name','id'),
+
+        ];
+
+        return $result;
+    }
+
+
     public function search($param)
     {
         $q = province::query();

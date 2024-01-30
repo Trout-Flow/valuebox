@@ -7,17 +7,19 @@
 @endsection
 @section('content')
     <x-breadcrumb title="Add Country" pagetitle="Country" />
-    <form autocomplete="off" method="POST" action="{{!empty($country) ? route('country.update'): route('country.save')}}" class="needs-validation" >
+    <form method="POST" action="{{ !empty($country) ? route('country.update') : route('country.save') }}"
+        class="needs-validation">
+        @csrf
+        <input type="hidden" name="id" id="id"
+         value="{{ isset($country->id) ? $country->id : '' }}" />
         <div class="row">
             <div class="col-xl-12 col-lg-12">
                 <div class="card">
                     <div class="card-body">
                         <div class="mb-3">
                             <label class="form-label" for="product-title-input">Country Name</label>
-                            <input type="hidden" class="form-control" id="formAction" name="formAction" value="add">
-                            {{-- <input type="text" class="form-control d-none" id="name"> --}}
-                            <input type="text" class="form-control" value="{{old('name', @$country->name)}}" id="country-name-input"
-                                placeholder="Enter Country Name" required>
+                            <input type="text" class="form-control" value="{{ old('name', !empty($country->name) ? $country->name : '') }}"
+                                name="name" id="name" placeholder="Enter Country Name" required>
                             <div class="invalid-feedback">Please enter a Country Name.</div>
                         </div>
                     </div>

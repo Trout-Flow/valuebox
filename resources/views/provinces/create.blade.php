@@ -1,66 +1,65 @@
 @extends('layouts.master')
-
 @section('title')
     Add Province
 @endsection
+@section('css')
+    <!-- extra css -->
+@endsection
 @section('content')
-    <x-breadcrumb title="Add Province" pagetitle="Provinces" />
-    <div class="content-page">
-        <div class="content">
-            @if(session()->has('message'))
-            <div class="alert" style="background-color: #a9e8a8">
-                {{ session('message') }}
-            </div>
-        @endif
-        </div>
-        <div class="content-wrapper">
-            @section('content')
-            <div class="content">
-                <div class="row">
-                    <div class="card card-success col-11">
-                        <div class="card-header">
-                                <h3 class="card-title">Add Province</h3>
-                        </div>
-                    </div>
+    <x-breadcrumb title="Add Province" pagetitle="Province" />
+    <form method="POST" action="{{ !empty($province) ? route('province.update') : route('province.save') }}"
+        class="needs-validation">
+        @csrf
+        <input type="hidden" name="id" id="id"
+         value="{{ isset($province->id) ? $province->id : '' }}" />
+        <div class="col-xl-0 col-lg-12">
+            <div class="row">
+                <div class="col-xl-6 col-lg-6   ">
+                    <label class="form-label" for="Country">Country</label>
+                    {{-- <input type="hidden" class="form-control" id="formAction" name="formAction" value="add"> --}}
+                    <select class="form-select" id="country_id" type="text" name="country_id"
+                        value="{{ old('country_id', !empty($province->country_id) ? $province->country_id : '') }}"
+                        placeholder="Please Select Country " class="form-control select2 form-control mb-3 custom-select"
+                        required>
+                        <option value="">Select</option>
+                        @foreach ($dropDownData['country'] as $key => $value)
+                            <option value="{{ $key }}"
+                                {{ (old('country_id') == $key ? 'selected' : '') || (!empty($province->country_id) ? collect($province->country_id)->contains($key) : '') ? 'selected' : '' }}>
+                                {{ $value }}</option>
+                        @endforeach
+                    </select>
+
+                </div>
+                <div class="col-xl-6 col-lg-6">
+                    {{-- <div class="mb-3"> --}}
+                    <label class="form-label" for="product-title-input">Province Name</label>
+                    {{--  <input type="hidden" class="form-control" id="formAction" name="formAction" value="add"> --}}
+                    <input type="text" class="form-control" value="{{ old('name', @$province->name) }}" id="name"
+                        name="name" placeholder="Enter Province Name" required>
+                    {{-- <div class="invalid-feedback">Please enter a Province Name.</div> --}}
                 </div>
             </div>
-            @endsection
-            <div class="card-body">
-                <form name="add-Province_form" id="data-form" method="POST" action="{{!empty($province) ? route('province.update'): route('province.save')}}">
-                    <input type="hidden" name="id" id="id" value="{{@$province->id}}">
-                    <section class="content">
-                        <div class="row">
-                            <div class="form-group col-sm-6">
-                                <h6 class="light-dark w-100">Country:</h6>
+        </div>
 
-                                <select name="country_id" id="country_id" class="form-control" value="{{request()->select('country_id')}}" placeholder="Select Country">
-                                    <option value="">Select</option>
-                                    @foreach($countries as $key=>$value)
-                                    <option value="{{ $key }}" {{!empty($province) && ($province->country_id === $key) ? "selected" : ''}} {{($key == old('country_id')) ? 'selected' : ''}}>{{ $value }}</option>
-                                @endforeach
-                                </select>
-                                @error('country_id')
-                                    <div class="error-message">{{ $message }}</div>
-                                @enderror
-
-                            </div>
-                            <div class="form-group col-sm-6">
-                                <label for="name">Province Name</label>
-                                <input type="text" class="form-control" name="name" id="name" value="{{old('name', @$province->name)}}" placeholder="Enter the Province Name" >
-                            </div>
-                        </div>
-                        <div class="form-group button-items mb-0 text-right">
-                            <div class="col-12" style="text-align: right;">
-                                <input type="submit" value="{{ !empty($province) ? 'Update' : 'Save' }}" class="btn btn-success"
-                                       style="background-color: #3c8dbc">
-                                <a href="{{ route('province.list') }}" class="btn btn-secondary ">Cancel</a>
-                            </div>
-                        </div>
-                    </section>
-                </form>
+        <div class="modal-footer mt-4">
+            <div class="hstack gap-2 justify-content-end">
+                <button type="submit" style="float: right;" class="btn btn-success w-sm">Save</button>
+                <a href="{{ route('province.list') }}" style="float: right;"
+                    class="btn btn-dark rounded bs-popover ml-0 mt-0  mb-0">Cancel</a>
             </div>
         </div>
-    </div>
-
+        <!-- end card -->
+    </form>
 @endsection
+@section('scripts')
+    <!-- ckeditor -->
+    <script src="{{ URL::asset('build/libs/@ckeditor/ckeditor5-build-classic/ckeditor.js') }}"></script>
 
+    <!-- dropzone js -->
+    <script src="{{ URL::asset('build/libs/dropzone/dropzone-min.js') }}"></script>
+    <!-- create-product -->
+    <script src="{{ URL::asset('build/js/backend/create-product.init.js') }}"></script>
+
+    <!-- App js -->
+    <script src="{{ URL::asset('build/js/app.js') }}"></script>
+@endsection

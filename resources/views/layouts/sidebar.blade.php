@@ -37,16 +37,13 @@
                     <a href="{{route('country.list')}}" class="nav-link menu-link"><i class="fa fa-globe" aria-hidden="true"></i> <span data-key="Country">{{ __('Country') }}</span> </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link menu-link"><i class="fa fa-globe" aria-hidden="true"></i> <span data-key="Province ">{{ __('Province') }}</span> </a>
+                    <a href="{{route('province.list')}}" class="nav-link menu-link"><i class="fa fa-globe" aria-hidden="true"></i> <span data-key="Province ">{{ __('Province') }}</span> </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link menu-link"><i class="fa fa-globe" aria-hidden="true"></i> <span data-key="City">{{ __('City') }}</span> </a>
+                    <a href="{{route('city.list')}}" class="nav-link menu-link"><i class="fa fa-globe" aria-hidden="true"></i> <span data-key="City">{{ __('City') }}</span> </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link menu-link"><i class="fa fa-globe" aria-hidden="true"></i> <span data-key="Sector">{{ __('Sector') }}</span> </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link menu-link"><i class="fa fa-globe" aria-hidden="true"></i> <span data-key="Area">{{ __('Area') }}</span> </a>
+                    <a href="{{route('area.list')}}" class="nav-link menu-link"><i class="fa fa-globe" aria-hidden="true"></i> <span data-key="Area">{{ __('Area') }}</span> </a>
                 </li>
 
                 {{-- <li class="nav-item">

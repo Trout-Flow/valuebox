@@ -18,14 +18,15 @@ class ProvincesController extends Controller
 
     public function index(Request $request)
     {
-        $provinces = $this->ProvinceService->search($request->all());
-        $name = $request['name'];
-        return view('province.index', compact('provinces', 'name'));
+        $request = request()->all();
+        $provinces = $this->ProvinceService->search($request);
+
+        return view('provinces.index', compact('provinces'));
     }
     public function create()
     {
-
-       return view('province.create');
+        $dropDownData = $this->ProvinceService->DropDownData();
+       return view('provinces.create', compact('dropDownData'));
     }
 
 
@@ -38,12 +39,13 @@ class ProvincesController extends Controller
 
     public function edit($id)
     {
-        $province = province::find($id);
 
+        $province = province::find($id);
+        $dropDownData = $this->ProvinceService->DropDownData();
         if(empty($province)){
             abort(404);
         }
-        return view('countries.create', compact('province'));
+        return view('provinces.create', compact('province', 'dropDownData'));
 
     }
 

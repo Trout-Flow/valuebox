@@ -10,6 +10,7 @@ namespace App\Services;
      * */
 
 use App\Models\Area;
+use App\Models\City;
 use App\Models\countries;
 use Illuminate\Support\Facades\Input;
 
@@ -28,6 +29,17 @@ use Illuminate\Support\Facades\Input;
         $object->save();
         return $object;
     }
+
+    public function DropDownData()
+    {
+        $result = [
+            'city' => City::pluck('name','id'),
+        ];
+
+        return $result;
+    }
+
+
     public function search($param)
     {
         $q = Area::query();

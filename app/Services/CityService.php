@@ -2,19 +2,18 @@
 
 namespace App\Services;
 
-
-
     /*
      * Class tblbanksService
      * @package App\Services
      * */
-use App\Models\countries;
-use Illuminate\Support\Facades\Input;
+
+use App\Models\City;
+use App\Models\province;
 
     class CityService
 {
-    const CITY_SAVED = 'Country save successfully';
-    const CITY_UPDATED = 'Country updated successfully';
+    const CITY_SAVED = 'City save successfully';
+    const CITY_UPDATED = 'City updated successfully';
     const PER_PAGE = '10';
 
     public function findUpdateOrCreate($model, array $where, array $data)
@@ -26,9 +25,20 @@ use Illuminate\Support\Facades\Input;
         $object->save();
         return $object;
     }
+
+    public function DropDownData()
+    {
+        $result = [
+            'province' => province::pluck('name','id'),
+        ];
+
+        return $result;
+    }
+
+
     public function search($param)
     {
-        $q = countries::query();
+        $q = City::query();
         if (!empty($param['name']))
         {
             $q->where('name', 'LIKE', '%'. $param['name'] . '%');

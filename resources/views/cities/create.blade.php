@@ -1,67 +1,61 @@
 @extends('layouts.master')
-
 @section('title')
     Add City
 @endsection
+@section('css')
+    <!-- extra css -->
+@endsection
 @section('content')
-    <x-breadcrumb title="Add City" pagetitle="Countries" />
-    <div class="content-page">
-        <div class="content">
-            @if(session()->has('message'))
-            <div class="alert" style="background-color: #a9e8a8">
-                {{ session('message') }}
-            </div>
-        @endif
-        </div>
-        <div class="content-wrapper">
-            @section('content')
-            <div class="content">
-                <div class="row">
-                    <div class="card card-success col-11">
-                        <div class="card-header">
-                                <h3 class="card-title">Add City</h3>
-                        </div>
-                    </div>
+    <x-breadcrumb title="Add City" pagetitle="City" />
+    <form method="POST" action="{{ !empty($city) ? route('city.update') : route('city.save') }}"
+        class="needs-validation">
+        @csrf
+        <input type="hidden" name="id" id="id"
+         value="{{ isset($city->id) ? $city->id : '' }}" />
+        <div class="col-xl-0 col-lg-12">
+            <div class="row">
+                <div class="col-xl-6 col-lg-6   ">
+                    <label class="form-label" for="province_id">Province </label>
+                    {{-- <input type="hidden" class="form-control" id="formAction" name="formAction" value="add"> --}}
+                    <select class="form-select" id="province_id" type="text" name="province_id"
+                        placeholder="Please Select Province " class="form-control select2 form-control mb-3 custom-select"
+                        required>
+                        <option value="">Select</option>
+                        @foreach ($dropDownData['province'] as $key => $value)
+                            <option value="{{ $key }}"
+                                {{ (old('province_id') == $key ? 'selected' : '') || (!empty($city->province_id) ? collect($city->province_id)->contains($key) : '') ? 'selected' : '' }}>
+                                {{ $value }}</option>
+                        @endforeach
+                    </select>
+
+                </div>
+                <div class="col-xl-6 col-lg-6">
+                    <label class="form-label" for="product-title-input">City Name</label>
+                    <input type="text" class="form-control" value="{{ old('name', @$city->name) }}" id="name"
+                        name="name" placeholder="Enter the City Name" required>
                 </div>
             </div>
-            @endsection
-            <div class="card-body">
-                <form name="add-city_form" id="data-form" method="POST" action="{{!empty($city) ? route('city.update'): route('city.save')}}">
-                    <input type="hidden" name="id" id="id" value="{{@$city->id}}">
-                    <section class="content">
-                        <div class="row">
-                            <div class="form-group col-sm-6">
-                                <h6 class="light-dark w-100">Province:</h6>
+        </div>
 
-                                <select name="province_id" id="province_id" class="form-control" value="{{request()->select('province_id')}}" placeholder="Select province">
-                                    <option value="">Select</option>
-                                    @foreach($provinces as $key=>$value)
-                                    <option value="{{ $key }}" {{!empty($city) && ($city->province_id === $key) ? "selected" : ''}} {{($key == old('province_id')) ? 'selected' : ''}}>{{ $value }}</option>
-                                @endforeach
-                                </select>
-                                @error('province_id')
-                                    <div class="error-message">{{ $message }}</div>
-                                @enderror
-
-                            </div>
-                            <div class="col-md-6">
-                                <div class="card card-primary">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="form-group">
-                                                <label for="name">Name</label>
-                                                <input type="text" class="form-control" name="name" id="name" value="{{old('name', @$city->name)}}" placeholder="Enter the city Name" autofocus>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </form>
+        <div class="modal-footer mt-4">
+            <div class="hstack gap-2 justify-content-end">
+                <button type="submit" style="float: right;" class="btn btn-success w-sm">Save</button>
+                <a href="{{ route('city.list') }}" style="float: right;"
+                    class="btn btn-dark rounded bs-popover ml-0 mt-0  mb-0">Cancel</a>
             </div>
         </div>
-    </div>
-
+        <!-- end card -->
+    </form>
 @endsection
+@section('scripts')
+    <!-- ckeditor -->
+    <script src="{{ URL::asset('build/libs/@ckeditor/ckeditor5-build-classic/ckeditor.js') }}"></script>
 
+    <!-- dropzone js -->
+    <script src="{{ URL::asset('build/libs/dropzone/dropzone-min.js') }}"></script>
+    <!-- create-product -->
+    <script src="{{ URL::asset('build/js/backend/create-product.init.js') }}"></script>
+
+    <!-- App js -->
+    <script src="{{ URL::asset('build/js/app.js') }}"></script>
+@endsection

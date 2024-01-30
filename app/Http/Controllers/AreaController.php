@@ -10,47 +10,48 @@ use App\Services\AreaService;
 class AreaController extends Controller
 {
 
-    protected $AreaService;
-    public function __construct(AreaService $AreaService)
+    protected $areaService;
+    public function __construct(AreaService $areaService)
     {
-        $this->AreaService =$AreaService;
+        $this->areaService =$areaService;
     }
 
     public function index(Request $request)
     {
-        $areas = $this->AreaService->search($request->all());
-        $name = $request['name'];
-        return view('Areas.index', compact('areas', 'name'));
+        $request = request()->all();
+        $areas = $this->areaService->search($request);
+        return view('Areas.index', compact('areas'));
     }
 
     public function create()
     {
-
-       return view('Areas.create');
+        $dropDownData = $this->areaService->DropDownData();
+       return view('Areas.create', compact('dropDownData'));
     }
 
 
     public function store(AreaRequest $request)
     {
         $data = $data = $request->except('_token','id');
-        $this->AreaService->findUpdateOrCreate(Area::class, ['id'=>''], $data);
+        $this->areaService->findUpdateOrCreate(Area::class, ['id'=>''], $data);
         return redirect('area/list')->with('message', AreaService::AREA_SAVED);
     }
 
     public function edit($id)
     {
+        $dropDownData = $this->areaService->DropDownData();
         $area = Area::find($id);
 
         if(empty($area)){
             abort(404);
         }
-        return view('Areas.create', compact('area'));
+        return view('Areas.create', compact('area','dropDownData'));
 
     }
 
     public function update(AreaRequest $request){
         $request = $request->except('_token','id');
-        $this->AreaService->findUpdateOrCreate(Area::class, ['id' => request('id')], $request);
+        $this->areaService->findUpdateOrCreate(Area::class, ['id' => request('id')], $request);
         return redirect('area/list')->with('message', AreaService::AREA_UPDATED);
     }
 
