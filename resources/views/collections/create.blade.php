@@ -82,3 +82,15 @@
 
 @endsection
 
+@section('scripts')
+    <!-- ckeditor -->
+    <script src="{{ URL::asset('build/libs/@ckeditor/ckeditor5-build-classic/ckeditor.js') }}"></script>
+
+    <!-- dropzone js -->
+    <script src="{{ URL::asset('build/libs/dropzone/dropzone-min.js') }}"></script>
+    <!-- create-product -->
+    <script src="{{ URL::asset('build/js/backend/create-product.init.js') }}"></script>
+
+    <!-- App js -->
+    <script src="{{ URL::asset('build/js/app.js') }}"></script>
+@endsection

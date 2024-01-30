@@ -22,7 +22,7 @@
                                 <div class="vr rounded bg-secondary opacity-50" style="width: 4px;"></div>
                                 <div class="flex-grow-1 ms-3">
                                     <p class="text-uppercase fw-medium text-muted fs-14 text-truncate">Total Earnings</p>
-                                    <h4 class="fs-22 fw-semibold mb-3">Rs.<span class="counter-value"
+                                    <h4 class="fs-22 fw-semibold mb-3">$<span class="counter-value"
                                             data-target="98851.35">0</span></h4>
                                     <div class="d-flex align-items-center gap-2">
                                         <h5 class="badge bg-success-subtle text-success mb-0">
@@ -77,7 +77,7 @@
                                 <div class="flex-grow-1 ms-3">
                                     <p class="text-uppercase fw-medium text-muted fs-14 text-truncate">Customers</p>
                                     <h4 class="fs-22 fw-semibold mb-3"><span class="counter-value"
-                                            data-target="1000">0</span> </h4>
+                                            data-target="79958">0</span> </h4>
                                     <div class="d-flex align-items-center gap-2">
                                         <h5 class="badge bg-success-subtle text-success mb-0">
                                             <i class="ri-arrow-right-up-line align-bottom"></i> +29.08 %

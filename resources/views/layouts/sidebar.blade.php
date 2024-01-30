@@ -36,8 +36,20 @@
                 <li class="nav-item">
                     <a href="{{route('country.list')}}" class="nav-link menu-link"><i class="fa fa-globe" aria-hidden="true"></i> <span data-key="Country">{{ __('Country') }}</span> </a>
                 </li>
-
                 <li class="nav-item">
+                    <a href="#" class="nav-link menu-link"><i class="fa fa-globe" aria-hidden="true"></i> <span data-key="Province ">{{ __('Province') }}</span> </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link menu-link"><i class="fa fa-globe" aria-hidden="true"></i> <span data-key="City">{{ __('City') }}</span> </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link menu-link"><i class="fa fa-globe" aria-hidden="true"></i> <span data-key="Sector">{{ __('Sector') }}</span> </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link menu-link"><i class="fa fa-globe" aria-hidden="true"></i> <span data-key="Area">{{ __('Area') }}</span> </a>
+                </li>
+
+                {{-- <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarProducts" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarProducts">
                         <i class="bi bi-box-seam"></i> <span data-key="t-products">{{ __('t-products') }}</span>
                     </a>
@@ -63,9 +75,9 @@
                             </li>
                         </ul>
                     </div>
-                </li>
+                </li> --}}
 
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarOrders" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarOrders">
                         <i class="bi bi-cart4"></i> <span data-key="t-orders">{{ __('t-orders') }}</span>
                     </a>
@@ -125,9 +137,9 @@
 
                 <li class="nav-item">
                     <a href="users-list" class="nav-link menu-link"> <i class="bi bi-person-bounding-box"></i> <span data-key="t-users-list">{{ __('t-users-list') }}</span> </a>
-                </li>
+                </li> --}}
 
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarShipping" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarShipping">
                         <i class="bi bi-truck"></i> <span data-key="t-shipping">{{ __('t-shipping') }}</span>
                     </a>
@@ -221,8 +233,8 @@
                     <a class="nav-link menu-link" href="/components/index" target="_blank">
                         <i class="bi bi-layers"></i> <span data-key="t-components">{{ __('t-components') }}</span> <span class="badge badge-pill bg-secondary" data-key="t-v1.0">{{ __('v1.0') }}</span>
                     </a>
-                </li>
-                <li class="nav-item">
+                </li> --}}
+                {{-- <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarMultilevel" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarMultilevel">
                         <i class="bi bi-share"></i> <span data-key="t-multi-level">{{ __('t-multi-level') }}</span>
                     </a>
@@ -260,7 +272,7 @@
                             </li>
                         </ul>
                     </div>
-                </li>
+                </li> --}}
 
             </ul>
         </div>

@@ -9,10 +9,10 @@
             <div class="col-md-4 col-6 d-none d-xxl-block">
                 <div class="d-flex align-items-center justify-content-center gap-3 fs-14 fw-medium">
                     <div>
-                        <i class="bi bi-envelope align-middle me-2"></i> support@themesbrand.com
+                        <i class="bi bi-envelope align-middle me-2"></i> support@valuebox.com
                     </div>
                     <div>
-                        <i class="bi bi-globe align-middle me-2"></i> www.themesbrand.com
+                        <i class="bi bi-globe align-middle me-2"></i> www.valuebox.com.pk
                     </div>
                 </div>
             </div>

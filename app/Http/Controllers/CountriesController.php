@@ -31,7 +31,7 @@ class CountriesController extends Controller
 
     public function store(CountryRequest $request)
     {
-        $data = $data = $request->except('_token','id');
+        $data = $request->except('_token','id');
         $this->CountryService->findUpdateOrCreate(countries::class, ['id'=>''], $data);
         return redirect('Country/list')->with('message', CountryService::COUNTRY_SAVED);
     }

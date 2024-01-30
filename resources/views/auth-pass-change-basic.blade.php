@@ -102,8 +102,8 @@
                             <p class="mb-0 text-muted">©
                                 <script>
                                     document.write(new Date().getFullYear())
-                                </script> Toner. Crafted with <i class="mdi mdi-heart text-danger"></i> by
-                                Themesbrand
+                                </script> ValueBox. Crafted with <i class="mdi mdi-heart text-danger"></i> by
+                                ValueBox
                             </p>
                         </div>
                     </div>

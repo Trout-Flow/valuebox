@@ -6,7 +6,7 @@
     <!-- extra css -->
 @endsection
 @section('content')
-    <x-breadcrumb title="Brands" pagetitle="Toner" />
+    <x-breadcrumb title="Brands" pagetitle="ValueBox" />
 
     </div>
 

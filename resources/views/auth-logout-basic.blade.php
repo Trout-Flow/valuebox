@@ -29,7 +29,7 @@
                                         class="avatar-md rounded-circle">
                                 </div>
 
-                                <p class="text-muted fs-15">Thank you for using <span class="fw-semibold">Toner</span> admin
+                                <p class="text-muted fs-15">Thank you for using <span class="fw-semibold">ValueBox</span> admin
                                     template</p>
 
                                 <div>
@@ -53,8 +53,8 @@
                             <p class="mb-0 text-muted">©
                                 <script>
                                     document.write(new Date().getFullYear())
-                                </script> Toner. Crafted with <i class="mdi mdi-heart text-danger"></i> by
-                                Themesbrand
+                                </script> ValueBox. Crafted with <i class="mdi mdi-heart text-danger"></i> by
+                                ValueBox
                             </p>
                         </div>
                     </div>

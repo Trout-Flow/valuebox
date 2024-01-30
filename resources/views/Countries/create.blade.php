@@ -1,53 +1,45 @@
 @extends('layouts.master')
-
 @section('title')
     Add Country
 @endsection
+@section('css')
+    <!-- extra css -->
+@endsection
 @section('content')
-    <x-breadcrumb title="Add Country" pagetitle="Countries" />
-    <div class="content-page">
-        <div class="content">
-            @if(session()->has('message'))
-            <div class="alert" style="background-color: #a9e8a8">
-                {{ session('message') }}
-            </div>
-        @endif
-        </div>
-        <div class="content-wrapper">
-            @section('content')
-            <div class="content">
-                <div class="row">
-                    <div class="card card-success col-11">
-                        <div class="card-header">
-                                <h3 class="card-title">Add Country</h3>
+    <x-breadcrumb title="Add Country" pagetitle="Country" />
+    <form autocomplete="off" method="POST" action="{{!empty($country) ? route('country.update'): route('country.save')}}" class="needs-validation" >
+        <div class="row">
+            <div class="col-xl-12 col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label" for="product-title-input">Country Name</label>
+                            <input type="hidden" class="form-control" id="formAction" name="formAction" value="add">
+                            {{-- <input type="text" class="form-control d-none" id="name"> --}}
+                            <input type="text" class="form-control" value="{{old('name', @$country->name)}}" id="country-name-input"
+                                placeholder="Enter Country Name" required>
+                            <div class="invalid-feedback">Please enter a Country Name.</div>
                         </div>
                     </div>
                 </div>
-            </div>
-            @endsection
-            <div class="card-body">
-                <form name="add-country_form" id="data-form" method="POST" action="{{!empty($country) ? route('country.update'): route('country.save')}}">
-                    <input type="hidden" name="id" id="id" value="{{@$country->id}}">
-                    <section class="content">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="card card-primary">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="form-group">
-                                                <label for="name">Name</label>
-                                                <input type="text" class="form-control" name="name" id="name" value="{{old('name', @$country->name)}}" placeholder="Enter the Country Name" autofocus>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </form>
+                <!-- end card -->
+                <div class="text-end mb-3">
+                    <button type="submit" class="btn btn-success w-sm">Submit</button>
+                </div>
             </div>
         </div>
-    </div>
-
+        <!-- end row -->
+    </form>
 @endsection
+@section('scripts')
+    <!-- ckeditor -->
+    <script src="{{ URL::asset('build/libs/@ckeditor/ckeditor5-build-classic/ckeditor.js') }}"></script>
 
+    <!-- dropzone js -->
+    <script src="{{ URL::asset('build/libs/dropzone/dropzone-min.js') }}"></script>
+    <!-- create-product -->
+    <script src="{{ URL::asset('build/js/backend/create-product.init.js') }}"></script>
+
+    <!-- App js -->
+    <script src="{{ URL::asset('build/js/app.js') }}"></script>
+@endsection
