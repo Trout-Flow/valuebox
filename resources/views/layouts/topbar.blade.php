@@ -31,12 +31,12 @@
                     </span>
                 </button>
 
-                <button type="button" class="btn btn-sm px-3 fs-15 user-name-text header-item d-none d-md-block" data-bs-toggle="modal" data-bs-target="#searchModal">
+                {{-- <button type="button" class="btn btn-sm px-3 fs-15 user-name-text header-item d-none d-md-block" data-bs-toggle="modal" data-bs-target="#searchModal">
                     <span class="bi bi-search me-2"></span> Search for ValueBox...
-                </button>
+                </button> --}}
             </div>
 
-            <div class="d-flex align-items-center">
+            {{-- <div class="d-flex align-items-center">
 
                 <div class="d-md-none topbar-head-dropdown header-item">
                     <button type="button" class="btn btn-icon btn-topbar btn-ghost-dark rounded-circle" id="page-header-search-dropdown" data-bs-toggle="modal" data-bs-target="#searchModal">
@@ -266,7 +266,7 @@
                     </div>
                 </div> --}}
 
-                <div class="dropdown topbar-head-dropdown ms-1 header-item dropdown-hover-end" id="notificationDropdown">
+                {{-- <div class="dropdown topbar-head-dropdown ms-1 header-item dropdown-hover-end" id="notificationDropdown">
                     <button type="button" class="btn btn-icon btn-topbar btn-ghost-dark rounded-circle" id="page-header-notifications-dropdown" data-bs-toggle="dropdown"  data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">
                         <i class='bi bi-bell fs-18'></i>
                         <span class="position-absolute topbar-badge fs-10 translate-middle badge rounded-pill bg-danger"><span class="notification-badge">4</span><span class="visually-hidden">unread messages</span></span>
@@ -414,18 +414,23 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
-                <div class="dropdown ms-sm-3 header-item topbar-user topbar-head-dropdown dropdown-hover-end">
+                <a href="{{ url('logout') }}">
+                    <span class="align-middle" style="font-weight:bold;background-color:black; color:white;padding:10px;border-radius:5px;" data-key="t-logout">{{ __('t-logout') }}
+                    </span></a>
+
+                {{-- <div class="dropdown ms-sm-3 header-item topbar-user topbar-head-dropdown dropdown-hover-end">
                     <button type="button" class="btn" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="d-flex align-items-center">
                             <img class="rounded-circle header-profile-user" src="@if(@Auth::user()->avatar) {{ URL::asset('images/users/')."/". @Auth::user()->avatar}} @else {{ URL::asset('build/images/users/avatar-1.jpg') }} @endif" alt="Header Avatar">
-                            {{-- <span class="text-start ms-xl-2">
+                            <span class="text-start ms-xl-2">
                                 <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{{ @Auth::user()->first_name." ".@Auth::user()->last_name }}</span>
                                 <span class="d-none d-xl-block ms-1 fs-13 user-name-sub-text">Founder</span>
-                            </span> --}}
+                            </span>
                         </span>
                     </button>
+
                     <div class="dropdown-menu dropdown-menu-end">
                         <!-- item-->
                         <h6 class="dropdown-header">Welcome {{@Auth::user()->last_name}}!</h6>
@@ -437,7 +442,7 @@
                         <a class="dropdown-item" href="account-settings"><i class="bi bi-gear text-muted fs-15 align-middle me-1"></i> <span class="align-middle">Settings</span></a>
                         <a class="dropdown-item" href="{{ url('logout') }}"><i class="bi bi-box-arrow-right text-muted fs-15 align-middle me-1"></i> <span class="align-middle" data-key="t-logout">{{ __('t-logout') }}</span></a>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
@@ -446,7 +451,10 @@
 
 <!-- Modal -->
 <div class="modal fade" id="searchModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+</div>
+
+    {{-- <div class="modal-dialog modal-lg"></div> 
+
         <div class="modal-content rounded">
             <div class="modal-header p-3">
                 <div class="position-relative w-100">
@@ -480,7 +488,7 @@
                             <a href="javascript:void(0);" class="list-group-item dropdown-item notify-item"><i class="bi bi-filetype-psd me-2"></i> <span>Toner.psd</span></a>
                             <a href="javascript:void(0);" class="list-group-item dropdown-item notify-item"><i class="bi bi-ticket-detailed me-2"></i> <span>Support Tickets</span></a>
                             <a href="javascript:void(0);" class="list-group-item dropdown-item notify-item"><i class="bi bi-file-earmark-zip me-2"></i> <span>Toner.zip</span></a>
-                        </div> --}}
+                        </div>
 
                         <div class="notification-group-list">
                             <h5 class="text-overflow text-muted fs-13 mb-2 mt-3 text-uppercase notification-title">Links</h5>
@@ -515,14 +523,12 @@
                                         <span class="fs-12 text-muted">React Developer</span>
                                     </div>
                                 </div>
-                            </a> --}}
+                            </a> 
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
+        </div>  --}}
 
 <!-- removeNotificationModal -->
 <div id="removeNotificationModal" class="modal fade zoomIn" tabindex="-1" aria-hidden="true">
