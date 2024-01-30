@@ -10,7 +10,7 @@
     <!--Swiper slider css-->
     <link href="{{ URL::asset('build/libs/swiper/swiper-bundle.min.css') }}" rel="stylesheet" type="text/css">
 @endsection
-@section('content')
+{{-- @section('content')
     <div class="row">
         <div class="col-xxl-12 col-lg-6 order-first">
             <div class="row row-cols-xxl-4 row-cols-1">
@@ -1209,7 +1209,7 @@
             </div> <!-- .card-->
         </div> <!-- .col-->
     </div> <!-- end row-->
-@endsection
+@endsection --}}
 @section('scripts')
     <!-- apexcharts -->
     <script src="{{ URL::asset('build/libs/apexcharts/apexcharts.min.js') }}"></script>
