@@ -18,9 +18,9 @@ class CountriesController extends Controller
 
     public function index(Request $request)
     {
-        $countries = $this->CountryService->search($request->all());
-        $name = $request['name'];
-        return view('Countries.index', compact('countries', 'name'));
+        $request = request()->all();
+        $countries = $this->CountryService->search($request);
+        return view('Countries.index', compact('countries'));
     }
     public function create()
     {
@@ -33,7 +33,7 @@ class CountriesController extends Controller
     {
         $data = $request->except('_token','id');
         $this->CountryService->findUpdateOrCreate(countries::class, ['id'=>''], $data);
-        return redirect('Country/list')->with('message', CountryService::COUNTRY_SAVED);
+        return redirect('country/list')->with('message', CountryService::COUNTRY_SAVED);
     }
 
     public function edit($id)

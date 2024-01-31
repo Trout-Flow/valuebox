@@ -47,7 +47,14 @@
                                         <td>
                                             <div class="media">
                                                 <div class="media-body align-self-center">
-                                                    <h6 class="mb-0">{{ $city->province_id }}</h6>
+                                                    <h6 class="mb-0">{{ $city->id }}</h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="media">
+                                                <div class="media-body align-self-center">
+                                                    <h6 class="mb-0">{{ $city->provinces->name}}</h6>
                                                 </div>
                                             </div>
                                         </td>
@@ -61,24 +68,27 @@
 
                                         <td class="text-center">
                                             <div class="action-btns">
-                                                @if ((!empty($permission->edit_access) && $permission->edit_access == 1) || Auth::user()->is_admin == 1)
-                                                    <a href="{{ route('city.edit', ['id' => $city->id]) }}"
-                                                        class="action-btn btn-edit bs-tooltip me-2"
-                                                        data-toggle="tooltip" data-placement="top" title="Edit">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                            height="24" viewBox="0 0 24 24" fill="none"
-                                                            stroke="currentColor" stroke-width="2"
-                                                            stroke-linecap="round" stroke-linejoin="round"
-                                                            class="feather feather-edit-2">
-                                                            <path
-                                                                d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z">
-                                                            </path>
-                                                        </svg>
-                                                    </a>
+                                                <a href="{{ route('city.edit', ['id' => $city->id]) }}"
+                                                    class="action-btn btn-edit bs-tooltip me-2"
+                                                    data-toggle="tooltip" data-placement="top" title="Edit">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                        height="24" viewBox="0 0 24 24" fill="none"
+                                                        stroke="currentColor" stroke-width="2"
+                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-edit-2">
+                                                        <path
+                                                            d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z">
+                                                        </path>
+                                                    </svg>
+                                                </a>
+                                                {{-- @if ((!empty($permission->edit_access) && $permission->edit_access == 1) || Auth::user()->is_admin == 1)
+
                                                 @endif
 
                                                 @if ((!empty($permission->delete_access) && $permission->delete_access == 1) || Auth::user()->is_admin == 1)
-                                                    <a href="javascript:void(0)"
+
+                                                @endif --}}
+                                                <a href="javascript:void(0)"
                                                         class="action-btn btn-delete bs-tooltip delete"
                                                         data-id="{{ $city->id }}" data-toggle="tooltip"
                                                         data-placement="top" title="Delete">
@@ -99,7 +109,6 @@
                                                             </line>
                                                         </svg>
                                                     </a>
-                                                @endif
 
                                             </div>
                                         </td>

@@ -20,7 +20,7 @@
                     <select class="form-select" id="country_id" type="text" name="country_id"
                         value="{{ old('country_id', !empty($province->country_id) ? $province->country_id : '') }}"
                         placeholder="Please Select Country " class="form-control select2 form-control mb-3 custom-select"
-                        required>
+                        >
                         <option value="">Select</option>
                         @foreach ($dropDownData['country'] as $key => $value)
                             <option value="{{ $key }}"
@@ -35,7 +35,7 @@
                     <label class="form-label" for="product-title-input">Province Name</label>
                     {{--  <input type="hidden" class="form-control" id="formAction" name="formAction" value="add"> --}}
                     <input type="text" class="form-control" value="{{ old('name', @$province->name) }}" id="name"
-                        name="name" placeholder="Enter Province Name" required>
+                        name="name" placeholder="Enter Province Name" >
                     {{-- <div class="invalid-feedback">Please enter a Province Name.</div> --}}
                 </div>
             </div>

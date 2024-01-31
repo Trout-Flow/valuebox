@@ -14,6 +14,12 @@ use Illuminate\Support\Facades\Input;
 
     class ProvinceService
 {
+    protected $commonService;
+
+    public function __construct(CommonService $commonService)
+    {
+        $this->commonService = $commonService;
+    }
     const PROVINCE_SAVED = 'Province save successfully';
     const PROVINCE_UPDATED = 'Province updated successfully';
     const PER_PAGE = '10';
@@ -39,16 +45,29 @@ use Illuminate\Support\Facades\Input;
     }
 
 
-    public function search($param)
+    // public function search($param)
+    // {
+    //     $q = province::query();
+    //     if (!empty($param['name']))
+    //     {
+    //         $q->where('name', 'LIKE', '%'. $param['name'] . '%');
+    //     }
+
+    //     $countries = $q->orderBy('name', 'ASC')->paginate(Self::PER_PAGE);
+    //     return $countries;
+    // }
+
+    public function search($request)
     {
-        $q = province::query();
-        if (!empty($param['name']))
-        {
-            $q->where('name', 'LIKE', '%'. $param['name'] . '%');
+        $provinces = [];
+        if (!empty($request['param'])) {
+            $query = province::with('country')->where('name', 'like', '%' . $request['param'] . '%');
+            $provinces = $query->get();
+        }else{
+            $provinces = province::get();
         }
 
-        $countries = $q->orderBy('name', 'ASC')->paginate(Self::PER_PAGE);
-        return $countries;
+        return $this->commonService->paginate($provinces, Self::PER_PAGE);
     }
 
 }

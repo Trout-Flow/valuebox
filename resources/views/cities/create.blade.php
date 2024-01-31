@@ -19,7 +19,7 @@
                     {{-- <input type="hidden" class="form-control" id="formAction" name="formAction" value="add"> --}}
                     <select class="form-select" id="province_id" type="text" name="province_id"
                         placeholder="Please Select Province " class="form-control select2 form-control mb-3 custom-select"
-                        required>
+                        >
                         <option value="">Select</option>
                         @foreach ($dropDownData['province'] as $key => $value)
                             <option value="{{ $key }}"
@@ -32,7 +32,7 @@
                 <div class="col-xl-6 col-lg-6">
                     <label class="form-label" for="product-title-input">City Name</label>
                     <input type="text" class="form-control" value="{{ old('name', @$city->name) }}" id="name"
-                        name="name" placeholder="Enter the City Name" required>
+                        name="name" placeholder="Enter the City Name" >
                 </div>
             </div>
         </div>

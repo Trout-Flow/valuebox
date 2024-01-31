@@ -4,7 +4,7 @@
             <div class="d-flex">
                 <!-- LOGO -->
                 <div class="navbar-brand-box horizontal-logo">
-                    <a href="index" class="logo logo-dark">
+                    <a href="{{route('index')}}" class="logo logo-dark">
                         <span class="logo-sm">
                             <img src="{{ URL::asset('build/images/logo-sm.png') }}" alt="" height="22">
                         </span>
@@ -13,7 +13,7 @@
                         </span>
                     </a>
 
-                    <a href="index" class="logo logo-light">
+                    <a href="{{route('index')}}" class="logo logo-light">
                         <span class="logo-sm">
                             <img src="{{ URL::asset('build/images/logo-sm.png') }}" alt="" height="22">
                         </span>
@@ -453,7 +453,7 @@
 <div class="modal fade" id="searchModal" tabindex="-1" aria-hidden="true">
 </div>
 
-    {{-- <div class="modal-dialog modal-lg"></div> 
+    {{-- <div class="modal-dialog modal-lg"></div>
 
         <div class="modal-content rounded">
             <div class="modal-header p-3">
@@ -523,7 +523,7 @@
                                         <span class="fs-12 text-muted">React Developer</span>
                                     </div>
                                 </div>
-                            </a> 
+                            </a>
                         </div>
                     </div>
                 </div>

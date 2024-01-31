@@ -11,7 +11,7 @@ class AreaRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,8 @@ class AreaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'city_id' => 'required',
+            'name' => 'required'
         ];
     }
 }

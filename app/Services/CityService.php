@@ -12,6 +12,12 @@ use App\Models\province;
 
     class CityService
 {
+    protected $commonService;
+
+    public function __construct(CommonService $commonService)
+    {
+        $this->commonService = $commonService;
+    }
     const CITY_SAVED = 'City save successfully';
     const CITY_UPDATED = 'City updated successfully';
     const PER_PAGE = '10';
@@ -36,16 +42,29 @@ use App\Models\province;
     }
 
 
-    public function search($param)
+    // public function search($param)
+    // {
+    //     $q = City::query();
+    //     if (!empty($param['name']))
+    //     {
+    //         $q->where('name', 'LIKE', '%'. $param['name'] . '%');
+    //     }
+
+    //     $countries = $q->orderBy('name', 'ASC')->paginate(Self::PER_PAGE);
+    //     return $countries;
+    // }
+
+
+    public function search($request)
     {
-        $q = City::query();
-        if (!empty($param['name']))
-        {
-            $q->where('name', 'LIKE', '%'. $param['name'] . '%');
+        $cities = [];
+        if (!empty($request['param'])) {
+            $query = City::with('province')->where('name', 'like', '%' . $request['param'] . '%');
+            $cities = $query->get();
+        }else{
+            $cities = City::get();
         }
 
-        $countries = $q->orderBy('name', 'ASC')->paginate(Self::PER_PAGE);
-        return $countries;
+        return $this->commonService->paginate($cities, Self::PER_PAGE);
     }
-
 }

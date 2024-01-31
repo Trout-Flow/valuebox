@@ -197,7 +197,7 @@
     </div> --}}
     <!--end row-->
 
-    <div class="row" id="sellersList">
+    <div class="row" id="countryList">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
@@ -214,7 +214,7 @@
                                 {{-- <a class="btn btn-primary add-btn" href="{{ route('country.create') }}"
                                     data-bs-toggle="modal">Add
                                     Country</a> --}}
-                                    <a href="{{ route('country.create') }}" class="btn btn-primary mt-2 mb-2 me-8"
+                                <a href="{{ route('country.create') }}" class="btn btn-primary mt-2 mb-2 me-8"
                                     style="float : right; " style="">Add Country
                                 </a>
                             </div>
@@ -228,53 +228,79 @@
                         <table class="table align-middle table-nowrap" id="customerTable">
                             <thead class="table-light">
                                 <tr>
-                                    <th scope="col" style="width: 50px;">
-                                        {{-- <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="checkAll"
-                                                value="option">
-                                        </div> --}}
-                                    </th>
+
                                     <th class="sort" data-sort="id">ID</th>
                                     <th class="sort" data-sort="country_name" style="width: 70%">Country Name</th>
                                     <th class="sort" data-sort="actions">Action</th>
                                 </tr>
                             </thead>
                             <tbody class="list form-check-all">
-                                {{-- <tr>
-                                    <th scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="chk_child"
-                                                value="option1">
-                                        </div>
-                                    </th>
-                                    <td class="id" style="display:none;"><a href="javascript:void(0);"
-                                            class="fw-medium link-primary">#TB01</a></td>
-                                    <td class="sellerName">Alfred Hurst</td>
-                                    <td class="itemStock">245</td>
-                                    <td class="balance">$748.32k</td>
-                                    <td class="email">alfredH@toner.com</td>
-                                    <td class="phone">415-778-3654</td>
-                                    <td class="createDate">18 Dec, 2018</td>
-                                    <td class="accountStatus"><span
-                                            class="badge bg-danger-subtle text-danger text-uppercase">INACTIVE</span></td>
-                                    <td>
-                                        <div class="d-flex gap-2">
-                                            <div>
-                                                <a href="seller-overview" class="btn btn-sm btn-soft-secondary">View</a>
+                                @foreach ($countries as $country)
+                                    <tr id="country{{ $country->id }}">
+                                        <td>
+                                            <div class="media">
+                                                <div class="media-body align-self-center">
+                                                    <h6 class="mb-0">{{ $country->id }}</h6>
+                                                </div>
                                             </div>
-                                            <div class="edit">
-                                                <a class="btn btn-sm btn-soft-info edit-item-btn" href="#showModal"
-                                                    data-bs-toggle="modal">Edit</a>
+                                        </td>
+                                        <td>
+                                            <div class="media">
+                                                <div class="media-body align-self-center">
+                                                    <h6 class="mb-0">{{ $country->name }}</h6>
+                                                </div>
                                             </div>
-                                            <div class="remove">
-                                                <button class="btn btn-sm btn-soft-danger remove-item-btn"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#deleteRecordModal">Remove</button>
+                                        </td>
+
+                                        <td class="text-center">
+                                            <div class="action-btns">
+                                                <a href="{{ route('country.edit', ['id' => $country->id]) }}"
+                                                    class="action-btn btn-edit bs-tooltip me-2"
+                                                    data-toggle="tooltip" data-placement="top" title="Edit">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                        height="24" viewBox="0 0 24 24" fill="none"
+                                                        stroke="currentColor" stroke-width="2"
+                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-edit-2">
+                                                        <path
+                                                            d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z">
+                                                        </path>
+                                                    </svg>
+                                                </a>
+                                                {{-- @if ((!empty($permission->edit_access) && $permission->edit_access == 1) || Auth::user()->is_admin == 1)
+
+                                                @endif --}}
+                                                <a href="javascript:void(0)"
+                                                class="action-btn btn-delete bs-tooltip delete"
+                                                data-id="{{ $country->id }}" data-toggle="tooltip"
+                                                data-placement="top" title="Delete">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                    height="24" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2"
+                                                    stroke-linecap="round" stroke-linejoin="round"
+                                                    class="feather feather-trash-2">
+                                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                                    <path
+                                                        d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                                                    </path>
+                                                    <line x1="10" y1="11" x2="10"
+                                                        y2="17">
+                                                    </line>
+                                                    <line x1="14" y1="11" x2="14"
+                                                        y2="17">
+                                                    </line>
+                                                </svg>
+                                            </a>
+                                                {{-- @if ((!empty($permission->delete_access) && $permission->delete_access == 1) || Auth::user()->is_admin == 1)
+
+                                                @endif --}}
+
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr> --}}
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
+
                         </table>
                         <div class="noresult" style="display: none">
                             <div class="text-center py-4">

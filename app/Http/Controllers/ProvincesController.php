@@ -23,6 +23,7 @@ class ProvincesController extends Controller
 
         return view('provinces.index', compact('provinces'));
     }
+
     public function create()
     {
         $dropDownData = $this->ProvinceService->DropDownData();
@@ -32,6 +33,7 @@ class ProvincesController extends Controller
 
     public function store(provinceRequest $request)
     {
+        
         $data = $data = $request->except('_token','id');
         $this->ProvinceService->findUpdateOrCreate(province::class, ['id'=>''], $data);
         return redirect('province/list')->with('message', ProvinceService::PROVINCE_SAVED);
