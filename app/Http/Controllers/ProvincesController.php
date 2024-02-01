@@ -33,7 +33,7 @@ class ProvincesController extends Controller
 
     public function store(provinceRequest $request)
     {
-        
+
         $data = $data = $request->except('_token','id');
         $this->ProvinceService->findUpdateOrCreate(province::class, ['id'=>''], $data);
         return redirect('province/list')->with('message', ProvinceService::PROVINCE_SAVED);
@@ -59,11 +59,15 @@ class ProvincesController extends Controller
 
     public function destroy($id)
     {
-        $deleted = province::destroy($id);
-        if($deleted){
-            return redirect()->route('province.list')->with('error','Province Deleted successfully.');
-        }else{
-            return response()->json(['error'=>'', 'message'=>'Province not deleted']);
+        $deleted = Province::destroy($id);
+        if ($deleted) {
+            $message = config('constants.delete') ;
+            session()->flash('message', $message);
+            return redirect('province/list')->with('message', config('constants.delete'));
+        } else {
+            $message = config('constants.wrong') ;
+            session()->flash('message', $message);
+            return redirect('province/list')->with('message', config('constants.wrong'));
         }
     }
 

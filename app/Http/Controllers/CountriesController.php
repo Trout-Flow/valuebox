@@ -55,11 +55,15 @@ class CountriesController extends Controller
 
     public function destroy($id)
     {
-        $deleted = countries::destroy($id);
-        if($deleted){
-            return redirect()->route('country.list')->with('error','Country Deleted successfully.');
-        }else{
-            return response()->json(['error'=>'', 'message'=>'Country not deleted']);
+        $deleted = Countries::destroy($id);
+        if ($deleted) {
+            $message = config('constants.delete') ;
+            session()->flash('message', $message);
+            return redirect('country/list')->with('message', config('constants.delete'));
+        } else {
+            $message = config('constants.wrong') ;
+            session()->flash('message', $message);
+            return redirect('country/list')->with('message', config('constants.wrong'));
         }
     }
 

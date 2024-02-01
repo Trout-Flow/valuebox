@@ -2,7 +2,7 @@
 <div class="app-menu navbar-menu">
     <!-- LOGO -->
     <div class="navbar-brand-box">
-        <a href="{{route('index')}}" class="logo logo-dark">
+        <a href="{{ route('index') }}" class="logo logo-dark">
             <span class="logo-sm">
                 <img src="{{ URL::asset('build/images/logo-sm.png') }}" alt="" height="26">
             </span>
@@ -10,7 +10,7 @@
                 <img src="{{ URL::asset('build/images/logo-dark.png') }}" alt="" height="26">
             </span>
         </a>
-        <a href="{{route('index')}}" class="logo logo-light">
+        <a href="{{ route('index') }}" class="logo logo-light">
             <span class="logo-sm">
                 <img src="{{ URL::asset('build/images/logo-sm.png') }}" alt="" height="24">
             </span>
@@ -18,7 +18,8 @@
                 <img src="{{ URL::asset('build/images/logo-light.png') }}" alt="" height="24">
             </span>
         </a>
-        <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover" id="vertical-hover">
+        <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover"
+            id="vertical-hover">
             <i class="ri-record-circle-line"></i>
         </button>
     </div>
@@ -31,19 +32,28 @@
             <ul class="navbar-nav" id="navbar-nav">
                 <li class="menu-title"><span data-key="t-menu">{{ __('t-menu') }}</span></li>
                 <li class="nav-item">
-                    <a href="{{route('index')}}" class="nav-link menu-link"> <i class="bi bi-speedometer2"></i> <span data-key="t-dashboard">{{ __('t-dashboard') }}</span> <span class="badge badge-pill bg-danger-subtle text-danger" data-key="t-hot">{{ __('t-hot') }}</span></a>
+                    <a href="{{ route('index') }}" class="nav-link menu-link"> <i class="bi bi-speedometer2"></i>
+                        <span data-key="t-dashboard">{{ __('t-dashboard') }}</span> <span
+                            class="badge badge-pill bg-danger-subtle text-danger"
+                            data-key="t-hot">{{ __('t-hot') }}</span></a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('country.list')}}" class="nav-link menu-link"><i class="bi bi-speedometer2"></i> <span data-key="Country">{{ __('Country') }}</span> </a>
+                    <a href="{{ route('country.list') }}" class="nav-link menu-link"><i class="bi bi-speedometer2"></i>
+                        <span data-key="Country">{{ __('Country') }}</span>
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('province.list')}}" class="nav-link menu-link"><i class="bi bi-speedometer2"></i> <span data-key="Province ">{{ __('Province') }}</span> </a>
+                    <a href="{{ route('province.list') }}" class="nav-link menu-link"><i
+                            class="bi bi-speedometer2"></i> <span data-key="Province ">{{ __('Province') }}</span>
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('city.list')}}" class="nav-link menu-link"><i class="bi bi-speedometer2"></i> <span data-key="City">{{ __('City') }}</span> </a>
+                    <a href="{{ route('city.list') }}" class="nav-link menu-link"><i class="bi bi-speedometer2"></i>
+                        <span data-key="City">{{ __('City') }}</span> </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('area.list')}}" class="nav-link menu-link"><i class="bi bi-speedometer2"></i> <span data-key="Area">{{ __('Area') }}</span> </a>
+                    <a href="{{ route('area.list') }}" class="nav-link menu-link"><i class="bi bi-speedometer2"></i>
+                        <span data-key="Area">{{ __('Area') }}</span> </a>
                 </li>
 
                 {{-- <li class="nav-item">

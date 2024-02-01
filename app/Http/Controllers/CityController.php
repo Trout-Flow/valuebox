@@ -34,7 +34,7 @@ class CityController extends Controller
     {
         $data = $data = $request->except('_token', 'id');
         $this->CityService->findUpdateOrCreate(City::class, ['id' => ''], $data);
-        return redirect('city/list')->with('message', CityService::CITY_SAVED);
+        return redirect('city/list')->with('message', config('constants.add'));
     }
 
     public function edit($id)
@@ -51,16 +51,20 @@ class CityController extends Controller
     {
         $request = $request->except('_token', 'id');
         $this->CityService->findUpdateOrCreate(City::class, ['id' => request('id')], $request);
-        return redirect('city/list')->with('message', CityService::CITY_UPDATED);
+        return redirect('city/list')->with('message', config('constants.update'));
     }
 
     public function destroy($id)
     {
         $deleted = City::destroy($id);
         if ($deleted) {
-            return redirect()->route('city.list')->with('error', 'City Deleted successfully.');
+            $message = config('constants.delete') ;
+            session()->flash('message', $message);
+            return redirect('city/list')->with('message', config('constants.delete'));
         } else {
-            return response()->json(['error' => '', 'message' => 'City not deleted']);
+            $message = config('constants.wrong') ;
+            session()->flash('message', $message);
+            return redirect('city/list')->with('message', config('constants.wrong'));
         }
     }
 }

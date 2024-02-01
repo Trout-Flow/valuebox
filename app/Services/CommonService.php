@@ -30,7 +30,7 @@ class CommonService
      */
     public function findUpdateOrCreate( $model , array $where, array $data)
     {
-        $object = $model ::firstOrNew($where);
+        $object =$model::firstOrNew($where);
         foreach ($data as $property => $value) {
             $object->{$property} = $value;
         }
@@ -112,10 +112,13 @@ class CommonService
         $deleted = $modelClass::destroy(request()->id);
         if ($deleted) {
             $message = config('constants.delete') ;
-            return response()->json(['status' => 'success', 'message' => $message]);
+            session()->flash('message', $message);
+            return redirect('area/list')->with('message', config('constants.delete'));
+            // return response()->json(['status' => 'success', 'message' => $message]);
         } else {
             $message = config('constants.wrong') ;
-            return response()->json(['status' => 'fail', 'message' => $message]);
+            session()->flash('message', $message);
+            return redirect('area/list')->with('message', config('constants.wrong'));
         }
     }
 }

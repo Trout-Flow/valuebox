@@ -6,14 +6,16 @@ use Illuminate\Http\Request;
 use App\Http\Requests\AreaRequest;
 use App\Models\Area;
 use App\Services\AreaService;
+use App\Services\CommonService;
 
 class AreaController extends Controller
 {
-
+    protected $commonService;
     protected $areaService;
-    public function __construct(AreaService $areaService)
+    public function __construct(AreaService $areaService, CommonService $commonService)
     {
         $this->areaService =$areaService;
+        $this->commonService =$commonService;
     }
 
     public function index(Request $request)
@@ -34,7 +36,12 @@ class AreaController extends Controller
     {
         $data = $data = $request->except('_token','id');
         $this->areaService->findUpdateOrCreate(Area::class, ['id'=>''], $data);
-        return redirect('area/list')->with('message', AreaService::AREA_SAVED);
+        $message = config('constants.add');
+        if(request('id')){
+            $message = config('constants.update');
+        }
+        session()->flash('message', $message);
+        return redirect('area/list')->with('message', config('constants.add'));
     }
 
     public function edit($id)
@@ -52,19 +59,14 @@ class AreaController extends Controller
     public function update(AreaRequest $request){
         $request = $request->except('_token','id');
         $this->areaService->findUpdateOrCreate(Area::class, ['id' => request('id')], $request);
-        return redirect('area/list')->with('message', AreaService::AREA_UPDATED);
+        $message = config('constants.update');
+        session()->flash('message', $message);
+        return redirect('area/list')->with('message', config('constants.update'));
     }
 
-    public function destroy($id)
+    public function destroy()
     {
-        $deleted = Area::destroy($id);
-        if($deleted){
-            return redirect()->route('area.list')->with('error','Area Deleted successfully.');
-        }
-        else
-        {
-            return response()->json(['error'=>'', 'message'=>'Area not deleted']);
-        }
+        return $this->commonService->deleteResource(Area::class);
     }
 
 }
