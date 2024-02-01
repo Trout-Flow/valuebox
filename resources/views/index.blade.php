@@ -10,7 +10,7 @@
     <!--Swiper slider css-->
     <link href="{{ URL::asset('build/libs/swiper/swiper-bundle.min.css') }}" rel="stylesheet" type="text/css">
 @endsection
-{{-- @section('content')
+ @section('content')
     <div class="row">
         <div class="col-xxl-12 col-lg-6 order-first">
             <div class="row row-cols-xxl-4 row-cols-1">
@@ -22,7 +22,7 @@
                                 <div class="vr rounded bg-secondary opacity-50" style="width: 4px;"></div>
                                 <div class="flex-grow-1 ms-3">
                                     <p class="text-uppercase fw-medium text-muted fs-14 text-truncate">Total Earnings</p>
-                                    <h4 class="fs-22 fw-semibold mb-3">$<span class="counter-value"
+                                    <h4 class="fs-22 fw-semibold mb-3">Rs.<span class="counter-value"
                                             data-target="98851.35">0</span></h4>
                                     <div class="d-flex align-items-center gap-2">
                                         <h5 class="badge bg-success-subtle text-success mb-0">
@@ -50,7 +50,7 @@
                                 <div class="flex-grow-1 ms-3">
                                     <p class="text-uppercase fw-medium text-muted fs-14 text-truncate">Orders</p>
                                     <h4 class="fs-22 fw-semibold mb-3"><span class="counter-value"
-                                            data-target="65802">0</span> </h4>
+                                            data-target="6580">0</span> </h4>
                                     <div class="d-flex align-items-center gap-2">
                                         <h5 class="badge bg-danger-subtle text-danger mb-0">
                                             <i class="ri-arrow-right-down-line align-bottom"></i> -2.74 %
@@ -77,7 +77,7 @@
                                 <div class="flex-grow-1 ms-3">
                                     <p class="text-uppercase fw-medium text-muted fs-14 text-truncate">Customers</p>
                                     <h4 class="fs-22 fw-semibold mb-3"><span class="counter-value"
-                                            data-target="79958">0</span> </h4>
+                                            data-target="799">0</span> </h4>
                                     <div class="d-flex align-items-center gap-2">
                                         <h5 class="badge bg-success-subtle text-success mb-0">
                                             <i class="ri-arrow-right-up-line align-bottom"></i> +29.08 %
@@ -124,7 +124,7 @@
         </div>
         <!--end col-->
 
-        <div class="col-xxl-9 order-last">
+        {{-- <div class="col-xxl-9 order-last">
             <div class="card">
                 <div class="card-header align-items-center d-flex">
                     <h4 class="card-title mb-0 flex-grow-1">Revenue</h4>
@@ -241,7 +241,8 @@
                 </div>
             </div>
             <!-- end card -->
-        </div><!-- end col -->
+        </div> <!-- end col --> --}}
+        
         <div class="col-xxl-3 col-lg-6 order-0 order-xxl-last">
             <div class="card card-height-100">
                 <div class="card-header">
@@ -365,7 +366,7 @@
         </div>
     </div>
 
-    <div class="row">
+    {{-- <div class="row">
         <div class="col-xxl-12">
             <div class="card">
                 <div class="card-header align-items-center d-flex">
@@ -598,9 +599,9 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
-    <div class="row widget-responsive-fullscreen">
+    {{-- <div class="row widget-responsive-fullscreen">
         <div class="col-xxl-3">
             <div class="card card-height-100">
                 <div class="card-header align-items-center d-flex">
@@ -1208,8 +1209,8 @@
                 </div>
             </div> <!-- .card-->
         </div> <!-- .col-->
-    </div> <!-- end row-->
-@endsection --}}
+    </div> <!-- end row--> --}}
+@endsection
 @section('scripts')
     <!-- apexcharts -->
     <script src="{{ URL::asset('build/libs/apexcharts/apexcharts.min.js') }}"></script>
