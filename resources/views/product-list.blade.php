@@ -12,7 +12,7 @@
 @section('content')
 
     <x-breadcrumb title="Product List" pagetitle="Products" />
-    
+
     <div class="row">
         <div class="col-xl-3 col-lg-4">
             <div class="card overflow-hidden">
@@ -404,7 +404,6 @@
                     </div>
                 </div>
             </div>
-
             <div id="product-list" class="gridjs-border-none mb-4"></div>
         </div>
         <!-- end col -->
