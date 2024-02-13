@@ -56,7 +56,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('delete/{id}', ['as' => 'province.delete', 'uses' => 'App\Http\Controllers\ProvincesController@destroy']);
         Route::post('show/{id}', ['as' => 'province.show', 'uses' => 'App\Http\Controllers\ProvincesController@show']);
         Route::get('search', ['as' => 'province.search', 'uses' => 'App\Http\Controllers\ProvincesController@search']);
-        Route::get('user', ['as' => 'user.bank', 'uses' => 'App\Http\Controllers\ProvincesController@getUserPermissions']);
     });
 
     Route::group(['prefix' => 'city'], function () {
@@ -81,5 +80,30 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('show/{id}', ['as' => 'area.show', 'uses' => 'App\Http\Controllers\AreaController@show']);
         Route::get('search', ['as' => 'area.search', 'uses' => 'App\Http\Controllers\AreaController@search']);
         Route::get('user', ['as' => 'user.area', 'uses' => 'App\Http\Controllers\AreaController@getUserPermissions']);
+    });
+
+    Route::group(['prefix' => 'seller'], function () {
+        Route::get('list', ['as' => 'seller.list', 'uses' => 'App\Http\Controllers\SellerController@index']);
+        Route::get('create', ['as' => 'seller.create', 'uses' => 'App\Http\Controllers\SellerController@create']);
+        // Route::post('save', [App\Http\Controllers\SellerController::class, 'store'])->name('seller.save');
+        // Route::post('/store', [App\Http\Controllers\ProductsController::class, 'store'])->name('product.store');
+        Route::post('save', ['as' => 'seller.save', 'uses' => 'App\Http\Controllers\SellerController@store']);
+        Route::get('edit', ['as' => 'seller.edit', 'uses' => 'App\Http\Controllers\SellerController@edit']);
+        Route::post('update', ['as' => 'seller.update', 'uses' => 'App\Http\Controllers\SellerController@store']);
+        Route::get('delete', ['as' => 'seller.delete', 'uses' => 'App\Http\Controllers\SellerController@destroy']);
+        Route::post('show/{id}', ['as' => 'seller.show', 'uses' => 'App\Http\Controllers\SellerController@show']);
+        Route::get('search', ['as' => 'seller.search', 'uses' => 'App\Http\Controllers\SellerController@search']);
+    });
+
+    Route::group(['prefix' => 'bank'], function () {
+        Route::get('list', ['as' => 'bank.list', 'uses' => 'App\Http\Controllers\BankController@index']);
+        Route::get('create', ['as' => 'bank.create', 'uses' => 'App\Http\Controllers\BankController@create']);
+        Route::post('save', ['as' => 'bank.save', 'uses' => 'App\Http\Controllers\BankController@store']);
+        Route::get('edit/{id}', ['as' => 'bank.edit', 'uses' => 'App\Http\Controllers\BankController@edit']);
+        Route::post('update', ['as' => 'bank.update', 'uses' => 'App\Http\Controllers\BankController@store']);
+        Route::get('delete/{id}', ['as' => 'bank.delete', 'uses' => 'App\Http\Controllers\BankController@delete']);
+        Route::post('show/{id}', ['as' => 'bank.show', 'uses' => 'App\Http\Controllers\BankController@show']);
+        Route::get('search', ['as' => 'bank.search', 'uses' => 'App\Http\Controllers\BankController@search']);
+        Route::get('user', ['as' => 'user.bank', 'uses' => 'App\Http\Controllers\BankController@getUserPermissions']);
     });
 });

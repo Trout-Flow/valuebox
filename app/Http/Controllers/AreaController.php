@@ -34,6 +34,7 @@ class AreaController extends Controller
 
     public function store(AreaRequest $request)
     {
+
         $data = $data = $request->except('_token','id');
         $this->areaService->findUpdateOrCreate(Area::class, ['id'=>''], $data);
         $message = config('constants.add');

@@ -1,12 +1,12 @@
 @extends('layouts.master')
 @section('title')
-    List View - Cities
+    List of Banks
 @endsection
 @section('css')
     <!-- extra css -->
 @endsection
 @section('content')
-    <x-breadcrumb title="List Of Cities" pagetitle="Cities" />
+    <x-breadcrumb title="List Of Banks" pagetitle="Banks" />
     <div class="row">
         @if (session()->has('message'))
             <div class="alert alert-success alert-dismissible fade show mb-4" role="alert">
@@ -16,7 +16,7 @@
             </div>
         @endif
     </div>
-    <div class="row" id="sellersList">
+    <div class="row" id="bankList">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
@@ -30,8 +30,11 @@
 
                         <div class="col-lg-auto ms-auto">
                             <div class="hstack gap-2">
-                                    <a href="{{ route('city.create') }}" class="btn btn-primary mt-2 mb-2 me-8"
-                                    style="float : right; " style="">Add City
+                                {{-- <a class="btn btn-primary add-btn" href="{{ route('bank.create') }}"
+                                    data-bs-toggle="modal">Add
+                                    bank</a> --}}
+                                <a href="{{ route('bank.create') }}" class="btn btn-primary mt-2 mb-2 me-8"
+                                    style="float : right; " style="">Add Bank
                                 </a>
                             </div>
                         </div>
@@ -44,40 +47,33 @@
                         <table class="table align-middle table-nowrap" id="customerTable">
                             <thead class="table-light">
                                 <tr>
+
                                     <th class="sort" data-sort="id">ID</th>
-                                    <th class="sort" data-sort="province" style="width: 40%">Province</th>
-                                    <th class="sort" data-sort="city_name" style="width: 40%">City Name</th>
-                                    <th class="sort" data-sort="actions"></th>
+                                    <th class="sort" data-sort="bank_name" style="width: 70%">Bank Name</th>
+                                    <th class="sort" data-sort="actions">Action</th>
                                 </tr>
                             </thead>
-                            <tbody  class="list form-check-all">
-                                @foreach ($cities as $city)
-                                    <tr id="city{{ $city->id }}">
+                            <tbody class="list form-check-all">
+                                @foreach ($banks as $bank)
+                                    <tr id="row_{{ $bank->id }}">
                                         <td>
                                             <div class="media">
                                                 <div class="media-body align-self-center">
-                                                    <h6 class="mb-0">{{ $city->id }}</h6>
+                                                    <h6 class="mb-0">{{ $bank->id }}</h6>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="media">
                                                 <div class="media-body align-self-center">
-                                                    <h6 class="mb-0">{{ $city->provinces->name}}</h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="media">
-                                                <div class="media-body align-self-center">
-                                                    <h6 class="mb-0">{{ $city->name }}</h6>
+                                                    <h6 class="mb-0">{{ $bank->name }}</h6>
                                                 </div>
                                             </div>
                                         </td>
 
                                         <td class="text-center">
                                             <div class="d-flex gap-2">
-                                                <a href="{{ route('city.edit', ['id' => $city->id]) }}"
+                                                <a href="{{ route('bank.edit', ['id' => $bank->id]) }}"
                                                     class="action-btn btn-edit bs-tooltip me-2" data-toggle="tooltip"
                                                     data-placement="top" title="Edit">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -95,8 +91,11 @@
                                                 @endif --}}
 
                                                 <div class="remove ">
-                                                    <a class="bi bi-trash " style="font-size: 1.3rem; color: rgb(255, 58, 68);"
-                                                        data-bs-toggle="modal"  data-id="{{ $city->id  }}" data-bs-target="#deleteRecordModal"></a>
+                                                    <a href="{{ route('bank.delete', ['id' => $bank->id]) }}"
+                                                        class="bi bi-trash "
+                                                        style="font-size: 1.3rem; color: rgb(255, 58, 68);"
+                                                        data-bs-toggle="modal" data-id="{{ $bank->id }}"
+                                                        data-bs-target="#deleteRecordModal"></a>
                                                 </div>
 
                                             </div>
@@ -104,27 +103,30 @@
                                     </tr>
                                 @endforeach
                             </tbody>
+
                         </table>
+
+                    </div>
+                    {{-- <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-end">
+                            {!! $banks->appends(request()->query())->links() !!}
+                        </ul>
+                    </nav> --}}
+
+
+                    <div aria-label="Page navigation">
+                        <ul class="mb-5 pagination justify-content-end">
+                            {!! $banks->appends(request()->query())->links() !!}
+                        </ul>
                     </div>
 
-                    <div class="d-flex justify-content-end">
-                        <div class="pagination-wrap hstack gap-2">
-                            <a class="page-item pagination-prev disabled" href="#">
-                                <i class="mdi mdi-chevron-left align-middle me-1"></i> Previous
-                            </a>
-                            <ul class="pagination listjs-pagination mb-0"></ul>
-                            <a class="page-item pagination-next" href="#">
-                                Next <i class="mdi mdi-chevron-right align-middle ms-1"></i>
-                            </a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-      <!-- deleteRecordModal -->
-      <div id="deleteRecordModal" class="modal fade zoomIn" tabindex="-1" aria-hidden="true">
+    <!-- deleteRecordModal -->
+    <div id="deleteRecordModal" class="modal fade zoomIn" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -143,14 +145,28 @@
                     <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
                         <button type="button" class="btn w-sm btn-light btn-hover" id="deleteRecord-close"
                             data-bs-dismiss="modal">Close</button>
-                        <a href="{{ route('city.delete', ['id'=>@$city->id]) }}" type="button" class="btn w-sm btn-danger btn-hover" id="delete-record">Yes, Delete
-                            It!</a>
+                        <a href="javascript:void(0);" id="{{ @$bank->id }}"
+                            class="action-btn btn-delete bs-tooltip delete" data-toggle="tooltip" data-placement="top"
+                            title="Delete">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-trash-2">
+                                <polyline points="3 6 5 6 21 6"></polyline>
+                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                                </path>
+                                <line x1="10" y1="11" x2="10" y2="17">
+                                </line>
+                                <line x1="14" y1="11" x2="14" y2="17">
+                                </line>
+                            </svg>
+                            Yes, Delete It!
+                        </a>
+                        {{-- <a href="{{ route('bank.delete') }}" id="{{ $bank->id }}" type="button" class="btn w-sm btn-danger btn-hover" id="delete-record">Yes, Delete It!</a> --}}
                     </div>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
-
 @endsection
 @section('scripts')
     <!-- list.js min js -->
@@ -164,4 +180,11 @@
 
     <!-- App js -->
     <script src="{{ URL::asset('build/js/app.js') }}"></script>
+    <script>
+        var config = {
+            routes: {
+                deleteMainHead: "{{ url('bank/delete') }}",
+            },
+        }
+    </script>
 @endsection
