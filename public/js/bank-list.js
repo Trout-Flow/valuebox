@@ -1,7 +1,3 @@
-
-
-
-
 var perPage = 10;
 var editlist = false;
 
@@ -22,7 +18,6 @@ var options = {
         }),
     ],
 };
-
 
 var usersList = new List("usersList", options).on("updated", function (list) {
     list.matchingItems.length == 0 ?

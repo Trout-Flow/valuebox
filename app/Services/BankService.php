@@ -53,7 +53,20 @@ use Symfony\Component\Console\Input\Input;
 
         return $banks;
     }
-
+    public function deleteResource($modelClass)
+    {
+        $deleted = $modelClass::destroy(request()->id);
+        if ($deleted) {
+            $message = config('constants.delete') ;
+            session()->flash('message', $message);
+            return redirect('bank/list')->with('message', config('constants.delete'));
+            // return response()->json(['status' => 'success', 'message' => $message]);
+        } else {
+            $message = config('constants.wrong') ;
+            session()->flash('message', $message);
+            return redirect('bank/list')->with('message', config('constants.wrong'));
+        }
+    }
 
 }
 

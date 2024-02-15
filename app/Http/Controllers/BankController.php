@@ -5,20 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Bank;
 use Illuminate\Http\Request;
 use App\Services\BankService;
-use App\Services\CommonService;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreBankRequest;
 
 class BankController extends Controller
 {
     private $bankService;
-    const PER_PAGE = 10;
-    private $commonService;
 
-    public function __construct(BankService $bankService, CommonService $commonService)
+    public function __construct(BankService $bankService)
     {
         $this->bankService = $bankService;
-        $this->commonService = $commonService;
     }
     /**
      * Display a listing of the resource.
@@ -109,6 +105,20 @@ class BankController extends Controller
      */
     public function delete()
     {
-        return $this->commonService->deleteResource(Bank::class);
+        return $this->bankService->deleteResource(Bank::class);
+    }
+
+     /**
+     * Search record.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return Response.
+     */
+    public function search(Request $request)
+    {
+        $request = request()->all();
+        $banks = $this->bankService->searchBank($request);
+
+        return view('banks.index', compact('banks'));
     }
 }
