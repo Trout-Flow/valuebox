@@ -412,7 +412,8 @@
 @endsection
 @section('scripts')
     <!-- ckeditor -->
-    <script src="{{ URL::asset('build/libs/@ckeditor/ckeditor5-build-classic/ckeditor.js') }}"></script>
+    <script src="{{ URL::asset('build/libs/@ckeditor/ckeditor5-build-classic/ckeditor.js') }}">
+    </script>
 
     <!-- dropzone js -->
     <script src="{{ URL::asset('build/libs/dropzone/dropzone-min.js') }}"></script>

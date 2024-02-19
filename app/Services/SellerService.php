@@ -9,8 +9,11 @@ namespace App\Services;
      * @package App\Services
      * */
 
+use App\Models\Area;
+use App\Models\City;
 use App\Models\Seller;
-
+use App\Models\countries;
+use App\Models\province;
 
     // use Illuminate\Support\Facades\Input;
 
@@ -43,6 +46,23 @@ use App\Models\Seller;
         $object->save();
 
         return $object;
+    }
+
+    public function DropDownData()
+    {
+        $result = [
+            'countries' => countries::pluck('name','id'),
+            'provinces' => province::pluck('name','id'),
+            'cities' => City::pluck('name','id'),
+            'areas' => Area::pluck('name','id'),
+        ];
+
+        return $result;
+    }
+
+    public function getcountry($country)
+    {
+        return countries::where('country', $country)->pluck('name', 'id');
     }
 
     public function searchSeller($request)

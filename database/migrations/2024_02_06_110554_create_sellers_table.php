@@ -14,17 +14,20 @@ return new class extends Migration
         Schema::create('sellers', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 250);
-            $table->string('shope_name', 250);
             $table->string('email', 150)->nullable();
+            $table->string('mobile_number', 250);
             $table->string('password');
             $table->string('confirm_password', 250);
             $table->string('cnic_no');
-            $table->string('cnic');
-            $table->string('bank_check');
-            $table->string('bank_name', 250);
-            $table->string('account_title');
-            $table->string('account_no');
+            $table->string('cnic_front');
+            $table->string('logo')->nullable();;
+            $table->string('cnic_back');
+            $table->string('commision', 250)->nullable();;
             $table->string('delivery_type');
+            $table->string('status')->nullable();
+            $table->string('created_by');
+            $table->string('updated_by');
+            $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });
     }

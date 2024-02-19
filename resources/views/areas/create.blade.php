@@ -16,7 +16,6 @@
             <div class="row">
                 <div class="col-xl-6 col-lg-6   ">
                     <label class="form-label" for="city_id">City </label>
-                    {{-- <input type="hidden" class="form-control" id="formAction" name="formAction" value="add"> --}}
                     <select class="form-select" id="city_id" type="text" name="city_id"
                         placeholder="Please Select city " class="form-control select2 form-control mb-3 custom-select"
                         >
@@ -27,7 +26,6 @@
                                 {{ $value }}</option>
                         @endforeach
                     </select>
-
                 </div>
                 <div class="col-xl-6 col-lg-6">
                     <label class="form-label" for="product-title-input">Area Name</label>

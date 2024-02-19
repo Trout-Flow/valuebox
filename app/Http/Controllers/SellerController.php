@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\City;
 use App\Models\Seller;
-use Illuminate\Support\Str;
+use App\Models\province;
+use App\Models\countries;
+use Illuminate\Http\Request;
 use App\Services\CommonService;
 use App\Services\SellerService;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\DB;
 use App\Services\UploadFileService;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreSellerRequest;
+use App\Models\Area;
 
 class SellerController extends Controller
 {
@@ -15,7 +22,7 @@ class SellerController extends Controller
     private $commonService;
     protected $uploadService;
 
-    public function __construct(SellerService $sellerService, CommonService $commonService,UploadFileService $uploadService)
+    public function __construct(SellerService $sellerService, CommonService $commonService, UploadFileService $uploadService)
     {
         $this->sellerService = $sellerService;
         $this->commonService = $commonService;
@@ -26,83 +33,109 @@ class SellerController extends Controller
     {
         $request = request()->all();
         $sellers = $this->sellerService->searchSeller($request);
+
         return view('seller.index', compact('sellers'));
     }
 
 
     public function create()
     {
-        return view('seller.create');
+        $data['countries'] = countries::get(["name", "id"]);
+        $dropDownData = $this->sellerService->DropDownData();
+        return view('seller.create', $data,  compact('dropDownData'));
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(StoreSellerRequest $request)
     {
         dd($request);
-        $data = $data = $request->except('_token','id');
-        $this->sellerService->findUpdateOrCreate(Seller::class, ['id'=>''], $data);
-        $message = config('constants.add');
-        if(request('id')){
-            $message = config('constants.update');
-        }
-        session()->flash('message', $message);
-        return redirect('seller/list')->with('message', config('constants.add'));
     }
 
 
     // public function store(StoreSellerRequest $request)
     // {
     //     dd($request);
-    //     // $data = $request->except('_token', 'id');
-    //     // // if ($request->cnic) {
-    //     // //     $fileName = Str::random(20) . '_' . '(' . $request->cnic->getClientOriginalName() . ')';
-    //     // //     $data['cnic'] = $fileName;
-    //     // // }
-    //     // // $saved = $this->sellerService->findUpdateOrCreate(Seller::class, ['id' => !empty(request('id')) ? request('id') : null], $data);
-    //     // // if ($saved && $request->file('cnic')) {
-    //     // //     $this->uploadService->uploadSingleFile($request->cnic, $fileName, config('constants.file_upload.inventory'));
-    //     // // }
-    //     // if($request->has('cnic')){
-    //     //     $file = $request->file('cnic');
-    //     //     $extension = $file->getClientOriginalExtension();
-    //     //     $path ='resources/images/sellers/';
-    //     //     $filename = time().'.'.$extension;
-    //     //     $file->move($path, $filename);
+    //     $data = $request->except('_token', 'id');
+    //     if ($request->cnic) {
+    //         $fileName = Str::random(20) . '_' . '(' . $request->cnic->getClientOriginalName() . ')';
+    //         $data['cnic'] = $fileName;
+    //     }
+    //     $saved = $this->sellerService->findUpdateOrCreate(Seller::class, ['id' => !empty(request('id')) ? request('id') : null], $data);
+    //     if ($saved && $request->file('cnic')) {
+    //         $this->uploadService->uploadSingleFile($request->cnic, $fileName, config('constants.file_upload.inventory'));
+    //     }
+    //     if($request->has('cnic')){
+    //         $file = $request->file('cnic');
+    //         $extension = $file->getClientOriginalExtension();
+    //         $path ='resources/images/sellers/';
+    //         $filename = time().'.'.$extension;
+    //         $file->move($path, $filename);
 
 
-    //     // }
-    //     // Seller::create([
-    //     //     'name' => $request->name,
-    //     //     'shope_name'=> $request->shope_name,
-    //     //     'email'=> $request->email,
-    //     //    'cnic_no'=> $request->cnic_no,
-    //     //     'cnic'=> $path.$filename,
-    //     //     'bank_check'=> $request->bank_check,
-    //     //     'bank_name'=> $request->bank_name,
-    //     //     'account_title'=> $request->account_title,
-    //     //     'account_no' => $request->account_no,
-    //     //     'delivery_type'=> $request->delivery_type,
-    //     // ]);
-    //     // $this->sellerService->findUpdateOrCreate(Seller::class, ['id' => !empty(request('id')) ? request('id') : null], $data);
-    //     // $message = config(
-    //     //     'constants.add'
-    //     // );
-    //     // if (request('id')) {
-    //     //     $message = config('constants.update');
-    //     // }
-    //     // session()->flash('message', $message);
-    //     // return redirect('seller/list');
+    //     }
+    //     Seller::create([
+    //         'name' => $request->name,
+    //         'shope_name'=> $request->shope_name,
+    //         'email'=> $request->email,
+    //        'cnic_no'=> $request->cnic_no,
+    //         'cnic'=> $path.$filename,
+    //         'bank_check'=> $request->bank_check,
+    //         'bank_name'=> $request->bank_name,
+    //         'account_title'=> $request->account_title,
+    //         'account_no' => $request->account_no,
+    //         'delivery_type'=> $request->delivery_type,
+    //     ]);
+    //     $this->sellerService->findUpdateOrCreate(Seller::class, ['id' => !empty(request('id')) ? request('id') : null], $data);
+    //     $message = config(
+    //         'constants.add'
+    //     );
+    //     if (request('id')) {
+    //         $message = config('constants.update');
+    //     }
+    //     session()->flash('message', $message);
+    //     return redirect('seller/list');
     // }
 
 
     public function edit($id)
     {
+        $dropDownData = $this->sellerService->DropDownData();
         $seller = Seller::find($id);
-        return view('seller.edit', compact('seller'));
+        return view('seller.edit', compact('seller', 'dropDownData'));
     }
 
 
     public function destroy()
     {
         return $this->commonService->deleteResource(Seller::class);
+    }
+
+    public function fetchProvince(Request $request): JsonResponse
+    {
+        $data['provinces'] = province::where("country_id", $request->country_id)
+            ->get(["name", "id"]);
+
+        return response()->json($data);
+    }
+
+    public function fetchCity(Request $request): JsonResponse
+    {
+        $data['cities'] = City::where("province_id", $request->province_id)
+            ->get(["name", "id"]);
+
+        return response()->json($data);
+    }
+
+    public function fetchArea(Request $request): JsonResponse
+    {
+        $data['areas'] = Area::where("city_id", $request->city_id)
+            ->get(["name", "id"]);
+
+        return response()->json($data);
     }
 }
