@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\countries;
 use Illuminate\Http\Request;
 use App\Services\CountryService;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CountryRequest;
 
 class CountriesController extends Controller
@@ -31,7 +32,10 @@ class CountriesController extends Controller
 
     public function store(CountryRequest $request)
     {
+
         $data = $request->except('_token','id');
+        $data['created_by'] = Auth::user()->id;
+        $data['updated_by'] = Auth::user()->id;
         $this->CountryService->findUpdateOrCreate(countries::class, ['id'=>''], $data);
         return redirect('country/list')->with('message', CountryService::COUNTRY_SAVED);
     }

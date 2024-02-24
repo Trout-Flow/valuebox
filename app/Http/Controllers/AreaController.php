@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Http\Requests\AreaRequest;
 use App\Models\Area;
+use Illuminate\Http\Request;
 use App\Services\AreaService;
 use App\Services\CommonService;
+use App\Http\Requests\AreaRequest;
+use Illuminate\Support\Facades\Auth;
 
 class AreaController extends Controller
 {
@@ -28,7 +29,7 @@ class AreaController extends Controller
     public function create()
     {
         $dropDownData = $this->areaService->DropDownData();
-       return view('Areas.create', compact('dropDownData'));
+        return view('Areas.create', compact('dropDownData'));
     }
 
 
@@ -36,6 +37,8 @@ class AreaController extends Controller
     {
 
         $data = $data = $request->except('_token','id');
+        $data['created_by'] = Auth::user()->id;
+        $data['updated_by'] = Auth::user()->id;
         $this->areaService->findUpdateOrCreate(Area::class, ['id'=>''], $data);
         $message = config('constants.add');
         if(request('id')){

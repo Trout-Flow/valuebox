@@ -45,39 +45,57 @@
                             <thead class="table-light">
                                 <tr>
                                     <th class="sort" data-sort="id">ID</th>
-                                    <th class="sort" data-sort="city" style="width: 40%">City</th>
-                                    <th class="sort" data-sort="area_name" style="width: 40%">Area Name</th>
-                                    <th class="sort" data-sort="actions"></th>
+                                    <th class="sort" data-sort="name" style="width: 30%">Seller Name</th>
+                                    <th class="sort" data-sort="store_name" style="width: 30%">Shope Name</th>
+                                    <th class="sort" data-sort="email" style="width: 20%">Email</th>
+                                    <th class="sort" data-sort="status">Status</th>
+                                    <th class="sort" data-sort="actions">Actions</th>
                                 </tr>
                             </thead>
                             <tbody class="list form-check-all">
-                                @foreach ($sellers as $area)
-                                    <tr id="area{{ $area->id }}">
+                                @foreach ($sellers as $seller)
+                                    <tr id="seller{{ $seller->id }}">
                                         <td>
                                             <div class="media">
                                                 <div class="media-body align-self-center">
-                                                    <h6 class="mb-0">{{ $area->id }}</h6>
+                                                    <h6 class="mb-0">{{ $seller->id }}</h6>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="media">
                                                 <div class="media-body align-self-center">
-                                                    <h6 class="mb-0">{{ $area->cities->name }}</h6>
+                                                    <h6 class="mb-0">{{ $seller->name }}</h6>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="media">
                                                 <div class="media-body align-self-center">
-                                                    <h6 class="mb-0">{{ $area->name }}</h6>
+                                                    <h6 class="mb-0">{{ $seller->store_name }}</h6>
+                                                </div>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="media">
+                                                <div class="media-body align-self-center">
+                                                    <h6 class="mb-0">{{ $seller->email }}</h6>
+                                                </div>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="media">
+                                                <div class="media-body align-self-center">
+                                                    <h6 class="mb-0">{{ $seller->status }}</h6>
                                                 </div>
                                             </div>
                                         </td>
 
                                         <td class="text-center">
                                             <div class="d-flex gap-2">
-                                                <a href="{{ route('area.edit', ['id' => $area->id]) }}"
+                                                <a href="{{ route('seller.edit', ['id' => $seller->id]) }}"
                                                     class="action-btn btn-edit bs-tooltip me-2" data-toggle="tooltip"
                                                     data-placement="top" title="Edit">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -97,7 +115,7 @@
                                                 <div class="remove ">
                                                     <a class="bi bi-trash "
                                                         style="font-size: 1.3rem; color: rgb(255, 58, 68);"
-                                                        data-bs-toggle="modal" data-id="{{ $area->id }}"
+                                                        data-bs-toggle="modal" data-id="{{ $seller->id }}"
                                                         data-bs-target="#deleteRecordModal"></a>
                                                 </div>
 

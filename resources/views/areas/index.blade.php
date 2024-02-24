@@ -97,13 +97,46 @@
                                                 @endif
 
                                                 <div class="remove ">
-                                                    <a class="bi bi-trash " style="font-size: 1.3rem; color: rgb(255, 58, 68);"
-                                                        data-bs-toggle="modal"  data-id="{{ $area->id  }}" data-bs-target="#deleteRecordModal"></a>
+                                                    <a class="bi bi-trash "
+                                                        style="font-size: 1.3rem; color: rgb(255, 58, 68);"
+                                                        data-bs-toggle="modal" data-id="{{ $area->id }}"
+                                                        data-bs-target="#deleteRecordModal"></a>
                                                 </div>
 
                                             </div>
                                         </td>
                                     </tr>
+                                    <!-- deleteRecordModal -->
+                                    <div id="deleteRecordModal" class="modal fade zoomIn" tabindex="-1" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body p-md-5">
+                                                    <div class="text-center">
+                                                        <div class="text-danger">
+                                                            <i class="bi bi-trash display-4"></i>
+                                                        </div>
+                                                        <div class="mt-4">
+                                                            <h4 class="mb-2">Are you sure ?</h4>
+                                                            <p class="text-muted fs-17 mx-4 mb-0">Are you sure you want to
+                                                                remove this record ?</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
+                                                        <button type="button" class="btn w-sm btn-light btn-hover"
+                                                            id="deleteRecord-close" data-bs-dismiss="modal">Close</button>
+                                                        <a href="{{ route('area.delete', ['id' => @$area->id]) }}"
+                                                            type="button" class="btn w-sm btn-danger btn-hover"
+                                                            id="delete-record">Yes, Delete
+                                                            It!</a>
+                                                    </div>
+                                                </div>
+                                            </div><!-- /.modal-content -->
+                                        </div><!-- /.modal-dialog -->
+                                    </div><!-- /.modal -->
                                 @endforeach
                             </tbody>
 

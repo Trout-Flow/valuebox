@@ -15,8 +15,13 @@ return new class extends Migration
             $table->increments('id');
             $table->integer('city_id');
             $table->string('name', 250);
-          
+            $table->string('created_by');
+            $table->string('updated_by');
+            $table->timestamp('deleted_at')->nullable();
+
             $table->timestamps();
+
+
         });
     }
 

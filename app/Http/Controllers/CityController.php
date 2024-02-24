@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\City;
+use App\Models\province;
 use Illuminate\Http\Request;
 use App\Services\CityService;
 use App\Http\Requests\CityRequest;
+use Illuminate\Support\Facades\Auth;
 
 class CityController extends Controller
 {
@@ -18,6 +20,7 @@ class CityController extends Controller
     public function index(Request $request)
     {
         $request = request()->all();
+
         $cities = $this->CityService->search($request);
 
         return view('cities.index', compact('cities'));
@@ -32,7 +35,10 @@ class CityController extends Controller
 
     public function store(CityRequest $request)
     {
+
         $data = $data = $request->except('_token', 'id');
+        $data['created_by'] = Auth::user()->id;
+        $data['updated_by'] = Auth::user()->id;
         $this->CityService->findUpdateOrCreate(City::class, ['id' => ''], $data);
         return redirect('city/list')->with('message', config('constants.add'));
     }

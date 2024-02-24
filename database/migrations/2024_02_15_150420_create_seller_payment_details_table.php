@@ -16,9 +16,9 @@ return new class extends Migration
             $table->increments('id');
             $table->string('account_title', 250);
             $table->string('iban_number', 250);
-            $table->string('bank_check');
-            $table->integer('seller_id');
-            $table->integer('bank_id');
+            $table->string('bank_check')->nullable();
+            $table->integer('seller_id')->unsigned();
+            $table->integer('bank_id')->unsigned();
             $table->string('created_by');
             $table->string('updated_by');
             $table->timestamp('deleted_at')->nullable();

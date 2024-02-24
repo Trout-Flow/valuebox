@@ -54,52 +54,23 @@ class SellerController extends Controller
     public function store(StoreSellerRequest $request)
     {
         dd($request);
+        $data = $request->except('_token', 'id');
+        $sellerData = $this->sellerService->prepareSellerData($request);
+        $sellerInsert = $this->commonService->findUpdateOrCreate(Seller::class, ['id' => ''], $sellerData);
+        $sellerStoreData = $this->sellerService->prepareSellerStoreData($request, $sellerInsert->id);
+        $this->sellerService->saveSellerStore($sellerStoreData);
+        $sellerPaymentData = $this->sellerService->prepareSellerPaymentData($request, $sellerInsert->id);
+        $this->sellerService->saveSellerPaymentData($sellerPaymentData);
+        // $this->sellerService->findUpdateOrCreate(Seller::class, ['id' => !empty(request('id')) ? request('id') : null], $data);
+        $message = config(
+            'constants.add'
+        );
+        if (request('id')) {
+            $message = config('constants.update');
+        }
+        session()->flash('message', $message);
+        return redirect('seller/list');
     }
-
-
-    // public function store(StoreSellerRequest $request)
-    // {
-    //     dd($request);
-    //     $data = $request->except('_token', 'id');
-    //     if ($request->cnic) {
-    //         $fileName = Str::random(20) . '_' . '(' . $request->cnic->getClientOriginalName() . ')';
-    //         $data['cnic'] = $fileName;
-    //     }
-    //     $saved = $this->sellerService->findUpdateOrCreate(Seller::class, ['id' => !empty(request('id')) ? request('id') : null], $data);
-    //     if ($saved && $request->file('cnic')) {
-    //         $this->uploadService->uploadSingleFile($request->cnic, $fileName, config('constants.file_upload.inventory'));
-    //     }
-    //     if($request->has('cnic')){
-    //         $file = $request->file('cnic');
-    //         $extension = $file->getClientOriginalExtension();
-    //         $path ='resources/images/sellers/';
-    //         $filename = time().'.'.$extension;
-    //         $file->move($path, $filename);
-
-
-    //     }
-    //     Seller::create([
-    //         'name' => $request->name,
-    //         'shope_name'=> $request->shope_name,
-    //         'email'=> $request->email,
-    //        'cnic_no'=> $request->cnic_no,
-    //         'cnic'=> $path.$filename,
-    //         'bank_check'=> $request->bank_check,
-    //         'bank_name'=> $request->bank_name,
-    //         'account_title'=> $request->account_title,
-    //         'account_no' => $request->account_no,
-    //         'delivery_type'=> $request->delivery_type,
-    //     ]);
-    //     $this->sellerService->findUpdateOrCreate(Seller::class, ['id' => !empty(request('id')) ? request('id') : null], $data);
-    //     $message = config(
-    //         'constants.add'
-    //     );
-    //     if (request('id')) {
-    //         $message = config('constants.update');
-    //     }
-    //     session()->flash('message', $message);
-    //     return redirect('seller/list');
-    // }
 
 
     public function edit($id)
@@ -126,6 +97,8 @@ class SellerController extends Controller
     public function fetchCity(Request $request): JsonResponse
     {
         $data['cities'] = City::where("province_id", $request->province_id)
+            ->get(["name", "id"]);
+        $data['areas'] = Area::where("city_id", $request->city_id)
             ->get(["name", "id"]);
 
         return response()->json($data);
