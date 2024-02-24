@@ -61,7 +61,7 @@
 
                     <div class="col-xl-6 col-lg-6">
                         <label class="form-label" for="product-title-input">Password</label>
-                        <input type="text" class="form-control" id="password" name="password"
+                        <input type="password" class="form-control" id="password" name="password"
                             placeholder="Enter the Password">
                     </div>
                 </div>
@@ -70,13 +70,13 @@
                 <div class="row">
                     <div class="col-xl-6 col-lg-6">
                         <label class="form-label" for="product-title-input">Confirm Password</label>
-                        <input type="text" class="form-control" id="confirm_password" name="confirm_password"
+                        <input type="password" class="form-control" id="confirm_password" name="confirm_password"
                             placeholder="Please enter your password again">
                     </div>
 
                     <div class="col-xl-6 col-lg-6">
                         <label class="form-label" for="product-title-input">CNIC No</label>
-                        <input type="text" class="form-control"
+                        <input type="number" class="form-control"
                             value="{{ old('cnic_no', !empty($seller->cnic_no) ? $seller->cnic_no : '') }}" id="cnic_no"
                             name="cnic_no" placeholder="Enter the CNIC No">
                     </div>
@@ -99,6 +99,8 @@
                             <div class="dropzone my-dropzone" id="cnic_front">
                                 <div class="dz-message">
                                     <label class="form-label" for="product-title-input">CNIC Front</label>
+                                    <div class="mb-3">
+                                        <i id="cnic_front" name="cnic_front " class="display-4 text-muted ri-upload-cloud-2-fill"></i>
                                     <div class="mb-3 ">
                                         <i type="file" id="cnic_front" name="cnic_front "
                                             class="display-4 text-muted ri-upload-cloud-2-fill"></i>
@@ -281,7 +283,7 @@
 
             let getTableElement = document.querySelector('.item-table');
             let currentIndex = getTableElement.rows.length;
-            
+
             let $html = '<tr>' +
                 '<td class="delete-item-row">' +
                 '<ul class="table-controls">' +

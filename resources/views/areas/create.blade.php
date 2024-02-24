@@ -20,7 +20,7 @@
                         placeholder="Please Select city " class="form-control select2 form-control mb-3 custom-select"
                         >
                         <option value="">Select</option>
-                        @foreach ($dropDownData['city'] as $key => $value)
+                        @foreach ($dropDownData['cities'] as $key => $value)
                             <option value="{{ $key }}"
                                 {{ (old('city_id') == $key ? 'selected' : '') || (!empty($area->city_id) ? collect($area->city_id)->contains($key) : '') ? 'selected' : '' }}>
                                 {{ $value }}</option>

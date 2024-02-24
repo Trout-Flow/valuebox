@@ -63,7 +63,7 @@
                                         <td>
                                             <div class="media">
                                                 <div class="media-body align-self-center">
-                                                    <h6 class="mb-0">{{$city->province->name}}</h6>
+                                                    <h6 class="mb-0">{{ @$city->provinces->name}}</h6>
                                                 </div>
                                             </div>
                                         </td>
