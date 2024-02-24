@@ -33,7 +33,7 @@ use Illuminate\Support\Facades\Input;
     public function DropDownData()
     {
         $result = [
-            'city' => City::pluck('name','id'),
+            'cities' => City::pluck('name','id'),
         ];
 
         return $result;

@@ -61,11 +61,13 @@
                                             </div>
                                         </td>
                                         <td>
+                                    <?php //if(isset($area->cities->name)) { ?>
                                             <div class="media">
                                                 <div class="media-body align-self-center">
                                                     <h6 class="mb-0">{{ $area->cities->name }}</h6>
                                                 </div>
                                             </div>
+                                    <?php //} ?>
                                         </td>
                                         <td>
                                             <div class="media">
@@ -144,8 +146,8 @@
                     <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
                         <button type="button" class="btn w-sm btn-light btn-hover" id="deleteRecord-close"
                             data-bs-dismiss="modal">Close</button>
-                        <a href="{{ route('area.delete', ['id'=>@$area->id]) }}" type="button" class="btn w-sm btn-danger btn-hover" id="delete-record">Yes, Delete
-                            It!</a>
+                        {{-- <a href="{{ route('area.delete', ['id'=>@$area->id]) }}" type="button" class="btn w-sm btn-danger btn-hover" id="delete-record">Yes, Delete
+                            It!</a> --}}
                     </div>
                 </div>
             </div><!-- /.modal-content -->

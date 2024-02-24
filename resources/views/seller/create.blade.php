@@ -54,12 +54,12 @@
 
                     <div class="col-xl-6 col-lg-6">
                         <label class="form-label" for="product-title-input">Password</label>
-                        <input type="text" class="form-control" id="password" name="password"
+                        <input type="password" class="form-control" id="password" name="password"
                             placeholder="Enter the Password">
                     </div>
                     <div class="col-xl-6 col-lg-6">
                         <label class="form-label" for="product-title-input">Confirm Password</label>
-                        <input type="text" class="form-control" id="confirm_password" name="confirm_password"
+                        <input type="password" class="form-control" id="confirm_password" name="confirm_password"
                             placeholder="Please enter your password again">
                     </div>
                 </div>
@@ -69,7 +69,7 @@
 
                     <div class="col-xl-6 col-lg-6">
                         <label class="form-label" for="product-title-input">CNIC No</label>
-                        <input type="text" class="form-control"
+                        <input type="number" class="form-control"
                             value="{{ old('cnic_no', !empty($seller->cnic_no) ? $seller->cnic_no : '') }}" id="cnic_no"
                             name="cnic_no" placeholder="Enter the CNIC No">
                     </div>
@@ -82,7 +82,7 @@
                             <div class="dropzone my-dropzone">
                                 <div class="dz-message">
                                     <label class="form-label" for="product-title-input">CNIC Front</label>
-                                    <div class="mb-3 ">
+                                    <div class="mb-3">
                                         <i id="cnic_front" name="cnic_front " class="display-4 text-muted ri-upload-cloud-2-fill"></i>
                                     </div>
 

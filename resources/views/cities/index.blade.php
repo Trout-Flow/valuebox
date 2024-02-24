@@ -63,7 +63,7 @@
                                         <td>
                                             <div class="media">
                                                 <div class="media-body align-self-center">
-                                                    <h6 class="mb-0">{{ $city->provinces->name}}</h6>
+                                                    <h6 class="mb-0">{{ @$city->provinces->name}}</h6>
                                                 </div>
                                             </div>
                                         </td>
@@ -143,8 +143,8 @@
                     <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
                         <button type="button" class="btn w-sm btn-light btn-hover" id="deleteRecord-close"
                             data-bs-dismiss="modal">Close</button>
-                        <a href="{{ route('city.delete', ['id'=>@$city->id]) }}" type="button" class="btn w-sm btn-danger btn-hover" id="delete-record">Yes, Delete
-                            It!</a>
+                        {{-- <a href="{{ route('city.delete', ['id'=>@$city->id]) }}" type="button" class="btn w-sm btn-danger btn-hover" id="delete-record">Yes, Delete
+                            It!</a> --}}
                     </div>
                 </div>
             </div><!-- /.modal-content -->
