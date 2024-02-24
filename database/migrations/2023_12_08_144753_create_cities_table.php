@@ -13,10 +13,14 @@ return new class extends Migration
     {
         Schema::create('cities', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('province_id');
+            $table->integer('province_id')->unsigned();
             $table->string('name', 250);
-
+            $table->string('created_by');
+            $table->string('updated_by');
+            $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
+
+            $table->foreign('province_id')->references('id')->on('provinces')->onDelete('cascade');
         });
     }
 

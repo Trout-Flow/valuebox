@@ -30,7 +30,7 @@
 
                         <div class="col-lg-auto ms-auto">
                             <div class="hstack gap-2">
-                                    <a href="{{ route('city.create') }}" class="btn btn-primary mt-2 mb-2 me-8"
+                                <a href="{{ route('city.create') }}" class="btn btn-primary mt-2 mb-2 me-8"
                                     style="float : right; " style="">Add City
                                 </a>
                             </div>
@@ -50,9 +50,9 @@
                                     <th class="sort" data-sort="actions"></th>
                                 </tr>
                             </thead>
-                            <tbody  class="list form-check-all">
+                            <tbody class="list form-check-all">
                                 @foreach ($cities as $city)
-                                    <tr id="city{{ $city->id }}">
+                                    <tr id="row_{{ $city->id }}">
                                         <td>
                                             <div class="media">
                                                 <div class="media-body align-self-center">
@@ -63,7 +63,7 @@
                                         <td>
                                             <div class="media">
                                                 <div class="media-body align-self-center">
-                                                    <h6 class="mb-0">{{ $city->provinces->name}}</h6>
+                                                    <h6 class="mb-0">{{$city->province->name}}</h6>
                                                 </div>
                                             </div>
                                         </td>
@@ -95,13 +95,46 @@
                                                 @endif --}}
 
                                                 <div class="remove ">
-                                                    <a class="bi bi-trash " style="font-size: 1.3rem; color: rgb(255, 58, 68);"
-                                                        data-bs-toggle="modal"  data-id="{{ $city->id  }}" data-bs-target="#deleteRecordModal"></a>
+                                                    <a class="bi bi-trash "
+                                                        style="font-size: 1.3rem; color: rgb(255, 58, 68);"
+                                                        data-bs-toggle="modal" data-id="{{ $city->id }}"
+                                                        data-bs-target="#deleteRecordModal"></a>
                                                 </div>
 
                                             </div>
                                         </td>
                                     </tr>
+                                    <!-- deleteRecordModal -->
+                                    <div id="deleteRecordModal" class="modal fade zoomIn" tabindex="-1" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body p-md-5">
+                                                    <div class="text-center">
+                                                        <div class="text-danger">
+                                                            <i class="bi bi-trash display-4"></i>
+                                                        </div>
+                                                        <div class="mt-4">
+                                                            <h4 class="mb-2">Are you sure ?</h4>
+                                                            <p class="text-muted fs-17 mx-4 mb-0">Are you sure you want to
+                                                                remove this record ?</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
+                                                        <button type="button" class="btn w-sm btn-light btn-hover"
+                                                            id="deleteRecord-close" data-bs-dismiss="modal">Close</button>
+                                                        <a href="{{ route('city.delete', ['id' =>$city->id]) }}"
+                                                            type="button" class="btn w-sm btn-danger btn-hover"
+                                                            id="delete-record">Yes, Delete
+                                                            It!</a>
+                                                    </div>
+                                                </div>
+                                            </div><!-- /.modal-content -->
+                                        </div><!-- /.modal-dialog -->
+                                    </div><!-- /.modal -->
                                 @endforeach
                             </tbody>
                         </table>
@@ -122,35 +155,6 @@
             </div>
         </div>
     </div>
-
-      <!-- deleteRecordModal -->
-      <div id="deleteRecordModal" class="modal fade zoomIn" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body p-md-5">
-                    <div class="text-center">
-                        <div class="text-danger">
-                            <i class="bi bi-trash display-4"></i>
-                        </div>
-                        <div class="mt-4">
-                            <h4 class="mb-2">Are you sure ?</h4>
-                            <p class="text-muted fs-17 mx-4 mb-0">Are you sure you want to remove this record ?</p>
-                        </div>
-                    </div>
-                    <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
-                        <button type="button" class="btn w-sm btn-light btn-hover" id="deleteRecord-close"
-                            data-bs-dismiss="modal">Close</button>
-                        <a href="{{ route('city.delete', ['id'=>@$city->id]) }}" type="button" class="btn w-sm btn-danger btn-hover" id="delete-record">Yes, Delete
-                            It!</a>
-                    </div>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-
 @endsection
 @section('scripts')
     <!-- list.js min js -->

@@ -15,13 +15,13 @@ return new class extends Migration
             $table->increments('id');
             $table->string('name', 250);
             $table->string('email', 150)->nullable();
-            $table->string('mobile_number', 250);
+            $table->string('mobile_number', 250)->nullable();
             $table->string('password');
             $table->string('confirm_password', 250);
             $table->string('cnic_no');
-            $table->string('cnic_front');
-            $table->string('logo')->nullable();;
-            $table->string('cnic_back');
+            $table->string('cnic_front')->nullable();
+            $table->string('logo')->nullable();
+            $table->string('cnic_back')->nullable();
             $table->string('commision', 250)->nullable();;
             $table->string('delivery_type');
             $table->string('status')->nullable();

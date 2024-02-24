@@ -67,4 +67,5 @@ use App\Models\province;
 
         return $this->commonService->paginate($cities, Self::PER_PAGE);
     }
+
 }

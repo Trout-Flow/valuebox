@@ -13,41 +13,34 @@ return new class extends Migration
     {
         Schema::create('seller_stores', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 250);
-            $table->string('address', 250);
-            $table->string('vacation_mode');
-            $table->date('start_date');
+            $table->string('store_name', 250);
+            $table->string('address', 250)->nullable();
+            $table->string('vacation_mode')->nullable();
+            $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
-            $table->integer('seller_id');
-            $table->integer('country_id');
-            $table->integer('province_id');
-            $table->integer('city_id');
-            $table->integer('area_id');
+            $table->integer('seller_id')->unsigned()->nullable();
+            $table->integer('country_id')->unsigned()->nullable();
+            $table->integer('province_id')->unsigned()->nullable();
+            $table->integer('city_id')->unsigned()->nullable();
+            $table->integer('area_id')->unsigned()->nullable();
             $table->string('created_by');
             $table->string('updated_by');
             $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
 
-            $table->foreign('seller_id')->references('id')
-            ->on('sellers')
-            ->onDelete('cascade');
+            $table->foreign('seller_id')->references('id')->on('sellers')->onDelete('cascade');
 
 
-            $table->foreign('country_id')->references('id')
-            ->on('countries')
-            ->onDelete('cascade');
+            $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
 
-            $table->foreign('province_id')->references('id')
-            ->on('provinces')
-            ->onDelete('cascade');
+            $table->foreign('province_id')->references('id')->on('provinces')->onDelete('cascade');
 
-            $table->foreign('city_id')->references('id')
-            ->on('cities')
-            ->onDelete('cascade');
 
-            $table->foreign('area_id')->references('id')
-            ->on('areas')
-            ->onDelete('cascade');
+            $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
+
+
+            $table->foreign('area_id')->references('id')->on('areas')->onDelete('cascade');
+
         });
     }
 

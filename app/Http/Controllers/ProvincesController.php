@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\province;
 use Illuminate\Http\Request;
 use App\Services\ProvinceService;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\provinceRequest;
 
 class ProvincesController extends Controller
@@ -33,8 +34,9 @@ class ProvincesController extends Controller
 
     public function store(provinceRequest $request)
     {
-
         $data = $data = $request->except('_token','id');
+        $data['created_by'] = Auth::user()->id;
+        $data['updated_by'] = Auth::user()->id;
         $this->ProvinceService->findUpdateOrCreate(province::class, ['id'=>''], $data);
         return redirect('province/list')->with('message', ProvinceService::PROVINCE_SAVED);
     }

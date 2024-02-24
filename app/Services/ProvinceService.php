@@ -1,18 +1,17 @@
 <?php
 
 namespace App\Services;
+/*
+* Class tblbanksService
+* @package App\Services
+*
+*/
 
-
-
-    /*
-     * Class tblbanksService
-     * @package App\Services
-     * */
 use App\Models\countries;
 use App\Models\province;
 use Illuminate\Support\Facades\Input;
 
-    class ProvinceService
+class ProvinceService
 {
     protected $commonService;
 
@@ -26,7 +25,7 @@ use Illuminate\Support\Facades\Input;
 
     public function findUpdateOrCreate($model, array $where, array $data)
     {
-       $object = $model::firstOrNew($where);
+        $object = $model::firstOrNew($where);
         foreach ($data as $property => $value) {
             $object->{$property} = $value;
         }
@@ -37,7 +36,7 @@ use Illuminate\Support\Facades\Input;
     public function DropDownData()
     {
         $result = [
-            'country' => Countries::pluck('name','id'),
+            'country' => Countries::pluck('name', 'id'),
 
         ];
 
@@ -61,13 +60,12 @@ use Illuminate\Support\Facades\Input;
     {
         $provinces = [];
         if (!empty($request['param'])) {
-            $query = province::with('country')->where('name', 'like', '%' . $request['param'] . '%');
+            $query = province::with('countries')->where('name', 'like', '%' . $request['param'] . '%');
             $provinces = $query->get();
-        }else{
+        } else {
             $provinces = province::get();
         }
 
         return $this->commonService->paginate($provinces, Self::PER_PAGE);
     }
-
 }
