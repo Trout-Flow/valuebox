@@ -3,7 +3,6 @@
     Add Seller
 @endsection
 @section('css')
-    <!-- extra css -->
     <link rel="stylesheet" href="{{ URL::asset('build/libs/dropzone/dropzone.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ URL::asset('build/libs/@simonwep/classic.min.css') }}" /> <!-- 'classic' theme -->
     <link rel="stylesheet" href="{{ URL::asset('build/libs/@simonwep/monolith.min.css') }}" /> <!-- 'monolith' theme -->
@@ -13,8 +12,9 @@
 @endsection
 @section('content')
     <x-breadcrumb title="Add Seller" pagetitle="Seller" />
-    <form method="post" action="{{ !empty($seller) ? route('seller.update') : route('seller.save') }}"
-        class="needs-validation" id="seller" name="seller" autocomplete="off" enctype="multipart/form-data">
+    <form method="POST"
+        action="{{ !empty($seller) ? route('seller.update') : route('seller.save') }}   "class="needs-validation"
+        enctype="multipart/form-data" novalidate>
         @csrf
         <input type="hidden" name="id" id="id" value="{{ isset($seller->id) ? $seller->id : '' }}" />
         <div class="form-group">
@@ -42,20 +42,21 @@
                             name="name" placeholder="Enter the Seller Name">
                     </div>
                     <div class="col-xl-6 col-lg-6">
-                        <label class="form-label" for="product-title-input">Email</label>
-                        <input type="email" class="form-control"
-                            value="{{ old('email', !empty($seller->email) ? $seller->email : '') }}" id="email"
-                            name="email" placeholder="Enter the Email">
+                        <label class="form-label" for="product-title-input">Seller Store/Shope Name</label>
+                        <input type="text" class="form-control"
+                            value="{{ old('store_name', !empty($seller->store_name) ? $seller->store_name : '') }}"
+                            id="store_name" name="store_name" placeholder="Enter the Shope Name">
                     </div>
+
                 </div>
             </div>
             <div class="col-xl-0 col-lg-12">
                 <div class="row">
                     <div class="col-xl-6 col-lg-6">
-                        <label class="form-label" for="product-title-input">Mobile Number</label>
-                        <input type="text" class="form-control"
-                            value="{{ old('mobile_number', !empty($seller->mobile_number) ? $seller->mobile_number : '') }}"
-                            id="name" name="mobile_number" placeholder="Enter the Mobile Number">
+                        <label class="form-label" for="product-title-input">Email</label>
+                        <input type="email" class="form-control"
+                            value="{{ old('email', !empty($seller->email) ? $seller->email : '') }}" id="email"
+                            name="email" placeholder="Enter the Email">
                     </div>
 
                     <div class="col-xl-6 col-lg-6">
@@ -81,9 +82,19 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-0 col-lg-12 mt-3">
+            <div class="col-lg-6">
+                <label class="form-label" for="product-title-input">Delivery Type</label>
+                <select class="form-select" id="delivery_type" type="text"
+                    value="{{ old('delivery_type', !empty($seller->delivery_type) ? $seller->delivery_type : '') }}"
+                    name="delivery_type" class="form-control select2 form-control mb-3 custom-select">
+                    <option value="Express Delivery">Express Delivery</option>
+                    <option value="Standard Delivery">Standard Delivery</option>
+                    <option value="both">Both</option>
+                </select>
+            </div>
+            {{-- <div class="col-xl-0 col-lg-12 mt-3">
                 <div class="row">
-                    <div class="col-xl-0 col-lg-4">
+                    <div class="col-xl-0 col-lg-6">
                         <div class="card-body">
                             <div class="dropzone my-dropzone" id="cnic_front">
                                 <div class="dz-message">
@@ -91,7 +102,7 @@
                                     <div class="mb-3 ">
                                         <i type="file" id="cnic_front" name="cnic_front "
                                             class="display-4 text-muted ri-upload-cloud-2-fill"></i>
-                                        {{-- <input type="file" name="cnic_front" class="form_control" /> --}}
+                                        <input type="file" name="cnic_front" class="form_control" />
                                     </div>
 
                                     <h5>Drop files here or click to upload.</h5>
@@ -100,7 +111,7 @@
                             <div class="error-msg mt-1">Please add a CNIC Front images.</div>
                         </div>
                     </div>
-                    <div class="col-xl-0 col-lg-4">
+                    <div class="col-xl-0 col-lg-6">
                         <div class="card-body">
                             <div class="dropzone my-dropzoneback">
                                 <div class="dz-message">
@@ -108,24 +119,7 @@
                                     <div class="mb-3">
                                         <i id="cnic_back" name="cnic_back"
                                             class="display-4 text-muted ri-upload-cloud-2-fill"></i>
-                                        {{-- <input type="file" name="cnic_back" class="form_control" /> --}}
-                                    </div>
-
-                                    <h5>Drop files here or click to upload.</h5>
-                                </div>
-                            </div>
-                            <div class="error-msg mt-1">Please add a CNIC Back images.</div>
-                        </div>
-                    </div>
-                    <div class="col-xl-0 col-lg-4">
-                        <div class="card-body">
-                            <div class="dropzone my-dropzonelogo">
-                                <div class="dz-message">
-                                    <label class="form-label" for="product-title-input">Logo</label>
-                                    <div class="mb-3">
-                                        <i id="logo" name="logo"
-                                            class="display-4 text-muted ri-upload-cloud-2-fill"></i>
-                                        {{-- <input type="file" name="cnic_back" class="form_control" /> --}}
+                                        {{-- <input type="file" name="cnic_back" class="form_control" />
                                     </div>
 
                                     <h5>Drop files here or click to upload.</h5>
@@ -135,7 +129,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             {{-- <div class="col-lg-0 col-12 form-group mb-4">
                 <label>
                     Upload Product Image </label>
@@ -245,17 +239,17 @@
                                     <td class="rate">
                                         <input type="text" class="form-control"
                                             value="{{ old('account_title', !empty($seller->account_title) ? $seller->account_title : '') }}"
-                                            id="account_title" name="account_title"
+                                            id="account_title" name="account_title[]"
                                             placeholder="Enter the Account Title">
                                     </td>
 
                                     <td class="title">
                                         <input type="text" class="form-control"
                                             value="{{ old('iban_number', !empty($seller->iban_number) ? $seller->iban_number : '') }}"
-                                            id="iban_number" name="iban_number" placeholder="Enter the Bank Account">
+                                            id="iban_number" name="iban_number[]" placeholder="Enter the Bank Account">
                                     </td>
 
-                                    <td class="dropzone my-dropzonecheck">
+                                    <td class="title">
                                         <input type="file" name="bank_check[]" class="form_control" />
 
                                     </td>
@@ -269,183 +263,6 @@
 
                 </div>
             </div>
-
-
-            <div class="card-header mt-3">
-                <div class="d-flex">
-                    <div class="flex-shrink-0 me-3">
-                        <div class="avatar-sm">
-                            <div class="avatar-title rounded-circle bg-light text-primary fs-20">
-                                <i class="bi bi-box-seam"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex-grow-1">
-                        <h1 class="card-title mb-1">Seller Store/Shope Information</h1>
-                        <p class="text-muted mb-0">Fill all information below.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tab-content" id="pills-tabContent">
-                <div class="invoice-detail-items mt-0">
-
-                    <div class="table-responsive">
-                        <table class="table item-table12">
-                            <thead>
-                                <tr>
-                                    <th class="" hidden>
-                                    </th>
-                                    <th></th>
-                                    <th class="">Store/Shope Name
-                                    </th>
-                                    <th class="">Contact Number</th>
-                                    <th class="">Country
-                                    </th>
-                                    <th class="">Province
-                                    </th>
-                                    <th class="">City
-                                    </th>
-                                    <th class="">Area
-                                    </th>
-                                    {{-- <th class="">Address
-                                    </th> --}}
-                                    {{-- <th class="">Description
-                                    </th> --}}
-
-
-                                </tr>
-                                <tr aria-hidden="true" class="mt-3 d-block table-row-hidden">
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="tr_clone validator_0">
-                                    <td class="delete-item-row">
-                                        <ul class="table-controls">
-                                            <li>
-                                                <a href="javascript:void(0);" class="delete-item" data-toggle="tooltip"
-                                                    data-placement="top" title="" data-original-title="Delete">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="feather feather-x-circle">
-                                                        <circle cx="12" cy="12" r="10">
-                                                        </circle>
-                                                        <line x1="15" y1="9" x2="9"
-                                                            y2="15">
-                                                        </line>
-                                                        <line x1="9" y1="9" x2="15"
-                                                            y2="15">
-                                                        </line>
-                                                    </svg>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                    <td hidden>
-                                        <input type="text" name="row_id[]" class="row_id" value="0" hidden>
-                                    </td>
-
-                                    <td class="store_name">
-                                        <input type="text" class="form-control"
-                                            value="{{ old('store_name', !empty($seller->store_name) ? $seller->store_name : '') }}"
-                                            id="store_name" name="store_name[]" placeholder="Enter the Shope Name">
-                                    </td>
-                                    <td class="shope_contact_no">
-                                        <input type="text" class="form-control"
-                                            value="{{ old('shope_contact_no', !empty($seller->shope_contact_no) ? $seller->shope_contact_no : '') }}"
-                                            id="shope_contact_no" name="shope_contact_no[]" placeholder="Contact Number">
-                                    </td>
-
-                                    <td class="country_id">
-                                        <select id="country-dropdown" class="form-control" name="country_id[]">
-                                            <option value="">-- Select Country --</option>
-                                            @foreach ($countries as $data)
-                                                <option value="{{ $data->id }}">
-                                                    {{ $data->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </td>
-                                    <br>
-                                    <td class="province_id">
-                                        <select id="province-dropdown" name="province_id[]" class="form-control">
-                                            <option value="">-- Select Province --</option>
-                                        </select>
-                                    </td>
-
-                                    <td class="city_id">
-                                        <select id="city-dropdown" name="city_id[]" class="form-control">
-                                            <option value="">-- Select City --</option>
-                                        </select>
-                                        <label class="form-label" for="product-title-input">Address</label>
-                                        <textarea type="textarea" id="address" name="address[]"
-                                            value="{{ isset($seller->address) ? $seller->address : '' }}" class="form-control" required>{{ @$seller->address }}</textarea>
-                                    </td>
-                                    <td class="area_id">
-                                        <select id="area-dropdown" name="area_id[]" class="form-control">
-                                            <option value="">-- Select Area --</option>
-                                        </select>
-                                        <label class="form-label" for="product-title-input">Description</label>
-                                        <textarea type="textarea" id="description" name="description[]"
-                                            value="{{ isset($seller->description) ? $seller->description : '' }}" class="form-control" required>{{ @$seller->description }}</textarea>
-
-                                    </td>
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <a href="javascript:void(0);" class="btn btn-dark addDescription mt-3" id="add-item">Add
-                        Item</a>
-
-                </div>
-            </div>
-
-            <div class="card-header mt-3">
-                <div class="d-flex">
-                    <div class="flex-shrink-0 me-3">
-                        <div class="avatar-sm">
-                            <div class="avatar-title rounded-circle bg-light text-primary fs-20">
-                                <i class="bi bi-box-seam"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex-grow-1">
-                        <h1 class="card-title mb-1">Seller Additional Information</h1>
-                        <p class="text-muted mb-0">Fill all information below.</p>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="col-xl-0 col-lg-12">
-                <div class="row">
-
-                    <div class="col-xl-6 col-lg-6">
-                        <label class="form-label" for="product-title-input">Delivery Type</label>
-                        <select class="form-select" id="delivery_type" type="text"
-                            value="{{ old('delivery_type', !empty($seller->delivery_type) ? $seller->delivery_type : '') }}"
-                            name="delivery_type" class="form-control select2 form-control mb-3 custom-select">
-                            <option value="Express Delivery">Express Delivery</option>
-                            <option value="Standard Delivery">Standard Delivery</option>
-                            <option value="both">Both</option>
-                        </select>
-                    </div>
-
-                    <div class="col-xl-6 col-lg-6">
-                        <label class="form-label" for="product-title-input">Commision</label>
-                        <input type="text" class="form-control"
-                            value="{{ old('commision', !empty($seller->commision) ? $seller->commision : '') }}"
-                            id="commision" name="commision" placeholder="Enter the Commision">
-                    </div>
-
-
-
-                </div>
-            </div>
-
             <div class="modal-footer mt-4">
                 <div class="hstack gap-2 justify-content-end">
                     <button type="submit" style="float: right;" class="btn btn-success w-sm">Save</button>
@@ -458,97 +275,13 @@
         </div>
 
     </form>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-        $(document).ready(function() {
-
-            /*------------------------------------------
-            --------------------------------------------
-            Country Dropdown Change Event
-            --------------------------------------------
-            --------------------------------------------*/
-            $('#country-dropdown').on('change', function() {
-                var idCountry = this.value;
-                $("#province-dropdown").html('');
-                $.ajax({
-                    url: "{{ url('api/fetch-provinces') }}",
-                    type: "POST",
-                    data: {
-                        country_id: idCountry,
-                        _token: '{{ csrf_token() }}'
-                    },
-                    dataType: 'json',
-                    success: function(result) {
-                        $('#province-dropdown').html(
-                            '<option value="">-- Select province --</option>');
-                        $.each(result.provinces, function(key, value) {
-                            $("#province-dropdown").append('<option value="' + value
-                                .id + '">' + value.name + '</option>');
-                        });
-                        $('#city-dropdown').html('<option value="">-- Select City --</option>');
-                        $('#area-dropdown').html('<option value="">-- Select Area --</option>');
-
-                    }
-                });
-            });
-
-            /*------------------------------------------
-            --------------------------------------------
-            Province Dropdown Change Event
-            --------------------------------------------
-            --------------------------------------------*/
-            $('#province-dropdown').on('change', function() {
-                var idProvince = this.value;
-                $("#city-dropdown").html('');
-                $.ajax({
-                    url: "{{ url('api/fetch-cities') }}",
-                    type: "POST",
-                    data: {
-                        province_id: idProvince,
-                        _token: '{{ csrf_token() }}'
-                    },
-                    dataType: 'json',
-                    success: function(res) {
-                        $('#city-dropdown').html('<option value="">-- Select City --</option>');
-                        $.each(res.cities, function(key, value) {
-                            $("#city-dropdown").append('<option value="' + value
-                                .id + '">' + value.name + '</option>');
-                        });
-                        $('#area-dropdown').html('<option value="">-- Select Area --</option>');
-                    }
-                });
-            });
-
-            $('#city-dropdown').on('change', function() {
-                var cityId = this.value;
-                $("#area-dropdown").html('');
-                $.ajax({
-                    url: "{{ url('api/fetch-areas') }}",
-                    type: "POST",
-                    data: {
-                        city_id: cityId,
-                        _token: '{{ csrf_token() }}'
-                    },
-                    dataType: 'json',
-                    success: function(resul) {
-                        $('#area-dropdown').html('<option value="">-- Select Area --</option>');
-                        $.each(resul.areas, function(key, value) {
-                            $("#area-dropdown").append('<option value="' + value
-                                .id + '">' + value.name + '</option>');
-                        });
-                    }
-                });
-            });
-
-        });
-    </script>
 
     <script>
         document.getElementsByClassName('additem')[0].addEventListener('click', function() {
 
             let getTableElement = document.querySelector('.item-table');
             let currentIndex = getTableElement.rows.length;
-
+            
             let $html = '<tr>' +
                 '<td class="delete-item-row">' +
                 '<ul class="table-controls">' +
@@ -569,65 +302,6 @@
 
             $(".item-table tbody").append($html);
             deleteItemRow();
-
-        })
-
-        deleteItemRow();
-        selectableDropdown(document.querySelectorAll('.invoice-select .dropdown-item'));
-        selectableDropdown(document.querySelectorAll('.invoice-tax-select .dropdown-item'), getTaxValue);
-        selectableDropdown(document.querySelectorAll('.invoice-discount-select .dropdown-item'), getDiscountValue);
-
-        var f2 = flatpickr(document.getElementById('due'), {
-            defaultDate: currentDate.setDate(currentDate.getDate() + 5),
-        });
-
-        function deleteItemRow() {
-            let deleteItem = document.querySelectorAll('.delete-item');
-            for (var i = 0; i < deleteItem.length; i++) {
-                deleteItem[i].addEventListener('click', function() {
-                    this.parentElement.parentNode.parentNode.parentNode.remove();
-                })
-            }
-        }
-    </script>
-
-    <script>
-        document.getElementsByClassName('addDescription')[0].addEventListener('click', function() {
-
-            let getTableElement = document.querySelector('.item-table12');
-            let currentIndex = getTableElement.rows.length;
-
-            let $html = '<tr>' +
-                '<td class="delete-item-row">' +
-                '<ul class="table-controls">' +
-                '<li><a href="javascript:void(0);" class="delete-item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></a></li>' +
-                '</ul>' +
-                '</td>' +
-                '<td hidden><input type="text" name="row_id[]" class="row_id" value="' + currentIndex +
-                '" hidden></td>' +
-                '<td class="store_name"><input type="text" class="form-control" value="{{ old('store_name', !empty($seller->store_name) ? $seller->store_name : '') }}" id="store_name" name="store_name[]" placeholder="Enter the Shope Name"></td> ' +
-                '<td class="shope_contact_no"><input type="text" class="form-control" value="{{ old('shope_contact_no', !empty($seller->shope_contact_no) ? $seller->shope_contact_no : '') }}" id="shope_contact_no" name="shope_contact_no[]" placeholder="Contact Number"></td> ' +
-                '<td class="country_id"> <select id="country-dropdown"
-            class = "form-control"
-            name = "country_id[]" > < option value = "" > --Select Country-- < /option>if ( / *
-                ___directives_script_2___ * / ) {<option value="{{ $data->id }}">{{ $data->name }}</option >
-        @endforeach < /select></td > ' +
-        '<td class="province_id"><select'
-        id = "province-dropdown"
-        'name="province_id[]" class="form-control"><option value="">-- Select Province --</option></select></td > ' +
-        '<td class="city_id"> <select'
-        id = "city-dropdown"
-        'name="city_id[]" class="form-control"> <option value="">-- Select City --</option></select><label class="form-label" for="product-title-input">Address</label><textarea type="textarea" id="address" name="address[]" value="{{ isset($seller->address) ? $seller->address : '' }}" class="form-control" required>{{ @$seller->address }}</textarea></td > ' +
-        '<td class="area_id"> <select'
-        id = "area-dropdown"
-        'name="area_id[]" class="form-control"><option value="">-- Select Area --</option></select><label class="form-label" for="product-title-input">Description</label><textarea type="textarea" id="description" name="description[]" value="{{ isset($seller->description) ? $seller->description : '' }}" class="form-control" required>{{ @$seller->description }}</textarea></td > ' +
-        '<div class="form-check form-check-primary form-check-inline me-0 mb-0">' +
-        '</div>' +
-        '</div>' +
-        '</td>' +
-        '</tr>';
-
-        $(".item-table12 tbody").append($html); deleteItemRow();
 
         })
 

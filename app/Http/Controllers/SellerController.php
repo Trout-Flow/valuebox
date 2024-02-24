@@ -61,7 +61,7 @@ class SellerController extends Controller
         $this->sellerService->saveSellerStore($sellerStoreData);
         $sellerPaymentData = $this->sellerService->prepareSellerPaymentData($request, $sellerInsert->id);
         $this->sellerService->saveSellerPaymentData($sellerPaymentData);
-        // $this->sellerService->findUpdateOrCreate(Seller::class, ['id' => !empty(request('id')) ? request('id') : null], $data);
+        //$this->sellerService->findUpdateOrCreate(Seller::class, ['id' => !empty(request('id')) ? request('id') : null], $data);
         $message = config(
             'constants.add'
         );
