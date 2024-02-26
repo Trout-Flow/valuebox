@@ -13,8 +13,8 @@
 @section('content')
     <x-breadcrumb title="Add Seller" pagetitle="Seller" />
     <form method="POST"
-        action="{{ !empty($seller) ? route('seller.update') : route('seller.save') }}   "class="needs-validation"
-        enctype="multipart/form-data" novalidate>
+        action="{{route('seller.save')}}" class="needs-validation"
+        enctype="multipart/form-data" >
         @csrf
         <input type="hidden" name="id" id="id" value="{{ isset($seller->id) ? $seller->id : '' }}" />
         <div class="form-group">
@@ -61,7 +61,7 @@
 
                     <div class="col-xl-6 col-lg-6">
                         <label class="form-label" for="product-title-input">Password</label>
-                        <input type="password" class="form-control" id="password" name="password"
+                        <input type="text" class="form-control" id="password" name="password"
                             placeholder="Enter the Password">
                     </div>
                 </div>
@@ -70,7 +70,7 @@
                 <div class="row">
                     <div class="col-xl-6 col-lg-6">
                         <label class="form-label" for="product-title-input">Confirm Password</label>
-                        <input type="password" class="form-control" id="confirm_password" name="confirm_password"
+                        <input type="text" class="form-control" id="confirm_password" name="confirm_password"
                             placeholder="Please enter your password again">
                     </div>
 
@@ -155,11 +155,6 @@
                     </div>
                 @endif
             </div> --}}
-            <div class="col-xl-0 col-lg-12 mt-3">
-                <div class="row">
-
-                </div>
-            </div>
             <div class="card-header mt-3">
                 <div class="d-flex">
                     <div class="flex-shrink-0 me-3">
@@ -169,9 +164,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="flex-grow-1">
-                        <h5 class="card-title mb-1">Seller Bank Information</h5>
-                        <p class="text-muted mb-0">Fill all information below.</p>
+                    <div class="row">
+                        <h5 class="mb-1">Seller Bank Information</h5>
+                        <p class="">Fill all information below.</p>
                     </div>
                 </div>
             </div>
@@ -241,18 +236,18 @@
                                     <td class="rate">
                                         <input type="text" class="form-control"
                                             value="{{ old('account_title', !empty($seller->account_title) ? $seller->account_title : '') }}"
-                                            id="account_title" name="account_title[]"
+                                            id="account_title" name="account_title"
                                             placeholder="Enter the Account Title">
                                     </td>
 
                                     <td class="title">
                                         <input type="text" class="form-control"
                                             value="{{ old('iban_number', !empty($seller->iban_number) ? $seller->iban_number : '') }}"
-                                            id="iban_number" name="iban_number[]" placeholder="Enter the Bank Account">
+                                            id="iban_number" name="iban_number" placeholder="Enter the Bank Account">
                                     </td>
 
                                     <td class="title">
-                                        <input type="file" name="bank_check[]" class="form_control" />
+                                        <input type="file" name="bank_check" class="form_control" />
 
                                     </td>
                                 </tr>
@@ -260,8 +255,8 @@
                         </table>
                     </div>
 
-                    <a href="javascript:void(0);" class="btn btn-dark additem mt-3" id="add-item">Add
-                        Item</a>
+                    {{-- <a href="javascript:void(0);" class="btn btn-dark additem mt-3" id="add-item">Add
+                        Item</a> --}}
 
                 </div>
             </div>

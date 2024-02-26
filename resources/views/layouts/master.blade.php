@@ -1,7 +1,8 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-layout="vertical" data-topbar="light" data-sidebar="light"
-    data-sidebar-size="lg" data-sidebar-image="none" data-preloader="disable" data-body-image="none">
+    data-sidebar-size="lg"   >
 
+    {{-- data-sidebar-image="none" data-body-image="none" data-preloader="disable"--}}
 <head>
     <meta charset="utf-8">
     <title>@yield('title') | Admin HTML Template</title>

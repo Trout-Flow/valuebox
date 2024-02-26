@@ -83,27 +83,25 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('user', ['as' => 'user.area', 'uses' => 'App\Http\Controllers\AreaController@getUserPermissions']);
     });
 
-    // Route::group(['prefix' => 'seller'], function () {
-    //     Route::get('list', ['as' => 'seller.list', 'uses' => 'App\Http\Controllers\SellerController@index']);
-    //     Route::get('create', ['as' => 'seller.create', 'uses' => 'App\Http\Controllers\SellerController@create']);
-    //     // Route::post('save', [App\Http\Controllers\SellerController::class, 'store'])->name('seller.save');
-    //     // Route::post('/store', [App\Http\Controllers\ProductsController::class, 'store'])->name('product.store');
-    //     Route::post('save', [App\Http\Controllers\SellerController::class, 'store'])->name('seller.save');
-    //     // Route::post('save', ['as' => 'seller.save', 'uses' => 'App\Http\Controllers\SellerController@store']);
-    //     Route::get('edit', ['as' => 'seller.edit', 'uses' => 'App\Http\Controllers\SellerController@edit']);
-    //     Route::post('update', ['as' => 'seller.update', 'uses' => 'App\Http\Controllers\SellerController@store']);
-    //     Route::get('delete', ['as' => 'seller.delete', 'uses' => 'App\Http\Controllers\SellerController@destroy']);
-    //     Route::post('show/{id}', ['as' => 'seller.show', 'uses' => 'App\Http\Controllers\SellerController@show']);
-    //     Route::get('search', ['as' => 'seller.search', 'uses' => 'App\Http\Controllers\SellerController@search']);
-    // });
+    Route::group(['prefix' => 'assignCollection'], function () {
+        Route::get('list', ['as' => 'assignCollection.list', 'uses' => 'App\Http\Controllers\AssignCollectionController@index']);
+        Route::get('create', ['as' => 'assignCollection.create', 'uses' => 'App\Http\Controllers\AssignCollectionController@create']);
+        Route::post('save', ['as' => 'assignCollection.save', 'uses' => 'App\Http\Controllers\AssignCollectionController@store']);
+        Route::get('edit/{id}', ['as' => 'assignCollection.edit', 'uses' => 'App\Http\Controllers\AssignCollectionController@edit']);
+        Route::post('update', ['as' => 'assignCollection.update', 'uses' => 'App\Http\Controllers\AssignCollectionController@store']);
+        Route::get('delete/{id}', ['as' => 'assignCollection.delete', 'uses' => 'App\Http\Controllers\AssignCollectionController@destroy']);
+        Route::post('show/{id}', ['as' => 'assignCollection.show', 'uses' => 'App\Http\Controllers\AssignCollectionController@show']);
+        Route::get('search', ['as' => 'assignCollection.search', 'uses' => 'App\Http\Controllers\AssignCollectionController@search']);
+        Route::get('user', ['as' => 'user.assignCollection', 'uses' => 'App\Http\Controllers\AssignCollectionController@getUserPermissions']);
+    });
 
     Route::group(['prefix' => 'seller'], function () {
         Route::get('list', ['as' => 'seller.list', 'uses' => 'App\Http\Controllers\SellerController@index']);
         Route::get('create', ['as' => 'seller.create', 'uses' => 'App\Http\Controllers\SellerController@create']);
-        Route::post('/save', [App\Http\Controllers\SellerController::class, 'store']);
-        Route::post('save', ['as' => 'seller.save', 'uses' => 'App\Http\Controllers\SellerController@store']);
+        // Route::post('/save', [App\Http\Controllers\SellerController::class, 'store']);
+        Route::post('save', ['as' => 'seller.save', 'uses' => 'App\Http\Controllers\SellerController@save']);
         Route::get('edit/{id}', ['as' => 'seller.edit', 'uses' => 'App\Http\Controllers\SellerController@edit']);
-        Route::post('update', ['as' => 'seller.update', 'uses' => 'App\Http\Controllers\SellerController@store']);
+        Route::post('update', ['as' => 'seller.update', 'uses' => 'App\Http\Controllers\SellerController@save']);
         Route::get('delete/{id}', ['as' => 'seller.delete', 'uses' => 'App\Http\Controllers\SellerController@delete']);
         Route::post('show/{id}', ['as' => 'seller.show', 'uses' => 'App\Http\Controllers\SellerController@show']);
         Route::get('search', ['as' => 'seller.search', 'uses' => 'App\Http\Controllers\SellerController@search']);

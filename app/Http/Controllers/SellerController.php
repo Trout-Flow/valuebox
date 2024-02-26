@@ -51,7 +51,7 @@ class SellerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreSellerRequest $request)
+    public function save(StoreSellerRequest $request)
     {
         dd($request);
         $data = $request->except('_token', 'id');
