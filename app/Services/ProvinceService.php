@@ -43,29 +43,28 @@ class ProvinceService
         return $result;
     }
 
-
-    // public function search($param)
+    // public function search($request)
     // {
-    //     $q = province::query();
-    //     if (!empty($param['name']))
-    //     {
-    //         $q->where('name', 'LIKE', '%'. $param['name'] . '%');
+    //     $provinces = [];
+    //     if (!empty($request['param'])) {
+    //         $query = province::with('countries')->where('name', 'like', '%' . $request['param'] . '%');
+    //         $provinces = $query->get();
+    //     } else {
+    //         $provinces = province::get();
     //     }
 
-    //     $countries = $q->orderBy('name', 'ASC')->paginate(Self::PER_PAGE);
-    //     return $countries;
+    //     return $this->commonService->paginate($provinces, config('constants.PER_PAGE'));
     // }
 
     public function search($request)
     {
-        $provinces = [];
-        if (!empty($request['param'])) {
-            $query = province::with('countries')->where('name', 'like', '%' . $request['param'] . '%');
-            $provinces = $query->get();
-        } else {
-            $provinces = province::get();
+        $q = province::query();
+        if (!empty($request['name']))
+        {
+            $q->with('countries')->where('name', 'LIKE', '%'. $request['name'] . '%');
         }
 
-        return $this->commonService->paginate($provinces, Self::PER_PAGE);
+        $provinces = $q->orderBy('id', 'ASC')->paginate(config('constants.PER_PAGE'));
+        return $provinces;
     }
 }

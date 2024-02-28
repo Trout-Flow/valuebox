@@ -16,7 +16,7 @@
             </div>
         @endif
     </div>
-    <div class="row" id="sellersList">
+    <div class="row" id="Area List">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
@@ -61,13 +61,15 @@
                                             </div>
                                         </td>
                                         <td>
-                                    <?php //if(isset($area->cities->name)) { ?>
+                                            <?php //if(isset($area->cities->name)) {
+                                            ?>
                                             <div class="media">
                                                 <div class="media-body align-self-center">
                                                     <h6 class="mb-0">{{ $area->cities->name }}</h6>
                                                 </div>
                                             </div>
-                                    <?php //} ?>
+                                            <?php //}
+                                            ?>
                                         </td>
                                         <td>
                                             <div class="media">
@@ -137,55 +139,49 @@
                                             </div><!-- /.modal-content -->
                                         </div><!-- /.modal-dialog -->
                                     </div><!-- /.modal -->
+                                    <!-- deleteRecordModal -->
+                                    <div id="deleteRecordModal" class="modal fade zoomIn" tabindex="-1"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body p-md-5">
+                                                    <div class="text-center">
+                                                        <div class="text-danger">
+                                                            <i class="bi bi-trash display-4"></i>
+                                                        </div>
+                                                        <div class="mt-4">
+                                                            <h4 class="mb-2">Are you sure ?</h4>
+                                                            <p class="text-muted fs-17 mx-4 mb-0">Are you sure you want to
+                                                                remove this record ?</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
+                                                        <button type="button" class="btn w-sm btn-light btn-hover"
+                                                            id="deleteRecord-close" data-bs-dismiss="modal">Close</button>
+                                                        {{-- <a href="{{ route('area.delete', ['id'=>@$area->id]) }}" type="button" class="btn w-sm btn-danger btn-hover" id="delete-record">Yes, Delete
+                                                        It!</a> --}}
+                                                    </div>
+                                                </div>
+                                            </div><!-- /.modal-content -->
+                                        </div><!-- /.modal-dialog -->
+                                    </div><!-- /.modal -->
                                 @endforeach
                             </tbody>
-
                         </table>
-
-                        <div class="d-flex justify-content-end">
-                            <div class="pagination-wrap hstack gap-2">
-                                <a class="page-item pagination-prev disabled" href="#">
-                                    <i class="mdi mdi-chevron-left align-middle me-1"></i> Previous
-                                </a>
-                                <ul class="pagination listjs-pagination mb-0"></ul>
-                                <a class="page-item pagination-next" href="#">
-                                    Next <i class="mdi mdi-chevron-right align-middle ms-1"></i>
-                                </a>
-                            </div>
-                        </div>
                     </div>
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-end">
+                            {!! $areas->appends(request()->query())->links() !!}
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- deleteRecordModal -->
-    <div id="deleteRecordModal" class="modal fade zoomIn" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body p-md-5">
-                    <div class="text-center">
-                        <div class="text-danger">
-                            <i class="bi bi-trash display-4"></i>
-                        </div>
-                        <div class="mt-4">
-                            <h4 class="mb-2">Are you sure ?</h4>
-                            <p class="text-muted fs-17 mx-4 mb-0">Are you sure you want to remove this record ?</p>
-                        </div>
-                    </div>
-                    <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
-                        <button type="button" class="btn w-sm btn-light btn-hover" id="deleteRecord-close"
-                            data-bs-dismiss="modal">Close</button>
-                        {{-- <a href="{{ route('area.delete', ['id'=>@$area->id]) }}" type="button" class="btn w-sm btn-danger btn-hover" id="delete-record">Yes, Delete
-                            It!</a> --}}
-                    </div>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
 @endsection
 @section('scripts')
     <!-- list.js min js -->

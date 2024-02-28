@@ -41,31 +41,29 @@ use App\Models\province;
         return $result;
     }
 
-
-    // public function search($param)
+    // public function search($request)
     // {
-    //     $q = City::query();
-    //     if (!empty($param['name']))
-    //     {
-    //         $q->where('name', 'LIKE', '%'. $param['name'] . '%');
+    //     $cities = [];
+    //     if (!empty($request['param'])) {
+    //         $query = City::with('province')->where('name', 'like', '%' . $request['param'] . '%');
+    //         $cities = $query->get();
+    //     }else{
+    //         $cities = City::get();
     //     }
 
-    //     $countries = $q->orderBy('name', 'ASC')->paginate(Self::PER_PAGE);
-    //     return $countries;
+    //     return $this->commonService->paginate($cities, config('constants.PER_PAGE'));
     // }
-
 
     public function search($request)
     {
-        $cities = [];
-        if (!empty($request['param'])) {
-            $query = City::with('province')->where('name', 'like', '%' . $request['param'] . '%');
-            $cities = $query->get();
-        }else{
-            $cities = City::get();
+        $q = City::query();
+        if (!empty($request['name']))
+        {
+            $q->with('province')->where('name', 'LIKE', '%'. $request['name'] . '%');
         }
 
-        return $this->commonService->paginate($cities, Self::PER_PAGE);
+        $cities = $q->orderBy('id', 'ASC')->paginate(config('constants.PER_PAGE'));
+        return $cities;
     }
 
 }

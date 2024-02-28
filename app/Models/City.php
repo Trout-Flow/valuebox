@@ -8,8 +8,8 @@ class City extends Model
     protected $fillable =[
         'province_id','name'
     ];
-    
-    public function province()
+
+    public function provinces()
     {
         return $this->hasOne(province::class, 'id','province_id');
     }

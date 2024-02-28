@@ -33,28 +33,30 @@ use Illuminate\Support\Facades\Input;
         $object->save();
         return $object;
     }
-    // public function search($param)
+
+    // public function search($request)
     // {
-    //     $q = countries::query();
-    //     if (!empty($param['name']))
-    //     {
-    //         $q->where('name', 'LIKE', '%'. $param['name'] . '%');
+    //     $countries = [];
+    //     if (!empty($request['param'])) {
+    //         $query = countries::where('name', 'like', '%' . $request['param'] . '%');
+    //         $countries = $query->get();
+    //     }else{
+    //         $countries = countries::get();
     //     }
 
-    //     $countries = $q->orderBy('name', 'ASC')->paginate(Self::PER_PAGE);
-    //     return $countries;
+    //     return $this->commonService->paginate($countries, config('constants.PER_PAGE'));
     // }
 
     public function search($request)
     {
-        $countries = [];
-        if (!empty($request['param'])) {
-            $query = countries::where('name', 'like', '%' . $request['param'] . '%');
-            $countries = $query->get();
-        }else{
-            $countries = countries::get();
+        $q = countries::query();
+        if (!empty($request['name']))
+        {
+            $q->where('name', 'LIKE', '%'. $request['name'] . '%');
         }
 
-        return $this->commonService->paginate($countries, Self::PER_PAGE);
+        $countries = $q->orderBy('id', 'ASC')->paginate(config('constants.PER_PAGE'));
+        return $countries;
     }
+
 }

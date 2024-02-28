@@ -1,9 +1,6 @@
 <?php
 
 namespace App\Services;
-
-
-
     /*
      * Class tblbanksService
      * @package App\Services
@@ -11,15 +8,14 @@ namespace App\Services;
 
 use App\Models\Area;
 use App\Models\City;
+use App\Models\province;
 use App\Models\countries;
+use App\Models\Seller;
+use App\Models\SellerStore;
 use Illuminate\Support\Facades\Input;
 
-    class AreaService
+    class SellerStoreService
 {
-    const AREA_SAVED = 'Area save successfully';
-    const AREA_UPDATED = 'Area updated successfully';
-    const PER_PAGE = '10';
-
     public function findUpdateOrCreate($model, array $where, array $data)
     {
        $object = $model::firstOrNew($where);
@@ -33,24 +29,27 @@ use Illuminate\Support\Facades\Input;
     public function DropDownData()
     {
         $result = [
+            'sellers' => Seller::pluck('name','id'),
+            'countries' => countries::pluck('name','id'),
+            'provinces' => province::pluck('name','id'),
             'cities' => City::pluck('name','id'),
+            'areas' => Area::pluck('name','id'),
         ];
 
         return $result;
     }
 
 
-    public function search($request)
+    public function search($param)
     {
-        $q = Area::query();
-        if (!empty($request['name']))
+        $q = SellerStore::query();
+        if (!empty($param['store_name']))
         {
-            $q->with('cities')->where('name', 'LIKE', '%'. $request['name'] . '%');
+            $q->where('store_name', 'LIKE', '%'. $param['store_name'] . '%');
         }
 
-        $areas = $q->orderBy('id', 'ASC')->paginate(config('constants.PER_PAGE'));
-        return $areas;
+        $sellerStores = $q->orderBy('store_name', 'ASC')->paginate(config('constants.PER_PAGE'));
+        return $sellerStores;
     }
-
 
 }

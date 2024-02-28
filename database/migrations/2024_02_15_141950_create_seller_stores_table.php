@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('seller_stores', function (Blueprint $table) {
             $table->increments('id');
             $table->string('store_name', 250);
+            $table->string('shope_contact_no');
             $table->string('address', 250)->nullable();
+            $table->string('description', 250)->nullable();
             $table->string('vacation_mode')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
@@ -29,8 +31,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('seller_id')->references('id')->on('sellers')->onDelete('cascade');
-
-
+            
             $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
 
             $table->foreign('province_id')->references('id')->on('provinces')->onDelete('cascade');
@@ -40,7 +41,6 @@ return new class extends Migration
 
 
             $table->foreign('area_id')->references('id')->on('areas')->onDelete('cascade');
-
         });
     }
 

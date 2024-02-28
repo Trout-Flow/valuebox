@@ -53,6 +53,9 @@ class SellerController extends Controller
      */
     public function save(StoreSellerRequest $request)
     {
+        $request->validate([
+            'bank_check' => 'nullable|mimes:png,jpg,jpeg'
+        ]);
         dd($request);
         $data = $request->except('_token', 'id');
         $sellerData = $this->sellerService->prepareSellerData($request);

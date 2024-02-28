@@ -121,4 +121,16 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('search', ['as' => 'bank.search', 'uses' => 'App\Http\Controllers\BankController@search']);
         Route::get('user', ['as' => 'user.bank', 'uses' => 'App\Http\Controllers\BankController@getUserPermissions']);
     });
+
+    Route::group(['prefix' => 'sellerStore'], function () {
+        Route::get('list', ['as' => 'sellerStore.list', 'uses' => 'App\Http\Controllers\SellerStoreController@index']);
+        Route::get('create', ['as' => 'sellerStore.create', 'uses' => 'App\Http\Controllers\SellerStoreController@create']);
+        Route::post('save', ['as' => 'sellerStore.save', 'uses' => 'App\Http\Controllers\SellerStoreController@save']);
+        Route::get('edit/{id}', ['as' => 'sellerStore.edit', 'uses' => 'App\Http\Controllers\SellerStoreController@edit']);
+        Route::post('update', ['as' => 'sellerStore.update', 'uses' => 'App\Http\Controllers\SellerStoreController@save']);
+        Route::get('delete/{id}', ['as' => 'sellerStore.delete', 'uses' => 'App\Http\Controllers\SellerStoreController@delete']);
+        Route::post('show/{id}', ['as' => 'sellerStore.show', 'uses' => 'App\Http\Controllers\SellerStoreController@show']);
+        Route::get('search', ['as' => 'sellerStore.search', 'uses' => 'App\Http\Controllers\SellerStoreController@search']);
+        Route::get('user', ['as' => 'user.sellerStore', 'uses' => 'App\Http\Controllers\SellerStoreController@getUserPermissions']);
+    });
 });

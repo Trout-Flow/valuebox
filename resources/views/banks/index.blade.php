@@ -142,14 +142,6 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        {{-- <div class="d-flex justify-content-end">
-                            <div class="pagination-wrap hstack gap-2">
-                                <a class="page-item pagination-next">
-                                    {!! $banks->appends(request()->query()) !!}
-                                </a>
-                            </div>
-                        </div> --}}
-
                     </div>
                     <nav aria-label="Page navigation">
                         <ul class="pagination justify-content-end">
@@ -162,10 +154,7 @@
         </div>
 
     </div>
-{{--
-    <ul class="mb-5 pagination justify-content-end">
-        {!! $banks->appends(request()->query()) !!}
-    </ul> --}}
+
 @endsection
 @section('scripts')
     <!-- list.js min js -->

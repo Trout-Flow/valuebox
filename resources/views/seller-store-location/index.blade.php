@@ -1,12 +1,12 @@
 @extends('layouts.master')
 @section('title')
-    List View - Countries
+    List View - Seller Stores
 @endsection
 @section('css')
     <!-- extra css -->
 @endsection
 @section('content')
-    <x-breadcrumb title="List Of Countries" pagetitle="Countries" />
+    <x-breadcrumb title="List Of Seller Stores" pagetitle="Seller Stores" />
     <div class="row">
         @if (session()->has('message'))
             <div class="alert alert-success alert-dismissible fade show mb-4" role="alert">
@@ -16,7 +16,7 @@
             </div>
         @endif
     </div>
-    <div class="row" id="country-List">
+    <div class="row" id="sellersList">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
@@ -30,11 +30,8 @@
 
                         <div class="col-lg-auto ms-auto">
                             <div class="hstack gap-2">
-                                {{-- <a class="btn btn-primary add-btn" href="{{ route('country.create') }}"
-                                    data-bs-toggle="modal">Add
-                                    Country</a> --}}
-                                <a href="{{ route('country.create') }}" class="btn btn-primary mt-2 mb-2 me-8"
-                                    style="float : right; " style="">Add Country
+                                <a href="{{ route('sellerStore.create') }}" class="btn btn-primary mt-2 mb-2 me-8"
+                                    style="float : right; " style="">Add Seller Stores
                                 </a>
                             </div>
                         </div>
@@ -47,33 +44,53 @@
                         <table class="table align-middle table-nowrap" id="customerTable">
                             <thead class="table-light">
                                 <tr>
-
                                     <th class="sort" data-sort="id">ID</th>
-                                    <th class="sort" data-sort="country_name" style="width: 70%">Country Name</th>
-                                    <th class="sort" data-sort="actions">Action</th>
+                                    <th class="sort" data-sort="city" style="width:30%">Seller Store/Shope Name</th>
+                                    <th class="sort" data-sort="sellerStore_name" style="width:20%">Shope Contact#</th>
+                                    <th class="sort" data-sort="sellerStore_name" style="width:30%">Address</th>
+                                    <th class="sort" data-sort="actions">Actions</th>
                                 </tr>
                             </thead>
                             <tbody class="list form-check-all">
-                                @foreach ($countries as $country)
-                                    <tr id="country{{ $country->id }}">
+                                @foreach ($sellerStores as $sellerStore)
+                                    <tr id="sellerStore{{ $sellerStore->id }}">
                                         <td>
                                             <div class="media">
                                                 <div class="media-body align-self-center">
-                                                    <h6 class="mb-0">{{ $country->id }}</h6>
+                                                    <h6 class="mb-0">{{ $sellerStore->id }}</h6>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
+                                            <?php //if(isset($sellerStore->cities->name)) {
+                                            ?>
                                             <div class="media">
                                                 <div class="media-body align-self-center">
-                                                    <h6 class="mb-0">{{ $country->name }}</h6>
+                                                    <h6 class="mb-0">{{ $sellerStore->shope_name }}</h6>
+                                                </div>
+                                            </div>
+                                            <?php //}
+                                            ?>
+                                        </td>
+                                        <td>
+                                            <div class="media">
+                                                <div class="media-body align-self-center">
+                                                    <h6 class="mb-0">{{ $sellerStore->shope_contact_no }}</h6>
+                                                </div>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="media">
+                                                <div class="media-body align-self-center">
+                                                    <h6 class="mb-0">{{ $sellerStore->address }}</h6>
                                                 </div>
                                             </div>
                                         </td>
 
                                         <td class="text-center">
                                             <div class="d-flex gap-2">
-                                                <a href="{{ route('country.edit', ['id' => $country->id]) }}"
+                                                <a href="{{ route('sellerStore.edit', ['id' => $sellerStore->id]) }}"
                                                     class="action-btn btn-edit bs-tooltip me-2" data-toggle="tooltip"
                                                     data-placement="top" title="Edit">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -84,16 +101,17 @@
                                                         </path>
                                                     </svg>
                                                 </a>
-                                                {{-- @if ((!empty($permission->edit_access) && $permission->edit_access == 1) || Auth::user()->is_admin == 1)
+                                                @if ((!empty($permission->edit_access) && $permission->edit_access == 1) || Auth::user()->is_admin == 1)
                                                 @endif
 
                                                 @if ((!empty($permission->delete_access) && $permission->delete_access == 1) || Auth::user()->is_admin == 1)
-                                                @endif --}}
+                                                @endif
 
                                                 <div class="remove ">
                                                     <a class="bi bi-trash "
                                                         style="font-size: 1.3rem; color: rgb(255, 58, 68);"
-                                                        data-bs-toggle="modal" data-bs-target="#deleteRecordModal"></a>
+                                                        data-bs-toggle="modal" data-id="{{ $sellerStore->id }}"
+                                                        data-bs-target="#deleteRecordModal"></a>
                                                 </div>
 
                                             </div>
@@ -121,12 +139,40 @@
                                                     <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
                                                         <button type="button" class="btn w-sm btn-light btn-hover"
                                                             id="deleteRecord-close" data-bs-dismiss="modal">Close</button>
-                                                        <a href="{{route('country.delete', ['id' => $country->id]) }}"
+                                                        <a href="{{ route('sellerStore.delete', ['id' => @$sellerStore->id]) }}"
                                                             type="button" class="btn w-sm btn-danger btn-hover"
                                                             id="delete-record">Yes, Delete
                                                             It!</a>
-
-
+                                                    </div>
+                                                </div>
+                                            </div><!-- /.modal-content -->
+                                        </div><!-- /.modal-dialog -->
+                                    </div><!-- /.modal -->
+                                    <!-- deleteRecordModal -->
+                                    <div id="deleteRecordModal" class="modal fade zoomIn" tabindex="-1"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body p-md-5">
+                                                    <div class="text-center">
+                                                        <div class="text-danger">
+                                                            <i class="bi bi-trash display-4"></i>
+                                                        </div>
+                                                        <div class="mt-4">
+                                                            <h4 class="mb-2">Are you sure ?</h4>
+                                                            <p class="text-muted fs-17 mx-4 mb-0">Are you sure you want to
+                                                                remove this record ?</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
+                                                        <button type="button" class="btn w-sm btn-light btn-hover"
+                                                            id="deleteRecord-close" data-bs-dismiss="modal">Close</button>
+                                                        {{-- <a href="{{ route('sellerStore.delete', ['id'=>@$sellerStore->id]) }}" type="button" class="btn w-sm btn-danger btn-hover" id="delete-record">Yes, Delete
+                                                        It!</a> --}}
                                                     </div>
                                                 </div>
                                             </div><!-- /.modal-content -->
@@ -137,27 +183,22 @@
 
                         </table>
 
+                        <div class="d-flex justify-content-end">
+                            <div class="pagination-wrap hstack gap-2">
+                                <a class="page-item pagination-prev disabled" href="#">
+                                    <i class="mdi mdi-chevron-left align-middle me-1"></i> Previous
+                                </a>
+                                <ul class="pagination listjs-pagination mb-0"></ul>
+                                <a class="page-item pagination-next" href="#">
+                                    Next <i class="mdi mdi-chevron-right align-middle ms-1"></i>
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                    <nav aria-label="Page navigation">
-                        <ul class="pagination justify-content-end">
-                            {!! $countries->appends(request()->query())->links() !!}
-                        </ul>
-                    </nav>
-
                 </div>
             </div>
         </div>
     </div>
-
-
-
-    <script>
-        var config = {
-            routes: {
-                deleteMainHead: "{{ url('country/delete') }}",
-            },
-        }
-    </script>
 @endsection
 @section('scripts')
     <!-- list.js min js -->

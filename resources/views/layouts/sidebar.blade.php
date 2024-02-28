@@ -64,6 +64,10 @@
                         <span data-key="Bank">{{ __('Bank') }}</span> </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('sellerStore.list') }}" class="nav-link menu-link"><i class="bi bi-speedometer2"></i>
+                        <span data-key="seller_store_location">{{ __('Seller Store Location') }}</span> </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('assignCollection.list') }}" class="nav-link menu-link"><i class="bi bi-speedometer2"></i>
                         <span data-key="assignCollection">{{ __(' Assign Collection to Sellers') }}</span> </a>
                 </li>
