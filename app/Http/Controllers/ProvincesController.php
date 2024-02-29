@@ -4,17 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\province;
 use Illuminate\Http\Request;
+use App\Services\CommonService;
 use App\Services\ProvinceService;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\provinceRequest;
 
 class ProvincesController extends Controller
 {
+    protected $commonService;
     protected $ProvinceService;
 
-    public function __construct(ProvinceService $ProvinceService)
+    public function __construct(ProvinceService $ProvinceService, CommonService $commonService)
     {
         $this->ProvinceService =$ProvinceService;
+        $this->commonService =$commonService;
     }
 
     public function index(Request $request)
@@ -59,18 +62,24 @@ class ProvincesController extends Controller
         return redirect('province/list')->with('message', ProvinceService::PROVINCE_UPDATED);
     }
 
+    // public function destroy($id)
+    // {
+    //     $deleted = Province::destroy($id);
+    //     if ($deleted) {
+    //         $message = config('constants.delete') ;
+    //         session()->flash('message', $message);
+    //         return redirect('province/list')->with('message', config('constants.delete'));
+    //     } else {
+    //         $message = config('constants.wrong') ;
+    //         session()->flash('message', $message);
+    //         return redirect('province/list')->with('message', config('constants.wrong'));
+    //     }
+    // }
+
     public function destroy($id)
     {
-        $deleted = Province::destroy($id);
-        if ($deleted) {
-            $message = config('constants.delete') ;
-            session()->flash('message', $message);
-            return redirect('province/list')->with('message', config('constants.delete'));
-        } else {
-            $message = config('constants.wrong') ;
-            session()->flash('message', $message);
-            return redirect('province/list')->with('message', config('constants.wrong'));
-        }
+        return $this->commonService->deleteResource(Province::class);
     }
+
 
 }

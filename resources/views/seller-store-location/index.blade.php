@@ -182,19 +182,12 @@
                             </tbody>
 
                         </table>
-
-                        <div class="d-flex justify-content-end">
-                            <div class="pagination-wrap hstack gap-2">
-                                <a class="page-item pagination-prev disabled" href="#">
-                                    <i class="mdi mdi-chevron-left align-middle me-1"></i> Previous
-                                </a>
-                                <ul class="pagination listjs-pagination mb-0"></ul>
-                                <a class="page-item pagination-next" href="#">
-                                    Next <i class="mdi mdi-chevron-right align-middle ms-1"></i>
-                                </a>
-                            </div>
-                        </div>
                     </div>
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-end">
+                            {!! $sellerStores->appends(request()->query())->links() !!}
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>

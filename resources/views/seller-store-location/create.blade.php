@@ -10,9 +10,8 @@
     <form method="POST" action="{{ !empty($sellerStore) ? route('sellerStore.update') : route('sellerStore.save') }}"
         class="needs-validation">
         @csrf
-        <input type="hidden" name="id" id="id"
-         value="{{ isset($sellerStore->id) ? $sellerStore->id : '' }}" />
-         <div class="card-header mt-3">
+        <input type="hidden" name="id" id="id" value="{{ isset($sellerStore->id) ? $sellerStore->id : '' }}" />
+        <div class="card-header mt-3">
             <div class="d-flex">
                 <div class="flex-shrink-0 me-3">
                     <div class="avatar-sm">
@@ -24,6 +23,23 @@
                 <div class="flex-grow-1">
                     <h1 class="card-title mb-1">Seller Store/Shope Information</h1>
                     <p class="text-muted mb-0">Fill all information below.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-0 col-lg-12 mt-3">
+            <div class="row">
+                <div class="col-xl-6 col-lg-6   ">
+                    <label class="form-label" for="Seller">Seller</label>
+                    <select class="form-select" id="seller_id" type="text" name="seller_id"
+                        class="form-control select2 form-control mb-3 custom-select">
+                        <option value="">Please Select Seller</option>
+                        @foreach ($dropDownData['sellers'] as $key => $value)
+                            <option value="{{ $key }}"
+                                {{ (old('seller_id') == $key ? 'selected' : '') || (!empty($seller->seller_id) ? collect($seller->seller_id)->contains($key) : '') ? 'selected' : '' }}>
+                                {{ $value }}</option>
+                        @endforeach
+                    </select>
+
                 </div>
             </div>
         </div>
@@ -85,14 +101,14 @@
         <div class="col-xl-0 col-lg-12">
 
             <label class="form-label" for="product-title-input">Address</label>
-            <textarea type="textarea" id="address" name="address[]"
-            placeholder="Additional Address..." class="form-control" required>{{ @$seller->address }}</textarea>
+            <textarea type="textarea" id="address" name="address[]" placeholder="Additional Address..." class="form-control"
+                required>{{ @$seller->address }}</textarea>
         </div>
 
         <div class="col-xl-0 col-lg-12">
             <label class="form-label" for="product-title-input">Description</label>
             <textarea type="textarea" id="description" name="description[]" placeholder="Seller Store Description..."
-                 class="form-control" required>{{ @$seller->description }}</textarea>
+                class="form-control" required>{{ @$seller->description }}</textarea>
         </div>
 
         <div class="modal-footer mt-4">
@@ -108,7 +124,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         $(document).ready(function() {
-
             /*------------------------------------------
             --------------------------------------------
             Country Dropdown Change Event

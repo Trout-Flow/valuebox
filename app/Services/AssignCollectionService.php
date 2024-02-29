@@ -37,12 +37,12 @@ use Illuminate\Support\Facades\Input;
     }
 
 
-    public function search($param)
+    public function search($request)
     {
         $q = AssignCollection::query();
-        if (!empty($param['seller_id']))
+        if (!empty($request['seller_id']))
         {
-            $q->where('seller_id', 'LIKE', '%'. $param['seller_id'] . '%');
+            $q->with('sellers')->where('seller_id', 'LIKE', '%'. $request['seller_id'] . '%');
         }
 
         $assignCollections = $q->orderBy('seller_id', 'ASC')->paginate(config('constants.PER_PAGE'));

@@ -39,17 +39,18 @@ use Illuminate\Support\Facades\Input;
         return $result;
     }
 
-
-    public function search($param)
+    public function search($request)
     {
         $q = SellerStore::query();
-        if (!empty($param['store_name']))
+        if (!empty($request['store_name']))
         {
-            $q->where('store_name', 'LIKE', '%'. $param['store_name'] . '%');
+            $q->with('seller_id')->with('country_id')->with('city_id')->with('area_id')->with('province_id')
+            ->where('store_name', 'LIKE', '%'. $request['store_name'] . '%');
         }
 
         $sellerStores = $q->orderBy('store_name', 'ASC')->paginate(config('constants.PER_PAGE'));
         return $sellerStores;
     }
+
 
 }

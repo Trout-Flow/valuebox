@@ -6,7 +6,6 @@ namespace App\Services;
      * Class tblbanksService
      * @package App\Services
      * */
-
 use App\Models\City;
 use App\Models\province;
 
@@ -18,9 +17,6 @@ use App\Models\province;
     {
         $this->commonService = $commonService;
     }
-    const CITY_SAVED = 'City save successfully';
-    const CITY_UPDATED = 'City updated successfully';
-    const PER_PAGE = '10';
 
     public function findUpdateOrCreate($model, array $where, array $data)
     {
