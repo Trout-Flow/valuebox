@@ -196,18 +196,30 @@ use Illuminate\Support\Facades\Auth;
         }
     }
 
+    // public function searchSeller($request)
+    // {
+    //     $sellers = [];
+    //     if (!empty($request['param'])) {
+    //         $query = Seller::where('name', 'like', '%' . $request['param'] . '%');
+    //         $sellers = $query->get();
+    //     }else
+    //     {
+    //         $sellers = Seller::get();
+    //     }
+
+    //     return $this->commonService->paginate($sellers , config('constants.PER_PAGE'));
+    // }
+
+
     public function searchSeller($request)
     {
-        $sellers = [];
+        $q = Seller::query();
         if (!empty($request['param'])) {
-            $query = Seller::where('name', 'like', '%' . $request['param'] . '%');
-            $sellers = $query->get();
-        }else
-        {
-            $sellers = Seller::get();
+            $q = Seller::where('name', 'like', '%' . $request['param'] . '%');
         }
+        $sellers = $q->orderBy('id', 'ASC')->paginate(config('constants.PER_PAGE'));
 
-        return $this->commonService->paginate($sellers , config('constants.PER_PAGE'));
+        return $sellers;
     }
 
 

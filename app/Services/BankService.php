@@ -49,10 +49,13 @@ use Symfony\Component\Console\Input\Input;
         if (!empty($request['param'])) {
             $q = Bank::where('name', 'like', '%' . $request['param'] . '%');
         }
-        $banks = $q->orderBy('name', 'DESC')->paginate(config('constants.PER_PAGE'));
+        $banks = $q->orderBy('id', 'ASC')->paginate(config('constants.PER_PAGE'));
 
         return $banks;
     }
+
+
+    
     public function deleteResource($modelClass)
     {
         $deleted = $modelClass::destroy(request()->id);
