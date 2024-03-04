@@ -53,13 +53,28 @@ use App\Models\province;
     public function search($request)
     {
         $q = City::query();
-        if (!empty($request['name']))
+        if (!empty($request['param']))
         {
-            $q->with('province')->where('name', 'LIKE', '%'. $request['name'] . '%');
+            $q->with('provinces')->where('name', 'LIKE', '%'. $request['param'] . '%');
         }
 
         $cities = $q->orderBy('id', 'ASC')->paginate(config('constants.PER_PAGE'));
         return $cities;
+    }
+
+    public function deleteResource($modelClass)
+    {
+        $deleted = $modelClass::destroy(request()->id);
+        if ($deleted) {
+            $message = config('constants.delete') ;
+            session()->flash('message', $message);
+            return redirect('city/list')->with('message', config('constants.delete'));
+            // return response()->json(['status' => 'success', 'message' => $message]);
+        } else {
+            $message = config('constants.wrong') ;
+            session()->flash('message', $message);
+            return redirect('city/list')->with('message', config('constants.wrong'));
+        }
     }
 
 }

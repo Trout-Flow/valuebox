@@ -70,7 +70,7 @@ class AreaController extends Controller
 
     public function destroy()
     {
-        return $this->commonService->deleteResource(Area::class);
+        return $this->areaService->deleteResource(Area::class);
     }
 
 }

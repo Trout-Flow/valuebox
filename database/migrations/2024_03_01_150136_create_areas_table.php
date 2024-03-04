@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('areas', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('city_id');
+            $table->integer('city_id')->unsigned();
             $table->string('name', 250);
             $table->string('created_by');
             $table->string('updated_by');
@@ -22,6 +22,7 @@ return new class extends Migration
             $table->timestamps();
 
 
+            $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
         });
     }
 

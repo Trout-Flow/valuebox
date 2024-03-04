@@ -103,46 +103,45 @@
                                                     <button class="btn btn-sm btn-ghost-danger btn-icon remove-item-btn"
                                                         data-bs-toggle="modal" data-bs-target="#deleteRecordModal"><i
                                                             style="font-size: 1.3rem; color: rgb(255, 58, 68);"
-                                                            class="bi bi-trash"></i></button>
+                                                            id="{{ $bank->id }}" class="bi bi-trash"></i></button>
                                                 </div>
                                             </div>
                                         </td>
                                     </tr>
-                                    <!-- deleteRecordModal -->
-                                    <div id="deleteRecordModal" class="modal fade zoomIn" tabindex="-1" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body p-md-5">
-                                                    <div class="text-center">
-                                                        <div class="text-danger">
-                                                            <i class="bi bi-trash display-4"></i>
-                                                        </div>
-                                                        <div class="mt-4">
-                                                            <h4 class="mb-2">Are you sure ?</h4>
-                                                            <p class="text-muted fs-17 mx-4 mb-0">Are you sure you want to
-                                                                remove this record ?</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
-                                                        <button type="button" class="btn w-sm btn-light btn-hover"
-                                                            id="deleteRecord-close" data-bs-dismiss="modal">Close</button>
-                                                        <a href="{{ route('bank.delete', ['id' => $bank->id]) }}"
-                                                            type="button" class="btn w-sm btn-danger btn-hover"
-                                                            id="delete-record">Yes, Delete
-                                                            It!</a>
-                                                    </div>
-                                                </div>
-                                            </div><!-- /.modal-content -->
-                                        </div><!-- /.modal-dialog -->
-                                    </div><!-- /.modal -->
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
+                    <!-- deleteRecordModal -->
+                    <div id="deleteRecordModal" class="modal fade zoomIn" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body p-md-5">
+                                    <div class="text-center">
+                                        <div class="text-danger">
+                                            <i class="bi bi-trash display-4"></i>
+                                        </div>
+                                        <div class="mt-4">
+                                            <h4 class="mb-2">Are you sure ?</h4>
+                                            <p class="text-muted fs-17 mx-4 mb-0">Are you sure you want to
+                                                remove this record ?</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
+                                        <button type="button" class="btn w-sm btn-light btn-hover" id="deleteRecord-close"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <a href="{{ route('bank.delete', ['id' => $bank->id]) }}" type="button"
+                                            class="btn w-sm btn-danger btn-hover" id="delete-record">Yes, Delete
+                                            It!</a>
+                                    </div>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div><!-- /.modal -->
                     <nav aria-label="Page navigation">
                         <ul class="pagination justify-content-end">
                             {!! $banks->appends(request()->query())->links() !!}
@@ -154,7 +153,6 @@
         </div>
 
     </div>
-
 @endsection
 @section('scripts')
     <!-- list.js min js -->
@@ -392,9 +390,9 @@
                     usersList.add({
                         id: `<a href="javascript:void(0);" class="fw-medium link-primary">${count}</a>`,
                         user_name: '<div class="d-flex align-items-center gap-2">\
-                            <div class="flex-shrink-0"><img src="' + usersImg.src + '" alt="" class="avatar-xs rounded-circle user-profile-img"></div>\
-                            <div class="flex-grow-1 ms-2 user_name">' + userNameField.value + '</div>\
-                            </div>',
+                                <div class="flex-shrink-0"><img src="' + usersImg.src + '" alt="" class="avatar-xs rounded-circle user-profile-img"></div>\
+                                <div class="flex-grow-1 ms-2 user_name">' + userNameField.value + '</div>\
+                                </div>',
                         email_id: emailField.value,
                         date: dateField.value,
                         status: isStatus(accountStatusField.value)
@@ -433,9 +431,9 @@
                                 id: '<a href="javascript:void(0);" class="fw-medium link-primary">' +
                                     idField.value + "</a>",
                                 user_name: '<div class="d-flex align-items-center gap-2">\
-                                    <div class="flex-shrink-0"><img src="' + usersImg.src + '" alt="" class="avatar-xs rounded-circle user-profile-img"></div>\
-                                    <div class="flex-grow-1 ms-2 user_name">' + userNameField.value + '</div>\
-                                    </div>',
+                                        <div class="flex-shrink-0"><img src="' + usersImg.src + '" alt="" class="avatar-xs rounded-circle user-profile-img"></div>\
+                                        <div class="flex-grow-1 ms-2 user_name">' + userNameField.value + '</div>\
+                                        </div>',
                                 email_id: emailField.value,
                                 date: dateField.value,
                                 status: isStatus(accountStatusField.value),
@@ -468,9 +466,9 @@
                 usersList.add({
                     id: `<a href="javascript:void(0);" class="fw-medium link-primary">#VZ${element.id}</a>`,
                     user_name: '<div class="d-flex align-items-center gap-2">\
-                        <div class="flex-shrink-0"><img src="' + element.user_name[0] + '" alt="" class="avatar-xs rounded-circle user-profile-img"></div>\
-                        <div class="flex-grow-1 ms-2 user_name">' + element.user_name[1] + '</div>\
-                        </div>',
+                            <div class="flex-shrink-0"><img src="' + element.user_name[0] + '" alt="" class="avatar-xs rounded-circle user-profile-img"></div>\
+                            <div class="flex-grow-1 ms-2 user_name">' + element.user_name[1] + '</div>\
+                            </div>',
                     // user_name: element.user_name,
                     email_id: element.email_id,
                     date: element.date,

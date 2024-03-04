@@ -5,7 +5,7 @@ namespace App\Services;
 
 
     /*
-     * Class tblbanksService
+     * Class assignCollectionsService
      * @package App\Services
      * */
 
@@ -47,6 +47,21 @@ use Illuminate\Support\Facades\Input;
 
         $assignCollections = $q->orderBy('seller_id', 'ASC')->paginate(config('constants.PER_PAGE'));
         return $assignCollections;
+    }
+
+    public function deleteResource($modelClass)
+    {
+        $deleted = $modelClass::destroy(request()->id);
+        if ($deleted) {
+            $message = config('constants.delete') ;
+            session()->flash('message', $message);
+            return redirect('assignCollection/list')->with('message', config('constants.delete'));
+            // return response()->json(['status' => 'success', 'message' => $message]);
+        } else {
+            $message = config('constants.wrong') ;
+            session()->flash('message', $message);
+            return redirect('assignCollection/list')->with('message', config('constants.wrong'));
+        }
     }
 
 }

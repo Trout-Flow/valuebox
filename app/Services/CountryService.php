@@ -50,13 +50,30 @@ use Illuminate\Support\Facades\Input;
     public function search($request)
     {
         $q = countries::query();
-        if (!empty($request['name']))
+        if (!empty($request['param']))
         {
-            $q->where('name', 'LIKE', '%'. $request['name'] . '%');
+            $q->where('name', 'LIKE', '%'. $request['param'] . '%');
         }
 
         $countries = $q->orderBy('id', 'ASC')->paginate(config('constants.PER_PAGE'));
         return $countries;
+    }
+
+
+
+    public function deleteResource($modelClass)
+    {
+        $deleted = $modelClass::destroy(request()->id);
+        if ($deleted) {
+            $message = config('constants.delete') ;
+            session()->flash('message', $message);
+            return redirect('country/list')->with('message', config('constants.delete'));
+            // return response()->json(['status' => 'success', 'message' => $message]);
+        } else {
+            $message = config('constants.wrong') ;
+            session()->flash('message', $message);
+            return redirect('country/list')->with('message', config('constants.wrong'));
+        }
     }
 
 }

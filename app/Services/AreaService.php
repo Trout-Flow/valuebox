@@ -43,14 +43,28 @@ use Illuminate\Support\Facades\Input;
     public function search($request)
     {
         $q = Area::query();
-        if (!empty($request['name']))
+        if (!empty($request['param']))
         {
-            $q->with('cities')->where('name', 'LIKE', '%'. $request['name'] . '%');
+            $q->with('cities')->where('name', 'LIKE', '%'. $request['param'] . '%');
         }
 
         $areas = $q->orderBy('id', 'ASC')->paginate(config('constants.PER_PAGE'));
         return $areas;
     }
 
+    public function deleteResource($modelClass)
+    {
+        $deleted = $modelClass::destroy(request()->id);
+        if ($deleted) {
+            $message = config('constants.delete') ;
+            session()->flash('message', $message);
+            return redirect('area/list')->with('message', config('constants.delete'));
+            // return response()->json(['status' => 'success', 'message' => $message]);
+        } else {
+            $message = config('constants.wrong') ;
+            session()->flash('message', $message);
+            return redirect('area/list')->with('message', config('constants.wrong'));
+        }
+    }
 
 }

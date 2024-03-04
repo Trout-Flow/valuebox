@@ -62,15 +62,16 @@ class CityController extends Controller
 
     public function destroy($id)
     {
-        $deleted = City::destroy($id);
-        if ($deleted) {
-            $message = config('constants.delete') ;
-            session()->flash('message', $message);
-            return redirect('city/list')->with('message', config('constants.delete'));
-        } else {
-            $message = config('constants.wrong') ;
-            session()->flash('message', $message);
-            return redirect('city/list')->with('message', config('constants.wrong'));
-        }
+        return $this->CityService->deleteResource(City::class);
+        // $deleted = City::destroy($id);
+        // if ($deleted) {
+        //     $message = config('constants.delete') ;
+        //     session()->flash('message', $message);
+        //     return redirect('city/list')->with('message', config('constants.delete'));
+        // } else {
+        //     $message = config('constants.wrong') ;
+        //     session()->flash('message', $message);
+        //     return redirect('city/list')->with('message', config('constants.wrong'));
+        // }
     }
 }
