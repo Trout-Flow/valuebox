@@ -116,19 +116,20 @@
                                                 @if ((!empty($permission->delete_access) && $permission->delete_access == 1) || Auth::user()->is_admin == 1)
                                                 @endif --}}
 
-                                                {{-- <div class="remove ">
+                                                <div class="remove ">
                                                     <a href="javascript:void(0);"
                                                         class="bi bi-trash "
                                                         style="font-size: 1.3rem; color: rgb(255, 58, 68);"
                                                         data-bs-toggle="modal" id="{{ $bank->id }}"
                                                         data-bs-target="#deleteRecordModal"></a>
-                                                </div> --}}
-                                                <div class="remove">
+                                                </div>
+                                                {{-- <div class="remove">
+                                                    <a onclick="return " href=""></a>
                                                     <button class="btn btn-sm btn-ghost-danger btn-icon remove-item-btn"
                                                         data-bs-toggle="modal" data-bs-target="#deleteRecordModal"><i
                                                             style="font-size: 1.3rem; color: rgb(255, 58, 68);"
                                                             id="{{ $bank->id }}" class="bi bi-trash"></i></button>
-                                                </div>
+                                                </div>--}}
                                             </div>
                                         </td>
                                     </tr>

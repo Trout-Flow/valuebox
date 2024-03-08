@@ -71,6 +71,10 @@
                     <a href="{{ route('assignCollection.list') }}" class="nav-link menu-link"><i class="bi bi-speedometer2"></i>
                         <span data-key="assignCollection">{{ __(' Assign Collection to Sellers') }}</span> </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('transaction.list') }}" class="nav-link menu-link"><i class="bi bi-speedometer2"></i>
+                        <span data-key="assignCollection">{{ __('Seller Transactions History') }}</span> </a>
+                </li>
                 {{-- <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarProducts" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarProducts">
                         <i class="bi bi-box-seam"></i> <span data-key="t-products">{{ __('t-products') }}</span>

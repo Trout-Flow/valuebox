@@ -83,8 +83,8 @@
             </div>
             <div class="col-xl-0 col-lg-12">
                 <label class="form-label" for="product-title-input">Description</label>
-                <textarea type="textarea" id="seller_description" name="seller_description[]"
-                     class="form-control" placeholder="Seller Description..." required>{{ @$seller->seller_description }}</textarea>
+                <textarea type="textarea" id="seller_description" name="seller_description[]" class="form-control"
+                    placeholder="Seller Description..." required>{{ @$seller->seller_description }}</textarea>
             </div>
             <div class="col-xl-0 col-lg-12 mt-3">
                 <div class="row">
@@ -349,14 +349,14 @@
             <div class="col-xl-0 col-lg-12">
 
                 <label class="form-label" for="product-title-input">Address</label>
-                <textarea type="textarea" id="address" name="address[]"
-                placeholder="Additional Address..." class="form-control" required>{{ @$seller->address }}</textarea>
+                <textarea type="textarea" id="address" name="address[]" placeholder="Additional Address..." class="form-control"
+                    required>{{ @$seller->address }}</textarea>
             </div>
 
             <div class="col-xl-0 col-lg-12">
                 <label class="form-label" for="product-title-input">Description</label>
                 <textarea type="textarea" id="description" name="description[]" placeholder="Seller Store Description..."
-                     class="form-control" required>{{ @$seller->description }}</textarea>
+                    class="form-control" required>{{ @$seller->description }}</textarea>
             </div>
 
             <div class="card-header mt-3">
@@ -399,6 +399,20 @@
 
 
 
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-xl-6 col-lg-6">
+                    <label class="form-label" for="product-title-input">Status</label>
+                    <select class="form-select" id="Status" type="text"
+                        value="{{ old('Status', !empty($seller->Status) ? $seller->Status : '') }}"
+                        name="Status" class="form-control select2 form-control mb-3 custom-select">
+                        <option value="pending">Pending</option>
+                        <option value="approved">Approved</option>
+                        <option value="reject">Reject</option>
+                    </select>
                 </div>
             </div>
 

@@ -1,12 +1,12 @@
 @extends('layouts.master')
 @section('title')
-    List View - Sellers
+    List View - Seller Transaction History
 @endsection
 @section('css')
     <!-- extra css -->
 @endsection
 @section('content')
-    <x-breadcrumb title="List Of Sellers" pagetitle="Sellers" />
+    <x-breadcrumb title="List Of Seller Transaction Histories" pagetitle="Seller Transaction Histories" />
     <div class="row">
         @if (session()->has('message'))
             <div class="alert alert-success alert-dismissible fade show mb-4" role="alert">
@@ -16,17 +16,17 @@
             </div>
         @endif
     </div>
-    <div class="row" id="sellersList">
+    <div class="row" id="transactionHistoryList">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
                     <div class="row g-3">
-                        <form class="col-lg-10" method="get" action="{{ route('seller.list') }}">
+                        <form class="col-lg-10" method="get" action="{{ route('transaction.list') }}">
                             <div class="row">
                                 <div class="col-md-5">
                                     <div class="search-box">
                                         <input type="text" value="{{ @$request['param'] }}" name="param" id="param"
-                                            class="form-control search" id="input-search" placeholder="Search Sellers...">
+                                            class="form-control search" id="input-search" placeholder="Search Transaction History...">
                                         <i class="ri-search-line search-icon"></i>
                                     </div>
 
@@ -52,13 +52,13 @@
 
                         </form>
 
-                        <div class="col-lg-auto ms-auto">
+                        {{-- <div class="col-lg-auto ms-auto">
                             <div class="hstack gap-2">
                                 <a href="{{ route('seller.create') }}" class="btn btn-primary mt-2 mb-2 me-8"
                                     style="float : right; " style="">Add Seller
                                 </a>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -69,57 +69,79 @@
                             <thead class="table-light">
                                 <tr>
                                     <th class="sort" data-sort="id">ID</th>
-                                    <th class="sort" data-sort="name" style="width: 30%">Seller Name</th>
-                                    <th class="sort" data-sort="store_name" style="width: 30%">Shope Name</th>
-                                    {{-- <th class="sort" data-sort="email" style="width: 20%">Email</th> --}}
+                                    <th class="sort" data-sort="date" style="width: 10%">Date</th>
+                                    <th class="sort" data-sort="seller_id" style="width: 20%">Seller</th>
+                                    <th class="sort" data-sort="payment_detail_id" style="width: 20%">IBAN Number</th>
+                                    <th class="sort" data-sort="transaction_no" style="width: 20%">Transaction Number</th>
                                     <th class="sort" data-sort="status">Status</th>
-                                    <th class="sort" data-sort="actions">Actions</th>
-                                    <th class="sort" data-sort="status">Status Update</th>
+                                    <th class="sort" data-sort="debit">Debit</th>
+                                    <th class="sort" data-sort="credit">Credit</th>
                                 </tr>
                             </thead>
                             <tbody class="list form-check-all">
-                                @foreach ($sellers as $seller)
-                                    <tr id="seller{{ $seller->id }}">
+                                @foreach ($transactionHistories as $transactionHistory)
+                                    <tr id="row_{{ $transactionHistory->id }}">
                                         <td>
                                             <div class="media">
                                                 <div class="media-body align-self-center">
-                                                    <h6 class="mb-0">{{ $seller->id }}</h6>
+                                                    <h6 class="mb-0">{{ $transactionHistory->id }}</h6>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="media">
                                                 <div class="media-body align-self-center">
-                                                    <h6 class="mb-0">{{ $seller->name }}</h6>
+                                                    <h6 class="mb-0">{{ $transactionHistory->date }}</h6>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="media">
                                                 <div class="media-body align-self-center">
-                                                    <h6 class="mb-0">{{ $seller->store_name }}</h6>
-                                                </div>
-                                            </div>
-                                        </td>
-
-                                        {{-- <td>
-                                            <div class="media">
-                                                <div class="media-body align-self-center">
-                                                    <h6 class="mb-0">{{ $seller->email }}</h6>
-                                                </div>
-                                            </div>
-                                        </td> --}}
-
-                                        <td>
-                                            <div class="media">
-                                                <div class="media-body align-self-center">
-                                                    <h6 class="mb-0">{{ $seller->status }}</h6>
+                                                    <h6 class="mb-0">{{ $transactionHistory->seller_id }}</h6>
                                                 </div>
                                             </div>
                                         </td>
 
+                                        <td>
+                                            <div class="media">
+                                                <div class="media-body align-self-center">
+                                                    <h6 class="mb-0">{{ $transactionHistory->payment_detail_id }}</h6>
+                                                </div>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="media">
+                                                <div class="media-body align-self-center">
+                                                    <h6 class="mb-0">{{ $transactionHistory->transaction_no }}</h6>
+                                                </div>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="media">
+                                                <div class="media-body align-self-center">
+                                                    <h6 class="mb-0">{{ $transactionHistory->status }}</h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="media">
+                                                <div class="media-body align-self-center">
+                                                    <h6 class="mb-0">{{ $transactionHistory->debit }}</h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="media">
+                                                <div class="media-body align-self-center">
+                                                    <h6 class="mb-0">{{ $transactionHistory->credit }}</h6>
+                                                </div>
+                                            </div>
+                                        </td>
                                         <td class="text-center">
-                                            <div class="d-flex gap-2">
+                                            {{-- <div class="d-flex gap-2">
                                                 <a href="{{ route('seller.edit', ['id' => $seller->id]) }}"
                                                     class="action-btn btn-edit bs-tooltip me-2" data-toggle="tooltip"
                                                     data-placement="top" title="Edit">
@@ -144,48 +166,10 @@
                                                         data-bs-target="#deleteRecordModal"></a>
                                                 </div>
 
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <span style="padding-bottom: 10px;">
-                                                <a class="btn btn-secendary" href="{{url('approve_seller')}}">Approve</a>
-                                            </span>
-
-                                            <a class="btn btn-warning" href="">Rejected</a>
+                                            </div> --}}
                                         </td>
 
                                     </tr>
-                                    <!-- deleteRecordModal -->
-                                    <div id="deleteRecordModal" class="modal fade zoomIn" tabindex="-1" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body p-md-5">
-                                                    <div class="text-center">
-                                                        <div class="text-danger">
-                                                            <i class="bi bi-trash display-4"></i>
-                                                        </div>
-                                                        <div class="mt-4">
-                                                            <h4 class="mb-2">Are you sure ?</h4>
-                                                            <p class="text-muted fs-17 mx-4 mb-0">Are you sure you want to
-                                                                remove this record ?</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
-                                                        <button type="button" class="btn w-sm btn-light btn-hover"
-                                                            id="deleteRecord-close" data-bs-dismiss="modal">Close</button>
-                                                        <a href="{{ route('seller.delete', ['id' => $seller->id]) }}"
-                                                            type="button" class="btn w-sm btn-danger btn-hover"
-                                                            id="delete-record">Yes, Delete
-                                                            It!</a>
-                                                    </div>
-                                                </div>
-                                            </div><!-- /.modal-content -->
-                                        </div><!-- /.modal-dialog -->
-                                    </div><!--/.modal -->
                                 @endforeach
                             </tbody>
 
@@ -193,7 +177,7 @@
                     </div>
                     <nav aria-label="Page navigation">
                         <ul class="pagination justify-content-end">
-                            {!! $sellers->appends(request()->query())->links() !!}
+                            {!! $transactionHistories->appends(request()->query())->links() !!}
                         </ul>
                     </nav>
                 </div>

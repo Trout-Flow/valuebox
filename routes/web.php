@@ -133,4 +133,14 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('search', ['as' => 'sellerStore.search', 'uses' => 'App\Http\Controllers\SellerStoreController@search']);
         Route::get('user', ['as' => 'user.sellerStore', 'uses' => 'App\Http\Controllers\SellerStoreController@getUserPermissions']);
     });
+
+    Route::group(['prefix' => 'transaction'], function () {
+        Route::get('list', ['as' => 'transaction.list', 'uses' => 'App\Http\Controllers\TransactionHistoryController@index']);
+        // Route::get('create', ['as' => 'transaction.create', 'uses' => 'App\Http\Controllers\SellerStoreController@create']);
+        // Route::post('save', ['as' => 'transaction.save', 'uses' => 'App\Http\Controllers\SellerStoreController@save']);
+        // Route::get('edit/{id}', ['as' => 'transaction.edit', 'uses' => 'App\Http\Controllers\SellerStoreController@edit']);
+        // Route::post('update', ['as' => 'transaction.update', 'uses' => 'App\Http\Controllers\SellerStoreController@save']);
+        // Route::get('delete/{id}', ['as' => 'transaction.delete', 'uses' => 'App\Http\Controllers\SellerStoreController@delete']);
+        Route::post('show/{id}', ['as' => 'transaction.show', 'uses' => 'App\Http\Controllers\TransactionHistoryController@show']);
+    });
 });

@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('cnic_back')->nullable();
             $table->string('commision', 250)->nullable();;
             $table->string('delivery_type');
-            $table->string('status')->nullable();
+            $table->string('status')->default('pending')->nullable();
             $table->string('created_by');
             $table->string('updated_by');
             $table->timestamp('deleted_at')->nullable();
