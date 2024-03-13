@@ -24,14 +24,14 @@ return new class extends Migration
             $table->integer('country_id')->unsigned()->nullable();
             $table->integer('province_id')->unsigned()->nullable();
             $table->integer('city_id')->unsigned()->nullable();
-            $table->integer('area_id')->unsigned()->nullable();
+            $table->integer('area_id')->nullable();
             $table->string('created_by');
             $table->string('updated_by');
             $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
 
             $table->foreign('seller_id')->references('id')->on('sellers')->onDelete('cascade');
-            
+
             $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
 
             $table->foreign('province_id')->references('id')->on('provinces')->onDelete('cascade');
@@ -39,8 +39,6 @@ return new class extends Migration
 
             $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
 
-
-            $table->foreign('area_id')->references('id')->on('areas')->onDelete('cascade');
         });
     }
 
