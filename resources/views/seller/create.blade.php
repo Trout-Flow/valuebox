@@ -16,7 +16,7 @@
     <form method="POST" action="{{ route('seller.save') }}" class="row g-3 needs-validation" novalidate
         enctype="multipart/form-data">
         @csrf
-        <input type="hidden" name="id" id="id" value="{{ isset($seller->id) ? $seller->id : ''}}"/>
+        <input type="hidden" name="id" id="id" value="{{ isset($seller->id) ? $seller->id : '' }}" />
         <div class="form-group">
             <div class="card-header">
                 <div class="d-flex">
@@ -93,7 +93,7 @@
                     </select>
                 </div>
             </div>
-            {{-- <div class="col-xl-0 col-lg-12 mt-3">
+            <div class="col-xl-0 col-lg-12 mt-3">
                 <div class="row">
                     <div class="col-xl-0 col-lg-6">
                         <div class="card-body">
@@ -101,11 +101,13 @@
                                 <div class="dz-message">
                                     <label class="form-label" for="product-title-input">CNIC Front</label>
                                     <div class="mb-3">
-                                        <i id="cnic_front" name="cnic_front " class="display-4 text-muted ri-upload-cloud-2-fill"></i>
-                                    <div class="mb-3 ">
+                                        <i id="cnic_front" name="cnic_front "
+                                            class="display-4 text-muted ri-upload-cloud-2-fill"></i>
+                                        {{-- <div class="mb-3 ">
                                         <i type="file" id="cnic_front" name="cnic_front "
                                             class="display-4 text-muted ri-upload-cloud-2-fill"></i>
                                         <input type="file" name="cnic_front" class="form_control" />
+                                    </div> --}}
                                     </div>
 
                                     <h5>Drop files here or click to upload.</h5>
@@ -122,7 +124,7 @@
                                     <div class="mb-3">
                                         <i id="cnic_back" name="cnic_back"
                                             class="display-4 text-muted ri-upload-cloud-2-fill"></i>
-                                        {{-- <input type="file" name="cnic_back" class="form_control" />
+                                        {{-- <input type="file" name="cnic_back" class="form_control" /> --}}
                                     </div>
 
                                     <h5>Drop files here or click to upload.</h5>
@@ -132,7 +134,7 @@
                         </div>
                     </div>
                 </div>
-            </div> --}}
+            </div>
             {{-- <div class="col-lg-0 col-12 form-group mb-4">
                 <label>
                     Upload Product Image </label>
@@ -197,62 +199,60 @@
                             <tbody>
 
                                 {{-- @foreach ($sellers as $seller) --}}
-                                    <tr class="tr_clone validator_0">
-                                        <td class="delete-item-row">
-                                            <ul class="table-controls">
-                                                <li>
-                                                    <a href="javascript:void(0);" class="delete-item"
-                                                        data-toggle="tooltip" data-placement="top" title=""
-                                                        data-original-title="Delete">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                            height="24" viewBox="0 0 24 24" fill="none"
-                                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round" class="feather feather-x-circle">
-                                                            <circle cx="12" cy="12" r="10">
-                                                            </circle>
-                                                            <line x1="15" y1="9" x2="9"
-                                                                y2="15">
-                                                            </line>
-                                                            <line x1="9" y1="9" x2="15"
-                                                                y2="15">
-                                                            </line>
-                                                        </svg>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </td>
-                                        <td hidden>
-                                            <input type="text" name="row_id[]" class="row_id" value="0" hidden>
-                                        </td>
+                                <tr class="tr_clone validator_0">
+                                    <td class="delete-item-row">
+                                        <ul class="table-controls">
+                                            <li>
+                                                <a href="javascript:void(0);" class="delete-item" data-toggle="tooltip"
+                                                    data-placement="top" title="" data-original-title="Delete">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-x-circle">
+                                                        <circle cx="12" cy="12" r="10">
+                                                        </circle>
+                                                        <line x1="15" y1="9" x2="9"
+                                                            y2="15">
+                                                        </line>
+                                                        <line x1="9" y1="9" x2="15"
+                                                            y2="15">
+                                                        </line>
+                                                    </svg>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td hidden>
+                                        <input type="text" name="row_id[]" class="row_id" value="0" hidden>
+                                    </td>
 
-                                        <td class="title">
-                                            <select class="form-select" id="bank_id" type="text" name="bank_id[]"
-                                                class="form-control select2 form-control mb-3 custom-select">
-                                                <option value="">Select Bank</option>
-                                                @foreach ($dropDownData['banks'] as $key => $value)
-                                                    <option value="{{ $key }}"
-                                                        {{ (old('bank_id') == $key ? 'selected' : '') || (!empty($seller->bank_id) ? collect($seller->bank_id)->contains($key) : '') ? 'selected' : '' }}>
-                                                        {{ $value }}</option>
-                                                @endforeach
-                                            </select>
-                                        </td>
-                                        <br>
-                                        <td class="rate">
-                                            <input type="text" class="form-control"
-                                                id="account_title" name="account_title[]"
-                                                placeholder="Enter the Account Title">
-                                        </td>
+                                    <td class="title">
+                                        <select class="form-select" id="bank_id" type="text" name="bank_id[]"
+                                            class="form-control select2 form-control mb-3 custom-select">
+                                            <option value="">Select Bank</option>
+                                            @foreach ($dropDownData['banks'] as $key => $value)
+                                                <option value="{{ $key }}"
+                                                    {{ (old('bank_id') == $key ? 'selected' : '') || (!empty($seller->bank_id) ? collect($seller->bank_id)->contains($key) : '') ? 'selected' : '' }}>
+                                                    {{ $value }}</option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                    <br>
+                                    <td class="rate">
+                                        <input type="text" class="form-control" id="account_title"
+                                            name="account_title[]" placeholder="Enter the Account Title">
+                                    </td>
 
-                                        <td class="title">
-                                            <input type="text" class="form-control"
-                                                id="iban_number" name="iban_number[]" placeholder="Enter the Bank Account">
-                                        </td>
+                                    <td class="title">
+                                        <input type="text" class="form-control" id="iban_number" name="iban_number[]"
+                                            placeholder="Enter the Bank Account">
+                                    </td>
 
-                                        <td class="dropzone my-dropzonecheck">
-                                            <input type="file" name="bank_check[]" class="form_control" />
+                                    <td class="dropzone my-dropzonecheck">
+                                        <input type="file" name="bank_check[]" class="form_control" />
 
-                                        </td>
-                                    </tr>
+                                    </td>
+                                </tr>
                                 {{-- @endforeach --}}
 
                             </tbody>
@@ -331,7 +331,7 @@
     <!-- dropzone js -->
     <script src="{{ URL::asset('build/libs/dropzone/dropzone-min.js') }}"></script>
     <!-- create-product -->
-    {{-- <script src="{{ URL::asset('build/js/backend/create-seller.init.js') }}"></script> --}}
+    <script src="{{ URL::asset('build/js/backend/create-seller.init.js') }}"></script>
 
     <script src="{{ URL::asset('build/libs/dropzone/dropzone-min.js') }}"></script>
     <script src="{{ URL::asset('build/libs/@simonwep/pickr.min.js') }}"></script>
