@@ -9,9 +9,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Area extends Model
 {
     use SoftDeletes;
+
     protected $fillable =[
         'city_id','name'
     ];
+
     public function cities()
     {
         return $this->hasOne(City::class, 'id','city_id');
