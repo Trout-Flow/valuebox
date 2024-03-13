@@ -159,7 +159,7 @@
                                     <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
                                         <button type="button" class="btn w-sm btn-light btn-hover" id="deleteRecord-close"
                                             data-bs-dismiss="modal">Close</button>
-                                        <a href="{{ route('bank.delete', ['id' => $bank->id]) }}" type="button"
+                                       <a href="#" type="button"
                                             class="btn w-sm btn-danger btn-hover" id="delete-record">Yes, Delete
                                             It!</a>
                                     </div>
